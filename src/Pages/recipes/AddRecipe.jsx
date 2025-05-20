@@ -1,7 +1,9 @@
-import React from "react";
+import React, { use } from "react";
 import Swal from "sweetalert2";
+import AuthContext from "../../contexts/AuthContext";
 
 const AddRecipe = () => {
+  const {user}=use(AuthContext)
   const handleAddRecipe = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -13,6 +15,7 @@ const AddRecipe = () => {
       .split(",")
       .map((item) => item.trim());
     recipeData.ingredients = arryingredients;
+    recipeData.user_email=user?.email
 
     // Like count should be number and start from 0
     recipeData.likeCount = parseInt(recipeData.likeCount);

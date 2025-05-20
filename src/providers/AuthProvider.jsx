@@ -3,15 +3,21 @@ import AuthContext from "../contexts/AuthContext";
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
 import { auth } from "../firebase/firebase.config";
 
+
 const AuthProvider = ({ children }) => {
+
+    const [loading,setLoading]=useState(true)
     const [user,setUser]=useState(null)
     const createUser=(email,password)=>{
+        setLoading(true)
         return createUserWithEmailAndPassword(auth,email,password)
     }
     const loginUser=(email,password)=>{
+        setLoading(true)
         return signInWithEmailAndPassword(auth,email,password)
     }
     const updateUserProfile=(displayName,photoURL)=>{
+        setLoading(true)
         return updateProfile(auth.currentUser,{displayName,photoURL})
     }
     const logOutUser=()=>{
@@ -21,6 +27,7 @@ const AuthProvider = ({ children }) => {
        const unsubscribe=onAuthStateChanged(auth,(currentUser)=>{
         // console.log(user,user.email)
         setUser(currentUser)
+        setLoading(false)
        })
        return()=> unsubscribe()
     },[])
@@ -30,7 +37,8 @@ const AuthProvider = ({ children }) => {
         loginUser,
         updateUserProfile,
         logOutUser,
-        user
+        user,
+        loading
        
 
     }

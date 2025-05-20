@@ -9,14 +9,13 @@ import ThemeToggle from "../components/ThemeToggle";
 import AuthContext from "../contexts/AuthContext";
 
 const Navbar = () => {
-  const { logOutUser, user } = use(AuthContext);
+  const { logOutUser, user, loading } = use(AuthContext);
   const handleLogoutUser = () => {
     logOutUser().then(() => {
       toast.warning("Logout Successfully");
     });
   };
   console.log(user);
-  const loading = false;
 
   const [state, setState] = useState(false);
   const handleHambarger = () => {
@@ -35,6 +34,22 @@ const Navbar = () => {
           All Recipes
         </NavLink>
       </li>
+      {loading && (
+        <>
+          <li className=" my-1">
+            {" "}
+            <NavLink className=" link-hover" to={"/add-recipes"}>
+              <span className="loading loading-dots loading-xl"></span>
+            </NavLink>
+          </li>
+          <li className=" my-1">
+            {" "}
+            <NavLink className=" link-hover" to={"/my-recipes"}>
+              <span className="loading loading-dots loading-xl"></span>
+            </NavLink>
+          </li>
+        </>
+      )}
       {user && (
         <>
           <li className=" my-1">
@@ -129,19 +144,29 @@ const Navbar = () => {
             {loading ? (
               <span className="loading loading-dots loading-xl"></span>
             ) : (
-              <FaCircleUser title={user?.email} size={40} />
+              <FaCircleUser size={40} />
             )}
           </>
         )}
 
         <div className="">
+          {loading && (
+            <Link to={"/login"}>
+              <button className=" btn btn-primary bg-gray-950">LogIn</button>
+            </Link>
+          )}
           {user ? (
-            <button onClick={handleLogoutUser} className=" btn btn-primary">
-              Logout
-            </button>
+            <>
+              <button
+                onClick={handleLogoutUser}
+                className=" btn btn-primary bg-gray-950"
+              >
+                Logout
+              </button>
+            </>
           ) : (
             <>
-              <div className=" flex gap-1">
+              <div className={` flex gap-1 ${loading && "hidden"}`}>
                 <Link to={"/signup"}>
                   <button className=" btn btn-primary bg-gray-950">
                     SignUp
