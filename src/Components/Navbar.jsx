@@ -140,10 +140,10 @@ const Navbar = () => {
             <>
               <div className=" flex gap-1">
                 <Link to={"/signup"}>
-                  <button className=" btn btn-primary">SignUp</button>
+                  <button className=" btn btn-primary bg-gray-950">SignUp</button>
                 </Link>
                 <Link to={"/login"}>
-                  <button className=" btn btn-primary">LogIn</button>
+                  <button className=" btn btn-primary bg-gray-950">LogIn</button>
                 </Link>
               </div>
             </>
