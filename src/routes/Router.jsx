@@ -14,6 +14,7 @@ import SignUp from "../Pages/auth/SignUp";
 
 
 
+
 const router = createBrowserRouter([
   {
     path: "/",
