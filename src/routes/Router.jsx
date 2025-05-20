@@ -7,12 +7,15 @@ import HomeLayout from "../layouts/HomeLayout";
 import AllRecipes from "../Pages/recipes/AllRecipes";
 import MyRecipes from "../Pages/recipes/MyRecipes";
 import AddRecipe from "../Pages/recipes/AddRecipe";
+import ExternalError from "../Pages/errors/ExternalError";
+import InternalError from "../Pages/errors/InternalError";
 
 
 
 const router = createBrowserRouter([
   {
     path: "/",
+    errorElement:<ExternalError></ExternalError>,
     Component:RootLayout,
     children:[
         {
@@ -25,6 +28,7 @@ const router = createBrowserRouter([
         },
         {
           path:"/my-recipes",
+          errorElement:<InternalError></InternalError>,
           Component:MyRecipes
         },
         {
@@ -35,7 +39,7 @@ const router = createBrowserRouter([
   },
   {
     path:"*",
-    errorElement:<p>error 404</p>
+    element:<ExternalError></ExternalError>
   }
 ]);
 export default router
