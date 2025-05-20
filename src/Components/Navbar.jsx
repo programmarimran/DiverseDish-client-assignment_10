@@ -1,24 +1,140 @@
-import React from "react";
-import { NavLink } from "react-router";
+import React, { useState } from "react";
+import { FaCircleUser } from "react-icons/fa6";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { RxCross2 } from "react-icons/rx";
+import { Link, NavLink } from "react-router";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
+  const user = "lorim";
+  const loading = false;
+
+  const [state, setState] = useState(false);
+  const handleHambarger = () => {
+    setState(!state);
+  };
+  const links = (
+    <>
+      <li className=" my-1">
+        <NavLink className=" link-hover" to={"/"}>
+          Home
+        </NavLink>
+      </li>
+      <li className=" my-1">
+        {" "}
+        <NavLink className=" link-hover" to={"/all-recipes"}>
+          All Recipes
+        </NavLink>
+      </li>
+      {user && (
+        <>
+          <li className=" my-1">
+            {" "}
+            <NavLink className=" link-hover" to={"/add-recipes"}>
+              Add Recipe
+            </NavLink>
+          </li>
+          <li className=" my-1">
+            {" "}
+            <NavLink className=" link-hover" to={"/my-recipes"}>
+              My Recipes
+            </NavLink>
+          </li>
+        </>
+      )}
+    </>
+  );
+  // console.log(state);
   return (
-    <div>
-    <div className=" flex items-center">
+    <div className="navbar bg-base-300 p-0">
+      <div className="navbar-start gap-4">
+        <div className="dropdown">
+          <button onClick={handleHambarger} type="button">
+            <div tabIndex={0} className="lg:hidden">
+              {state ? <RxCross2 size={24} /> : <GiHamburgerMenu size={24} />}
+            </div>
+          </button>
+
+          {state && (
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-52 p-2 shadow"
+            >
+              {links}
+            </ul>
+          )}
+        </div>
+        <div className=" items-center hidden lg:flex">
           <div className="avatar">
-        <div className="w-8 rounded-full">
-          <img src="https://i.ibb.co/vCWy2D9d/Chat-GPT-Image-May-20-2025-12-04-49-AM-removebg-preview-1.png" />
+            <div className="w-10 rounded-full">
+              <img src="https://i.ibb.co/SX6hZdjg/Screenshot-2025-05-20-112334.png" />
+            </div>
+          </div>
+          <Link to={"/"} className="text-xl font-bold">
+            DiverseDish
+          </Link>
         </div>
       </div>
-      <h1 className=" text-teal-500 text-2xl font-bold">Diverse<span className=" text-green-500">Dish</span></h1>
-    </div>
-      <NavLink className={"btn "} to={"/"}>
-        Home
-      </NavLink>
-      <NavLink className={"btn "} to={"/all-recipes-page"}>
-        {" "}
-        All recipes page
-      </NavLink>
+      <div className="navbar-center hidden lg:flex">
+        <ul className="menu gap-4 menu-horizontal px-1">{links}</ul>
+      </div>
+      <div className=" flex items-center lg:hidden  ">
+        <div className="avatar">
+          <div className="w-10 rounded-full">
+            <img src="https://i.ibb.co/SX6hZdjg/Screenshot-2025-05-20-112334.png" />
+          </div>
+        </div>
+        <Link to={"/"} className="text-xl font-bold">
+          DiverseDish
+        </Link>
+      </div>
+      <div className="navbar-end gap-3">
+        {user?.photoURL ? (
+          <>
+            {/* ************ */}
+
+            <div className="tooltip tooltip-bottom  bg-gray-200">
+              <div className="tooltip-content">
+                <div
+                  className={`animate-bounce text-orange-400 ${
+                    user?.email.length < 15 ? "text-lg" : " text-xs"
+                  } font-black`}
+                >
+                  {user ? user.displayName : ""}
+                </div>
+              </div>
+              <div className="avatar">
+                <div className="ring-primary ring-offset-base-100 w-10 rounded-full ring-2 ring-offset-2">
+                  <img src={user?.photoURL} alt="User" />
+                </div>
+              </div>
+            </div>
+            {/* **************** */}
+          </>
+        ) : (
+          <>
+            {loading ? (
+              <span className="loading loading-dots loading-xl"></span>
+            ) : (
+              <FaCircleUser title={user?.email} size={40} />
+            )}
+          </>
+        )}
+
+        <button className="btn btn-primary">
+          {user ? (
+            <span
+              onClick={() => {
+                toast.warning("Logout Successfully");
+              }}
+            >
+              Logout
+            </span>
+          ) : (
+            <Link to={"/auth"}>LogIn</Link>
+          )}
+        </button>
+      </div>
     </div>
   );
 };

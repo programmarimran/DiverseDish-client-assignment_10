@@ -1,9 +1,10 @@
 import React from 'react';
 import { Outlet } from 'react-router';
-import Navbar from '../Components/Navbar';
-import Footer from '../Components/Footer';
 
-const Root = () => {
+import Footer from '../components/Footer';
+import Navbar from '../Components/Navbar';
+
+const RootLayout = () => {
     return (
         <div>
             <Navbar></Navbar>
@@ -13,4 +14,4 @@ const Root = () => {
     );
 };
 
-export default Root;
+export default RootLayout;

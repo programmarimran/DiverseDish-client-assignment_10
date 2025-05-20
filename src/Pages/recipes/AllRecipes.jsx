@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AllRecipesPage = () => {
+const AllRecipes = () => {
     return (
         <div>
             this is all recipes page 
@@ -8,4 +8,4 @@ const AllRecipesPage = () => {
     );
 };
 
-export default AllRecipesPage;
+export default AllRecipes;

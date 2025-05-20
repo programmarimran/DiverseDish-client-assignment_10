@@ -3,7 +3,7 @@ import React from 'react';
 const PrivateRoute = () => {
     return (
         <div>
-            thsi si PrivateRoute
+            thsi is proivate route
         </div>
     );
 };
