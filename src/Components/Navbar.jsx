@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import { FaCircleUser } from "react-icons/fa6";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RxCross2 } from "react-icons/rx";
@@ -6,9 +6,16 @@ import { Link, NavLink } from "react-router";
 import { toast } from "react-toastify";
 // import ThemeToggle from "./ThemeToggle";
 import ThemeToggle from "../components/ThemeToggle";
+import AuthContext from "../contexts/AuthContext";
 
 const Navbar = () => {
-  const user = "";
+  const { logOutUser, user } = use(AuthContext);
+  const handleLogoutUser = () => {
+    logOutUser().then(() => {
+      toast.warning("Logout Successfully");
+    });
+  };
+  console.log(user);
   const loading = false;
 
   const [state, setState] = useState(false);
@@ -129,21 +136,21 @@ const Navbar = () => {
 
         <div className="">
           {user ? (
-            <span
-              onClick={() => {
-                toast.warning("Logout Successfully");
-              }}
-            >
-              <button className=" btn btn-primary">Logout</button>
-            </span>
+            <button onClick={handleLogoutUser} className=" btn btn-primary">
+              Logout
+            </button>
           ) : (
             <>
               <div className=" flex gap-1">
                 <Link to={"/signup"}>
-                  <button className=" btn btn-primary bg-gray-950">SignUp</button>
+                  <button className=" btn btn-primary bg-gray-950">
+                    SignUp
+                  </button>
                 </Link>
                 <Link to={"/login"}>
-                  <button className=" btn btn-primary bg-gray-950">LogIn</button>
+                  <button className=" btn btn-primary bg-gray-950">
+                    LogIn
+                  </button>
                 </Link>
               </div>
             </>

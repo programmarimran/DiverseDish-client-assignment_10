@@ -17,7 +17,7 @@ const SignUp = () => {
 
     createUser(email,password)
     .then(result=>{
-      console.log(result.user)
+      result?.user&&""
       updateUserProfile(name,photo)
       .then(()=>{
         toast.success("User Sign In Successfully!!")
