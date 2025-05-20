@@ -4,6 +4,9 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { RxCross2 } from "react-icons/rx";
 import { Link, NavLink } from "react-router";
 import { toast } from "react-toastify";
+// import ThemeToggle from "./ThemeToggle";
+import ThemeToggle from "../components/ThemeToggle";
+
 
 const Navbar = () => {
   const user = "lorim";
@@ -46,7 +49,7 @@ const Navbar = () => {
   );
   // console.log(state);
   return (
-    <div className="navbar bg-base-300 p-0">
+    <div className="navbar p-0">
       <div className="navbar-start gap-4">
         <div className="dropdown">
           <button onClick={handleHambarger} type="button">
@@ -88,7 +91,9 @@ const Navbar = () => {
           DiverseDish
         </Link>
       </div>
+      
       <div className="navbar-end gap-3">
+         <ThemeToggle/>
         {user?.photoURL ? (
           <>
             {/* ************ */}
@@ -135,6 +140,7 @@ const Navbar = () => {
           )}
         </button>
       </div>
+     
     </div>
   );
 };
