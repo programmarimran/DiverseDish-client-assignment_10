@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
-  const { loginUser } = use(AuthContext);
+  const { loginUser,createUserWithGoogleLogin } = use(AuthContext);
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const handleLogin = (e) => {
@@ -20,14 +20,25 @@ const Login = () => {
       })
       .catch((error) => {
         setError(error.code);
-      });
+      });  
   };
+  const handleGoogleLogin=()=>{
+    createUserWithGoogleLogin()
+    .then(result=>{
+      result?.user&&toast.success("You Google Login Successfully!!")
+      navigate("/")
+    })
+    .catch(error=>{
+      console.log(error.code)
+      setError(error.code)
+    })
+  }
   return (
     <div className="card mx-auto bg-base-100 border border-gray-200 my-12 w-full  shrink-0 shadow-2xl">
       <form onSubmit={handleLogin} className="card-body">
         <h1 className="text-3xl text-center font-bold">Login now!</h1>
         <fieldset className=" fieldset">
-          <button type="button" className="btn bg-[#70e00020] mt-4">
+          <button onClick={handleGoogleLogin} type="button" className="btn bg-[#70e00020] mt-4">
             
             <FcGoogle size={30} /> Log In with Google!!
           </button>
