@@ -9,6 +9,8 @@ import MyRecipes from "../Pages/recipes/MyRecipes";
 import AddRecipe from "../Pages/recipes/AddRecipe";
 import ExternalError from "../Pages/errors/ExternalError";
 import InternalError from "../Pages/errors/InternalError";
+import Login from "../Pages/auth/Login";
+import SignUp from "../Pages/auth/SignUp";
 
 
 
@@ -34,6 +36,14 @@ const router = createBrowserRouter([
         {
           path:"/add-recipes",
           Component:AddRecipe
+        },
+        {
+          path:"/login",
+          Component:Login
+        },
+        {
+          path:"/signup",
+          Component:SignUp
         }
     ]
   },

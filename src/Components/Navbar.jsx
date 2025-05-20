@@ -7,9 +7,8 @@ import { toast } from "react-toastify";
 // import ThemeToggle from "./ThemeToggle";
 import ThemeToggle from "../components/ThemeToggle";
 
-
 const Navbar = () => {
-  const user = "lorim";
+  const user = "";
   const loading = false;
 
   const [state, setState] = useState(false);
@@ -50,7 +49,7 @@ const Navbar = () => {
   // console.log(state);
   return (
     <div className="navbar p-0">
-      <div className="navbar-start gap-4">
+      <div className="navbar-start gap-1 md:gap-4">
         <div className="dropdown">
           <button onClick={handleHambarger} type="button">
             <div tabIndex={0} className="lg:hidden">
@@ -67,13 +66,13 @@ const Navbar = () => {
             </ul>
           )}
         </div>
-        <div className=" items-center hidden lg:flex">
+        <div className=" items-center md:hidden lg:flex">
           <div className="avatar">
-            <div className="w-10 rounded-full">
-              <img src="https://i.ibb.co/SX6hZdjg/Screenshot-2025-05-20-112334.png" />
+            <div className=" w-10 md:w-10 rounded-full">
+              <img src="https://i.ibb.co/j9wgB0GG/Screenshot-2025-05-20-112334-removebg-preview.png" />
             </div>
           </div>
-          <Link to={"/"} className="text-xl font-bold">
+          <Link to={"/"} className="text-xl hidden lg:flex font-bold">
             DiverseDish
           </Link>
         </div>
@@ -81,19 +80,21 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu gap-4 menu-horizontal px-1">{links}</ul>
       </div>
-      <div className=" flex items-center lg:hidden  ">
+      <div className="  items-center hidden md:flex  lg:hidden  ">
         <div className="avatar">
           <div className="w-10 rounded-full">
-            <img src="https://i.ibb.co/SX6hZdjg/Screenshot-2025-05-20-112334.png" />
+            <img src="https://i.ibb.co/j9wgB0GG/Screenshot-2025-05-20-112334-removebg-preview.png" />
           </div>
         </div>
         <Link to={"/"} className="text-xl font-bold">
           DiverseDish
         </Link>
       </div>
-      
-      <div className="navbar-end gap-3">
-         <ThemeToggle/>
+
+      <div className="navbar-end gap-1 md:gap-3">
+        <div className=" ">
+          <ThemeToggle />
+        </div>
         {user?.photoURL ? (
           <>
             {/* ************ */}
@@ -126,21 +127,29 @@ const Navbar = () => {
           </>
         )}
 
-        <button className="btn btn-primary">
+        <div className="">
           {user ? (
             <span
               onClick={() => {
                 toast.warning("Logout Successfully");
               }}
             >
-              Logout
+              <button className=" btn btn-primary">Logout</button>
             </span>
           ) : (
-            <Link to={"/auth"}>LogIn</Link>
+            <>
+              <div className=" flex gap-1">
+                <Link to={"/signup"}>
+                  <button className=" btn btn-primary">SignUp</button>
+                </Link>
+                <Link to={"/login"}>
+                  <button className=" btn btn-primary">LogIn</button>
+                </Link>
+              </div>
+            </>
           )}
-        </button>
+        </div>
       </div>
-     
     </div>
   );
 };
