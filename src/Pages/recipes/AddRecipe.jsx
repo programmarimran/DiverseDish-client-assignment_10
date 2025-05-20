@@ -1,9 +1,10 @@
-import React, { use } from "react";
+import React, { use, useState } from "react";
 import Swal from "sweetalert2";
 import AuthContext from "../../contexts/AuthContext";
 
 const AddRecipe = () => {
   const {user}=use(AuthContext)
+  const [value,setValue]=useState(0)
   const handleAddRecipe = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -119,6 +120,9 @@ const AddRecipe = () => {
             <label className="label">Preparation Time (minutes)</label>
             <input
               type="number"
+              min={0}
+              value={`${value<0?0:value}`}
+              onChange={(e)=>setValue(e.target.value)}
               className="input bg-[#70e00020] w-full"
               name="preparationTime"
               placeholder="Time in minutes"
