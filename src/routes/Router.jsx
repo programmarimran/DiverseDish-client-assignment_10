@@ -1,7 +1,4 @@
-import {
-  createBrowserRouter,
- 
-} from "react-router";
+import { createBrowserRouter } from "react-router";
 import RootLayout from "../layouts/RootLayout";
 import HomeLayout from "../layouts/HomeLayout";
 import AllRecipes from "../Pages/recipes/AllRecipes";
@@ -12,46 +9,57 @@ import InternalError from "../Pages/errors/InternalError";
 import Login from "../Pages/auth/Login";
 import SignUp from "../Pages/auth/SignUp";
 import PrivateRoute from "./PrivateRoute";
-
-
-
+import RecipeDetails from "../Pages/recipes/RecipeDetails";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    errorElement:<ExternalError></ExternalError>,
-    Component:RootLayout,
-    children:[
-        {
-            index:true,
-            Component:HomeLayout
-        },
-        {
-            path:"/all-recipes",
-            element:<AllRecipes/>
-        },
-        {
-          path:"/my-recipes",
-          errorElement:<InternalError></InternalError>,
-          element:<PrivateRoute><MyRecipes></MyRecipes></PrivateRoute>
-        },
-        {
-          path:"/add-recipes",
-          element:<PrivateRoute><AddRecipe></AddRecipe></PrivateRoute>
-        },
-        {
-          path:"/login",
-          Component:Login
-        },
-        {
-          path:"/signup",
-          Component:SignUp
-        }
-    ]
+    errorElement: <ExternalError></ExternalError>,
+    Component: RootLayout,
+    children: [
+      {
+        index: true,
+        Component: HomeLayout,
+      },
+      {
+        path: "/all-recipes",
+        element: <AllRecipes />,
+      },
+      {
+        path: "/recipe-details/:id",
+        loader:({params})=>fetch(`https://diverse-dish-server.vercel.app/recipes/${params.id}`),
+        Component:RecipeDetails
+      },
+      {
+        path: "/my-recipes",
+        errorElement: <InternalError></InternalError>,
+        element: (
+          <PrivateRoute>
+            <MyRecipes></MyRecipes>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/add-recipes",
+        element: (
+          <PrivateRoute>
+            <AddRecipe></AddRecipe>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/login",
+        Component: Login,
+      },
+      {
+        path: "/signup",
+        Component: SignUp,
+      },
+    ],
   },
   {
-    path:"*",
-    element:<ExternalError></ExternalError>
-  }
+    path: "*",
+    element: <ExternalError></ExternalError>,
+  },
 ]);
-export default router
+export default router;

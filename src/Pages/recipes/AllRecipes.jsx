@@ -25,7 +25,8 @@ const AllRecipes = () => {
               </p>
               <div className=" flex justify-between">
                 <Link
-                to={`/recipes/${recipe._id}`}
+              
+                to={`/recipe-details/${recipe._id}`}
                 className="inline-block bg-blue-500 text-white text-sm px-3 py-1 rounded hover:bg-blue-600 transition"
               >
                 See Details
