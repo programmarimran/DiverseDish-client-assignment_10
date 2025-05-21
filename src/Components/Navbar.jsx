@@ -13,9 +13,10 @@ const Navbar = () => {
   const handleLogoutUser = () => {
     logOutUser().then(() => {
       toast.warning("Logout Successfully");
+      return;
     });
   };
-  console.log(user);
+  // console.log(user);
 
   const [state, setState] = useState(false);
   const handleHambarger = () => {
@@ -32,6 +33,12 @@ const Navbar = () => {
         {" "}
         <NavLink className=" link-hover" to={"/all-recipes"}>
           All Recipes
+        </NavLink>
+      </li>
+      <li className=" my-1">
+        {" "}
+        <NavLink className=" link-hover" to={"/add-recipes"}>
+          Add Recipe
         </NavLink>
       </li>
       {loading && (
@@ -54,12 +61,6 @@ const Navbar = () => {
         <>
           <li className=" my-1">
             {" "}
-            <NavLink className=" link-hover" to={"/add-recipes"}>
-              Add Recipe
-            </NavLink>
-          </li>
-          <li className=" my-1">
-            {" "}
             <NavLink className=" link-hover" to={"/my-recipes"}>
               My Recipes
             </NavLink>
@@ -71,11 +72,11 @@ const Navbar = () => {
   // console.log(state);
   return (
     <div className="navbar p-0">
-      <div className="navbar-start gap-1 md:gap-4">
+      <div className="navbar-start md:gap-4">
         <div className="dropdown">
           <button onClick={handleHambarger} type="button">
             <div tabIndex={0} className="lg:hidden">
-              {state ? <RxCross2 size={24} /> : <GiHamburgerMenu size={24} />}
+              {state ? <RxCross2 size={35} /> : <GiHamburgerMenu size={35} />}
             </div>
           </button>
 

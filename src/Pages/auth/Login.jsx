@@ -1,10 +1,12 @@
 import React, { use, useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import AuthContext from "../../contexts/AuthContext";
 import { toast } from "react-toastify";
 import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
+  const location=useLocation()
+  console.log(location)
   const { loginUser,createUserWithGoogleLogin } = use(AuthContext);
   const navigate = useNavigate();
   const [error, setError] = useState("");
@@ -16,7 +18,7 @@ const Login = () => {
     loginUser(email, password)
       .then((result) => {
         result?.user && toast.success("You Login Successfully!!");
-        navigate("/");
+          navigate(location?.state||"/")
       })
       .catch((error) => {
         setError(error.code);
@@ -26,7 +28,7 @@ const Login = () => {
     createUserWithGoogleLogin()
     .then(result=>{
       result?.user&&toast.success("You Google Login Successfully!!")
-      navigate("/")
+      navigate(location?.state||"/")
     })
     .catch(error=>{
       console.log(error.code)

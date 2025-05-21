@@ -1,4 +1,4 @@
-import React from "react";
+import React, { use } from "react";
 import {
   FaFacebook,
   FaGithub,
@@ -8,9 +8,10 @@ import {
 } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa6";
 import { Link, NavLink } from "react-router";
+import AuthContext from "../contexts/AuthContext";
 
 const Footer = () => {
-  const user = true;
+  const {user} =use(AuthContext)
   const links = (
      <>
        <li className=" my-1">

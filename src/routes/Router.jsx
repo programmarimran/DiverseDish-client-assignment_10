@@ -11,6 +11,7 @@ import ExternalError from "../Pages/errors/ExternalError";
 import InternalError from "../Pages/errors/InternalError";
 import Login from "../Pages/auth/Login";
 import SignUp from "../Pages/auth/SignUp";
+import PrivateRoute from "./PrivateRoute";
 
 
 
@@ -27,16 +28,16 @@ const router = createBrowserRouter([
         },
         {
             path:"/all-recipes",
-            Component:AllRecipes,
+            element:<AllRecipes/>
         },
         {
           path:"/my-recipes",
           errorElement:<InternalError></InternalError>,
-          Component:MyRecipes
+          element:<PrivateRoute><MyRecipes></MyRecipes></PrivateRoute>
         },
         {
           path:"/add-recipes",
-          Component:AddRecipe
+          element:<PrivateRoute><AddRecipe></AddRecipe></PrivateRoute>
         },
         {
           path:"/login",
