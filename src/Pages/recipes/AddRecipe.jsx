@@ -95,7 +95,7 @@ const AddRecipe = () => {
               type="text"
               className="input bg-[#70e00020] w-full"
               name="ingredients"
-              placeholder="List ingredients"
+              placeholder="Example: Chicken, Pasta, Cream,"
               required
             />
           </fieldset>
@@ -106,7 +106,7 @@ const AddRecipe = () => {
               type="text"
               className="input bg-[#70e00020] w-full"
               name="instructions"
-              placeholder="Write instructions"
+              placeholder="Example:1.Boil pasta 2.Add cream and spices. 4. Mix pasta and cook for 5 minutes."
               required
             />
           </fieldset>
@@ -122,6 +122,7 @@ const AddRecipe = () => {
               <option value={""} disabled>
                 Select cuisine
               </option>
+              <option>BanglaDeshi</option>
               <option>Italian</option>
               <option>Mexican</option>
               <option>Indian</option>
