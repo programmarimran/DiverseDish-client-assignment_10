@@ -6,6 +6,7 @@ import {
   FaTwitter,
   FaYoutube,
 } from "react-icons/fa";
+import { FaLinkedin } from "react-icons/fa6";
 import { Link, NavLink } from "react-router";
 
 const Footer = () => {
@@ -42,7 +43,7 @@ const Footer = () => {
      </>
    );
   return (
-    <footer className=" footer-horizontal  text-base-content rounded p-10">
+    <footer className=" footer-horizontal  text-base-content rounded py-10">
       <div className=" w-[200px] md:w-[300px] mx-auto flex justify-center items-center">
         <img
           src="https://i.ibb.co/ch573kTZ/Screenshot-2025-05-20-111920-removebg-preview.png"
@@ -57,19 +58,19 @@ const Footer = () => {
           <ul className=" flex flex-col gap-1 md:gap-3">{links}</ul>
         </nav>
         <nav className=" mx-auto ">
-          <ul className="">
+          <ul className=" md:space-y-5">
             <li className=" font-medium">
-              <Link className={" link-hover"} to={"/termsAndCondition"}>
+              <NavLink className={" link-hover"} to={"/copyright-notice"}>
                 {" "}
-                Terms and conditions
-              </Link>
+                Copyright notice
+              </NavLink>
             </li>
 
             <li className=" font-medium">
-              <Link className={" link-hover"} to={"/privacyPolicy"}>
+              <NavLink className={" link-hover"} to={"/contact-informaion"}>
                 {" "}
-                Privacy policy
-              </Link>
+                Contact information
+              </NavLink>
             </li>
           </ul>
         </nav>
@@ -86,12 +87,12 @@ const Footer = () => {
             </li>
             <li>
               <Link to={"https://www.youtube.com/@techmorebd1"} target="_blank">
-                <FaYoutube className=" text-red-500" size={30}></FaYoutube>
+                <FaYoutube className=" text-red-600" size={30}></FaYoutube>
               </Link>
             </li>
             <li>
-              <Link to={"https://www.instagram.com/"} target="_blank">
-                <FaInstagram className=" text-black" size={30}></FaInstagram>
+              <Link to={"https://www.linkedin.com/in/md-imran-hasan-664907354/"} target="_blank">
+                <FaLinkedin className=" text-blue-600" size={30}></FaLinkedin>
               </Link>
             </li>
             <li>

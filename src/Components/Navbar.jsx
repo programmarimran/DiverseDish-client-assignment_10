@@ -113,7 +113,7 @@ const Navbar = () => {
         </Link>
       </div>
 
-      <div className="navbar-end gap-1 md:gap-3">
+      <div className="navbar-end gap-2 md:gap-3">
         <div className=" ">
           <ThemeToggle />
         </div>
@@ -121,7 +121,7 @@ const Navbar = () => {
           <>
             {/* ************ */}
 
-            <div className="tooltip tooltip-bottom  bg-gray-200">
+            <div className="tooltip tooltip-bottom rounded-full bg-gray-200">
               <div className="tooltip-content">
                 <div
                   className={`animate-bounce text-orange-400 ${

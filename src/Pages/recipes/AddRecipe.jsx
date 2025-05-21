@@ -3,8 +3,9 @@ import Swal from "sweetalert2";
 import AuthContext from "../../contexts/AuthContext";
 
 const AddRecipe = () => {
-  const {user}=use(AuthContext)
-  const [value,setValue]=useState(0)
+  const { user } = use(AuthContext);
+  const [value, setValue] = useState(0);
+  const [error, setError] = useState("");
   const handleAddRecipe = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -16,7 +17,7 @@ const AddRecipe = () => {
       .split(",")
       .map((item) => item.trim());
     recipeData.ingredients = arryingredients;
-    recipeData.user_email=user?.email
+    recipeData.user_email = user?.email;
 
     // Like count should be number and start from 0
     recipeData.likeCount = parseInt(recipeData.likeCount);
@@ -24,6 +25,13 @@ const AddRecipe = () => {
 
     // Convert checkbox values to array
     recipeData.categories = formData.getAll("categories");
+
+    if (recipeData?.categories.length < 1) {
+      setError("Please select at least one");
+      return;
+    } else {
+      setError("");
+    }
 
     console.log(recipeData);
 
@@ -66,6 +74,7 @@ const AddRecipe = () => {
               className="input bg-[#70e00020] w-full"
               name="image"
               placeholder="Enter image URL"
+              required
             />
           </fieldset>
 
@@ -76,6 +85,7 @@ const AddRecipe = () => {
               className="input bg-[#70e00020] w-full"
               name="title"
               placeholder="Enter recipe title"
+              required
             />
           </fieldset>
 
@@ -86,6 +96,7 @@ const AddRecipe = () => {
               className="input bg-[#70e00020] w-full"
               name="ingredients"
               placeholder="List ingredients"
+              required
             />
           </fieldset>
 
@@ -96,6 +107,7 @@ const AddRecipe = () => {
               className="input bg-[#70e00020] w-full"
               name="instructions"
               placeholder="Write instructions"
+              required
             />
           </fieldset>
 
@@ -103,9 +115,11 @@ const AddRecipe = () => {
             <label className="label">Cuisine Type</label>
             <select
               name="cuisine"
+              required
+              defaultValue=""
               className="select bg-[#70e00020] select-bordered w-full"
             >
-              <option disabled selected>
+              <option value={""} disabled>
                 Select cuisine
               </option>
               <option>Italian</option>
@@ -120,18 +134,23 @@ const AddRecipe = () => {
             <label className="label">Preparation Time (minutes)</label>
             <input
               type="number"
-              min={0}
-              value={`${value<0?0:value}`}
-              onChange={(e)=>setValue(e.target.value)}
+              min={1}
+              value={`${value < 0 ? 0 : value}`}
+              onChange={(e) => setValue(e.target.value)}
               className="input bg-[#70e00020] w-full"
               name="preparationTime"
               placeholder="Time in minutes"
+              required
             />
           </fieldset>
         </div>
 
         <fieldset className="fieldset my-6 bg-base-300 border-base-300 rounded-box border p-4">
-          <label className="label">Categories</label>
+          <label className="label">Categories </label>
+          <span className=" text-center text-2xl text-error">
+            {error && error}
+          </span>
+
           <div className="grid grid-cols-2 md:grid-cols-3 gap-2 mt-2">
             {["Breakfast", "Lunch", "Dinner", "Dessert", "Vegan"].map((cat) => (
               <label key={cat} className="cursor-pointer label">
