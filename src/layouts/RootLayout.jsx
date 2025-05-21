@@ -13,7 +13,7 @@ const RootLayout = () => {
           <Navbar></Navbar>
         </div>
       </header>
-      <main className=" bg-[#70e00005]">
+      <main className=" bg-[#70e00010]">
        <div className=" w-11/12 mx-auto min-h-[calc(100vh-429px)]">
          <Outlet></Outlet>
        </div>

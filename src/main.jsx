@@ -6,12 +6,15 @@ import { RouterProvider } from "react-router";
 import router from "./routes/Router";
 import AuthProvider from "./providers/AuthProvider";
 import { ToastContainer } from "react-toastify";
+import ProductProvider from "./providers/ProductProvider";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <ToastContainer />
     <AuthProvider>
-      <RouterProvider router={router} />
+      <ProductProvider>
+        <RouterProvider router={router} />
+      </ProductProvider>
     </AuthProvider>
   </StrictMode>
 );

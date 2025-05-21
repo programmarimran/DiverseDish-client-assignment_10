@@ -17,7 +17,7 @@ const AddRecipe = () => {
       .split(",")
       .map((item) => item.trim());
     recipeData.ingredients = arryingredients;
-    recipeData.user_email = user?.email;
+    recipeData.user= {name:user?.displayName,email:user?.email,photo:user?.photoURL}
 
     // Like count should be number and start from 0
     recipeData.likeCount = parseInt(recipeData.likeCount);
