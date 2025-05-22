@@ -5,9 +5,9 @@ import { toast } from "react-toastify";
 import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
-  const location=useLocation()
+  const location = useLocation();
   // console.log(location)
-  const { loginUser,createUserWithGoogleLogin } = use(AuthContext);
+  const { loginUser, createUserWithGoogleLogin, setLoading } = use(AuthContext);
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const handleLogin = (e) => {
@@ -18,30 +18,40 @@ const Login = () => {
     loginUser(email, password)
       .then((result) => {
         result?.user && toast.success("You Login Successfully!!");
-          navigate(location?.state||"/")
+        navigate(location?.state || "/");
+        return;
       })
       .catch((error) => {
         setError(error.code);
-      });  
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
-  const handleGoogleLogin=()=>{
+  const handleGoogleLogin = () => {
     createUserWithGoogleLogin()
-    .then(result=>{
-      result?.user&&toast.success("You Google Login Successfully!!")
-      navigate(location?.state||"/")
-    })
-    .catch(error=>{
-      console.log(error.code)
-      setError(error.code)
-    })
-  }
+      .then((result) => {
+        result?.user && toast.success("You Google Login Successfully!!");
+        navigate(location?.state || "/");
+      })
+      .catch((error) => {
+        console.log(error.code);
+        setError(error.code);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
   return (
     <div className="card mx-auto bg-base-100 border border-gray-200 my-12 w-full  shrink-0 shadow-2xl">
       <form onSubmit={handleLogin} className="card-body">
         <h1 className="text-3xl text-center font-bold">Login now!</h1>
         <fieldset className=" fieldset">
-          <button onClick={handleGoogleLogin} type="button" className="btn bg-[#70e00020] mt-4">
-            
+          <button
+            onClick={handleGoogleLogin}
+            type="button"
+            className="btn bg-[#70e00020] mt-4"
+          >
             <FcGoogle size={30} /> Log In with Google!!
           </button>
         </fieldset>

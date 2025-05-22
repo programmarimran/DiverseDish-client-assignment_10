@@ -10,6 +10,7 @@ const AuthProvider = ({ children }) => {
     const [user,setUser]=useState(null)
     const provider = new GoogleAuthProvider();
     const createUserWithGoogleLogin=()=>{
+        setLoading(true)
         return signInWithPopup(auth, provider)
     }
     const createUser=(email,password)=>{
@@ -43,7 +44,8 @@ const AuthProvider = ({ children }) => {
         updateUserProfile,
         logOutUser,
         user,
-        loading
+        loading,
+        setLoading
        
 
     }

@@ -5,7 +5,12 @@ import { toast } from "react-toastify";
 import { FcGoogle } from "react-icons/fc";
 
 const SignUp = () => {
-  const { createUser, updateUserProfile,createUserWithGoogleLogin } = use(AuthContext);
+  const {
+    createUser,
+    updateUserProfile,
+    createUserWithGoogleLogin,
+    setLoading,
+  } = use(AuthContext);
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const handleCreateUser = (e) => {
@@ -20,31 +25,42 @@ const SignUp = () => {
       .then((result) => {
         result?.user && "";
         updateUserProfile(name, photo).then(() => {
-          toast.success("User Sign In Successfully!!");
+          toast.success("User Sign Up Successfully!!");
           navigate("/");
+          return;
         });
       })
       .catch((error) => {
         setError(error.code);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
-  const handleGoogleSignUp=()=>{
-      createUserWithGoogleLogin()
-      .then(result=>{
-        result?.user&&toast.success("You Google Sign Up Successfully!!");
-        navigate("/")
+  const handleGoogleSignUp = () => {
+    createUserWithGoogleLogin()
+      .then((result) => {
+        result?.user && toast.success("You Google Sign Up Successfully!!");
+        navigate("/");
       })
-      .catch(error=>{
-        console.log(error.code)
-        setError(error.code)
+      .catch((error) => {
+        console.log(error.code);
+        setError(error.code);
       })
-    }
+      .finally(() => {
+        setLoading(false);
+      });
+  };
   return (
     <div className="card mx-auto bg-base-100 border border-gray-200 my-12 w-full  shrink-0 shadow-2xl">
       <form onSubmit={handleCreateUser} className="card-body">
         <h1 className="text-3xl text-center font-bold">SignUp now!</h1>
         <fieldset className=" fieldset">
-          <button onClick={handleGoogleSignUp} type="button" className="btn bg-[#70e00020] mt-4">
+          <button
+            onClick={handleGoogleSignUp}
+            type="button"
+            className="btn bg-[#70e00020] mt-4"
+          >
             {" "}
             <FcGoogle size={30} /> Sign Up with Google!!
           </button>
