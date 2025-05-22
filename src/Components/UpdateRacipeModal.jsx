@@ -1,8 +1,21 @@
 import React, { useState } from "react";
 import { FaEdit } from "react-icons/fa";
 
-const UpdateRacipeModal = () => {
-  const [value, setValue] = useState(0);
+const UpdateRacipeModal = ({ recipe }) => {
+  const {
+    title,
+    preparationTime,
+    likeCount,
+    instructions,
+    ingredients,
+    image,
+    cuisine,
+    categories,
+  } = recipe;
+  const categoryArray = Array.isArray(categories)
+  ? categories
+  : categories?.split(",") || [];
+  const [value, setValue] = useState(preparationTime);
   // const [error,setError]=useState("")
   const handleUpdateRacipe = (e) => {
     e.preventDefault();
@@ -30,6 +43,7 @@ const UpdateRacipeModal = () => {
                 <input
                   type="text"
                   name="image"
+                  defaultValue={image}
                   required
                   placeholder="Enter image URL"
                   className="input bg-[#70e00020] w-full"
@@ -41,6 +55,7 @@ const UpdateRacipeModal = () => {
                 <input
                   type="text"
                   name="title"
+                  defaultValue={title}
                   required
                   placeholder="Enter recipe title"
                   className="input bg-[#70e00020] w-full"
@@ -52,6 +67,7 @@ const UpdateRacipeModal = () => {
                 <input
                   type="text"
                   name="ingredients"
+                  defaultValue={ingredients}
                   required
                   placeholder="Example: Chicken, Pasta, Cream"
                   className="input bg-[#70e00020] w-full"
@@ -63,6 +79,7 @@ const UpdateRacipeModal = () => {
                 <input
                   type="text"
                   name="instructions"
+                  defaultValue={instructions}
                   required
                   placeholder="Example: 1.Boil pasta 2.Add cream..."
                   className="input bg-[#70e00020] w-full"
@@ -74,7 +91,7 @@ const UpdateRacipeModal = () => {
                 <select
                   name="cuisine"
                   required
-                  defaultValue=""
+                  defaultValue={cuisine}
                   className="select bg-[#70e00020] select-bordered w-full"
                 >
                   <option value="" disabled>
@@ -94,6 +111,7 @@ const UpdateRacipeModal = () => {
                 <input
                   type="number"
                   min={1}
+                  
                   value={`${value < 0 ? 0 : value}`}
                   onChange={(e) => setValue(e.target.value)}
                   className="input bg-[#70e00020] w-full"
@@ -115,6 +133,8 @@ const UpdateRacipeModal = () => {
                     <label key={cat} className="cursor-pointer label">
                       <input
                         type="checkbox"
+                       defaultChecked={categoryArray.includes(cat)}
+                       
                         className="checkbox bg-[#70e00020] checkbox-primary mr-2"
                         name="categories"
                         value={cat}
@@ -131,7 +151,7 @@ const UpdateRacipeModal = () => {
               <input
                 type="number"
                 name="likeCount"
-                value={0}
+                value={likeCount}
                 readOnly
                 className="input bg-[#70e00020] w-full"
               />

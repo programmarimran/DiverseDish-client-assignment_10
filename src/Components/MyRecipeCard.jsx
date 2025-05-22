@@ -29,7 +29,7 @@ const MyRecipeCard = ({ recipe }) => {
             }`}
           >
             <div>
-              <UpdateRacipeModal></UpdateRacipeModal>
+              <UpdateRacipeModal recipe={recipe}></UpdateRacipeModal>
             </div>
             <div className="p-2 rounded-full bg-red-200 hover:bg-red-300 cursor-pointer transition-all duration-300">
               <RiDeleteBin6Line size={24} className="text-red-700 hover:text-red-900" />

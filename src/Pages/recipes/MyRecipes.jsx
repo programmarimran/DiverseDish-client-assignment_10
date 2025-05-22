@@ -7,9 +7,9 @@ const MyRecipes = () => {
   const { user } = use(AuthContext);
   const { recipes } = use(ProductContext);
   const userEmail = user?.email;
-  console.log(recipes);
+  // console.log(recipes);
   const myRecipes = recipes.filter((re) => re.user.email === userEmail);
-  console.log(myRecipes);
+  // console.log(myRecipes);
   return (
     <div>
      
