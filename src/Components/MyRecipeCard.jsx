@@ -1,9 +1,10 @@
 import { use } from "react";
-import { FaEdit, FaUser } from "react-icons/fa";
 import ProductContext from "../contexts/ProductContext";
 import { AiFillLike } from "react-icons/ai";
 import { Link } from "react-router";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import UpdateRacipeModal from "./UpdateRacipeModal";
+import { FaUser } from "react-icons/fa";
 
 const MyRecipeCard = ({ recipe }) => {
   const { darkIstrue } = use(ProductContext);
@@ -27,8 +28,8 @@ const MyRecipeCard = ({ recipe }) => {
               darkIstrue ? "bg-green-800" : "bg-green-200"
             }`}
           >
-            <div className="p-2 rounded-full bg-green-300 hover:bg-green-400 cursor-pointer transition-all duration-300">
-              <FaEdit size={24} className="text-green-900 hover:text-green-950" />
+            <div>
+              <UpdateRacipeModal></UpdateRacipeModal>
             </div>
             <div className="p-2 rounded-full bg-red-200 hover:bg-red-300 cursor-pointer transition-all duration-300">
               <RiDeleteBin6Line size={24} className="text-red-700 hover:text-red-900" />

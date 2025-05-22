@@ -25,6 +25,7 @@ const MyRecipes = () => {
           myRecipes.map(recipe=><MyRecipeCard key={recipe?._id} recipe={recipe}></MyRecipeCard>)
         }
       </div>
+      
     </div>
   );
 };
