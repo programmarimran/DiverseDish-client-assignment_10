@@ -1,17 +1,26 @@
-import React, { useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { useLoaderData, useNavigate } from "react-router";
 import { FaStar } from "react-icons/fa";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import { AiFillLike } from "react-icons/ai";
+import AuthContext from "../../contexts/AuthContext";
 
 const RecipeDetails = () => {
-  const navigate=useNavigate()
+  const { user } = use(AuthContext);
+  const navigate = useNavigate();
   const recipe = useLoaderData();
   const [likeCount, setLikeCount] = useState(recipe?.likeCount);
-  const handleGoBack=()=>{
-    navigate(-1)
-  }
+  const handleGoBack = () => {
+    navigate(-1);
+  };
+
+  const [currentUser, setCurrentUser] = useState(false);
+  useEffect(() => {
+    if (user?.email === recipe?.user?.email) {
+      setCurrentUser(true);
+    }
+  }, []);
   const handleLikeButton = () => {
     const updateLike = { likeCount: recipe?.likeCount };
     //MongoDb Added
@@ -25,7 +34,10 @@ const RecipeDetails = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log("After Updated likeCount", data);
-        if (data?.modifiedCount > 0) {
+        if (user?.email === recipe?.user?.email) {
+          setCurrentUser(true);
+          return;
+        } else if (data?.modifiedCount > 0) {
           setLikeCount(likeCount + 1);
           toast.success("Like Success");
         }
@@ -71,17 +83,22 @@ const RecipeDetails = () => {
             <strong>Instructions:</strong> {recipe?.instructions?.slice(0, 80)}
             ...
           </p>
+          <h3 className="text-lg font-semibold">Author: {recipe?.user.name}</h3>
           <button
             onClick={handleLikeButton}
-            className="btn btn-success text-xl shadow-2xl w-full"
+            className={`btn btn-success ${
+              currentUser ? "cursor-not-allowed" : ""
+            } text-xl shadow-2xl w-full`}
           >
-           <AiFillLike size={30} className=" text-blue-500 shadow-2xl" /> Like
+            <AiFillLike size={30} className=" text-blue-500 shadow-2xl" /> Like
           </button>
         </div>
       </div>
 
       <div className="bg-linear-to-br from-[#70e00099] to-[#4ade8090] shadow-2xl  p-5 rounded-lg">
-        <button onClick={handleGoBack} className="btn btn-success w-full">Go Back</button>
+        <button onClick={handleGoBack} className="btn btn-success w-full">
+          Go Back
+        </button>
       </div>
     </div>
   );
