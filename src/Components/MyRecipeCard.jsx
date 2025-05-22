@@ -4,7 +4,7 @@ import ProductContext from "../contexts/ProductContext";
 import { AiFillLike } from "react-icons/ai";
 import { Link } from "react-router";
 
-const HomeCard = ({ recipe }) => {
+const MyRecipeCard = ({ recipe }) => {
   const { darkIstrue } = use(ProductContext);
   return (
     <div className="bg-linear-to-br from-[#70e00050] to-[#4ade8090] mx-auto w-full h-full shadow-2xl rounded-2xl">
@@ -70,4 +70,4 @@ const HomeCard = ({ recipe }) => {
   );
 };
 
-export default HomeCard;
+export default MyRecipeCard;
