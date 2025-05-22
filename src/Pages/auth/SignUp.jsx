@@ -14,7 +14,7 @@ const SignUp = () => {
     const formData = new FormData(form);
     const userData = Object.fromEntries(formData.entries());
     const { email, password, name, photo } = userData;
-    console.log(name, photo, email, password);
+    // console.log(name, photo, email, password);
 
     createUser(email, password)
       .then((result) => {

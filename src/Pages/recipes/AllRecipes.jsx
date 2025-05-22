@@ -1,6 +1,7 @@
 import { use } from "react";
 import { Link } from "react-router";
 import ProductContext from "../../contexts/ProductContext";
+import { AiFillLike } from "react-icons/ai";
 
 const AllRecipes = () => {
   const { recipes } = use(ProductContext);
@@ -18,7 +19,7 @@ const AllRecipes = () => {
               alt={recipe.title}
               className="h-40 pt-1 px-1 rounded-t-2xl w-full object-cover"
             />
-            <div className="p-4 flex-grow">
+            <div className="p-4 flex flex-col justify-between flex-grow">
               <h3 className="text-lg font-semibold mb-1">{recipe.title}</h3>
               <p className="text-gray-600 text-sm mb-2">
                 Cuisine: {recipe.cuisineType}
@@ -31,7 +32,7 @@ const AllRecipes = () => {
               >
                 See Details
               </Link>
-              <p className=" bg-blue-200 border border-blue-400 text-blue-700 rounded-2xl px-2">Total Like: {recipe.likeCount}</p>
+              <p className=" bg-blue-200 flex items-center border border-blue-400 text-blue-700 rounded-2xl px-2"><AiFillLike  className=" text-blue-500 shadow-2xl" />: {recipe.likeCount}</p>
               </div>
             </div>
           </div>
