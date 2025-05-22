@@ -15,7 +15,7 @@ const RecipeDetails = () => {
   const handleLikeButton = () => {
     const updateLike = { likeCount: recipe?.likeCount };
     //MongoDb Added
-    fetch(`https://diverse-dish-server.vercel.app/recipes/${recipe._id}`, {
+    fetch(`http://localhost:3000/recipes/${recipe._id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",

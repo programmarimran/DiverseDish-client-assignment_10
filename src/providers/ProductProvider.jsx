@@ -5,7 +5,7 @@ const ProductProvider = ({ children }) => {
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
-    fetch("https://diverse-dish-server.vercel.app/recipes") // Replace with your actual API URL
+    fetch("http://localhost:3000/recipes") // Replace with your actual API URL
       .then((res) => res.json())
       .then((data) => setRecipes(data));
   }, []);
