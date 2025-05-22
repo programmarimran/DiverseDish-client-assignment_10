@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { FaToggleOff, FaToggleOn } from "react-icons/fa6";
+import ProductContext from "../contexts/ProductContext";
 
 const ThemeToggle = () => {
   const [theme, setTheme] = useState("light");
+  const { setDarkIStrue, darkIstrue } = use(ProductContext);
 
   useEffect(() => {
     // Load saved theme or use system preference
@@ -18,9 +20,13 @@ const ThemeToggle = () => {
     localStorage.setItem("theme", newTheme);
   };
 
+  const hadleHandleToggleButton = () => {
+    toggleTheme();
+    setDarkIStrue(!darkIstrue);
+  };
   return (
-    <button onClick={toggleTheme} className="">
-     {theme === "light" ? <FaToggleOff size={50} /> : <FaToggleOn size={50} />}
+    <button onClick={hadleHandleToggleButton} className="">
+      {theme === "light" ? <FaToggleOff size={50} /> : <FaToggleOn size={50} />}
     </button>
   );
 };

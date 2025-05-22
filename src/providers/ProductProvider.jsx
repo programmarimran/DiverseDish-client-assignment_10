@@ -3,15 +3,18 @@ import ProductContext from "../contexts/ProductContext";
 
 const ProductProvider = ({ children }) => {
   const [recipes, setRecipes] = useState([]);
+  const [darkIstrue,setDarkIStrue]=useState(false)
 
   useEffect(() => {
-    fetch("http://localhost:3000/recipes") // Replace with your actual API URL
+    fetch("https://diverse-dish-server.vercel.app/recipes") // Replace with your actual API URL
       .then((res) => res.json())
       .then((data) => setRecipes(data));
   }, []);
 //   console.log(recipes);
   const products={
-    recipes
+    recipes,
+    setDarkIStrue,
+    darkIstrue
   }
   return (
     <div>
