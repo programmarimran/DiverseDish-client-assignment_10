@@ -47,7 +47,7 @@ const AddRecipe = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("Server response:", data);
+        // console.log("Server response:", data);
         if (data.insertedId) {
           Swal.fire({
             title: "Recipe Added Successfully!",

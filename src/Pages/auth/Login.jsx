@@ -10,11 +10,31 @@ const Login = () => {
   const { loginUser, createUserWithGoogleLogin, setLoading } = use(AuthContext);
   const navigate = useNavigate();
   const [error, setError] = useState("");
+  const [passwordError,setPasswordError]=useState("")
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
+     //  Password authentication start with regular expression
+    const uppercaseRegex = /^(?=.*[A-Z]).{1,}$/;
+    const lowercaseRegex = /^(?=.*[a-z]).{1,}$/;
+    const passwordLength = /^.{6,}$/;
+    if (!uppercaseRegex.test(password)) {
+      setPasswordError("Please minimum 1 character Upercase");
+      setError("");
+      return;
+    } else if (!lowercaseRegex.test(password)) {
+      setPasswordError("Please minimum 1 character Lowercase");
+      setError("");
+      return;
+    } else if (!passwordLength.test(password)) {
+      setPasswordError("Please Your password minimum 6 character");
+      setError("");
+      return;
+    } else {
+      setPasswordError("");
+    }
     loginUser(email, password)
       .then((result) => {
         result?.user && toast.success("You Login Successfully!!");
@@ -65,6 +85,7 @@ const Login = () => {
           <label className="label">Email</label>
           <input
             type="email"
+            required
             className="input bg-[#70e00020] w-full"
             name="email"
             placeholder="Email"
@@ -73,10 +94,12 @@ const Login = () => {
           <label className="label">Password</label>
           <input
             type="password"
+            required
             className="input bg-[#70e00020] w-full"
             name="password"
             placeholder="Password"
           />
+          <p className=" text-error my-3 ">{passwordError}</p>
           <div>
             <a className="link link-hover">Forgot password?</a>
           </div>
