@@ -4,8 +4,8 @@ import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 
-const UpdateRacipeModal = ({ recipe,setShowModal }) => {
-  const navigate=useNavigate()
+const UpdateRacipeModal = ({ recipe }) => {
+  const navigate = useNavigate();
   const {
     _id,
     title,
@@ -22,53 +22,52 @@ const UpdateRacipeModal = ({ recipe,setShowModal }) => {
   // : categories?.split(",") || [];
   const [value, setValue] = useState(preparationTime);
   // const [error,setError]=useState("")
-  
+
   const handleUpdateRacipe = (e) => {
     e.preventDefault();
-    const form=e.target;
-    const formData=new FormData(form)
-    const updatedRecipe=Object.fromEntries(formData.entries())
-    updatedRecipe.ingredients=form.ingredients.value.split(",")
-    updatedRecipe.categories=formData.getAll("categories");
-     updatedRecipe.likeCount=parseInt(form.likeCount.value)
+    const form = e.target;
+    const formData = new FormData(form);
+    const updatedRecipe = Object.fromEntries(formData.entries());
+    updatedRecipe.ingredients = form.ingredients.value.split(",");
+    updatedRecipe.categories = formData.getAll("categories");
+    updatedRecipe.likeCount = parseInt(form.likeCount.value);
     // console.log(updatedRecipe)
-    fetch(`http://localhost:3000/recipes/${_id}`,{
-      method:"PUT",
-      headers:{
-        "content-type":"application/json"
+    fetch(`http://localhost:3000/recipes/${_id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
       },
-      body:JSON.stringify(updatedRecipe)
+      body: JSON.stringify(updatedRecipe),
     })
-    .then(res=>res.json())
-    .then(data=>{
-      console.log("after update ",data)
-      if(data.modifiedCount==0){
-        Swal.fire("please Change your Data");
-      }
-      else if(data?.modifiedCount>0){
-        toast.success("Your Recipe Updated Successfully !!")
-        navigate("/my-recipes")
-        setShowModal(false)
-        return
-      }
-    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("after update ", data);
+        if (data?.modifiedCount > 0) {
+          toast.success("Your Recipe Updated Successfully !!");
+          navigate("/my-recipes");
+
+          document.getElementById("add-recipe-modal").close();
+
+          return;
+        }
+      });
   };
 
   return (
     <>
-      {/* Trigger Button */}
-      <label htmlFor="add-recipe-modal">
-        <div className="p-2 rounded-full bg-green-300 hover:bg-green-400 cursor-pointer transition-all duration-300">
+      <div className="p-2 rounded-full bg-green-300 hover:bg-green-400 cursor-pointer transition-all duration-300">
+        <button
+          className=""
+          onClick={() => document.getElementById("my_modal_1").showModal()}
+        >
           <FaEdit size={24} className="text-green-900 hover:text-green-950" />
-        </div>
-      </label>
-
-      {/* Modal */}
-      <input type="checkbox" id="add-recipe-modal" className="modal-toggle" />
-      <div className="modal">
+        </button>
+      </div>
+      <dialog id="my_modal_1" className="modal">
         <div className="modal-box max-w-4xl w-full">
-          <h3 className="font-bold text-xl text-center mb-4">Update Recipe</h3>
-
+          <h3 className=" my-12 text-center bg-green-100 text-green-600 border border-green-200  rounded-lg py-2 px-4 text-2xl font-bold">
+            Update Recipe
+          </h3>
           <form onSubmit={handleUpdateRacipe}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <fieldset className="fieldset bg-base-300 border-base-300 rounded-box border p-4">
@@ -144,7 +143,6 @@ const UpdateRacipeModal = ({ recipe,setShowModal }) => {
                 <input
                   type="number"
                   min={1}
-                  
                   value={`${value < 0 ? 0 : value}`}
                   onChange={(e) => setValue(e.target.value)}
                   className="input bg-[#70e00020] w-full"
@@ -166,8 +164,7 @@ const UpdateRacipeModal = ({ recipe,setShowModal }) => {
                     <label key={cat} className="cursor-pointer label">
                       <input
                         type="checkbox"
-                       defaultChecked={categories.includes(cat)}
-                       
+                        defaultChecked={categories.includes(cat)}
                         className="checkbox bg-[#70e00020] checkbox-primary mr-2"
                         name="categories"
                         value={cat}
@@ -189,21 +186,27 @@ const UpdateRacipeModal = ({ recipe,setShowModal }) => {
                 className="input bg-[#70e00020] w-full"
               />
             </fieldset>
-
-            <div className="modal-action">
+            {/* modal end */}
+            <div className=" flex items-center justify-between">
+              <div className="modal-action">
+                <form method="dialog">
+                  {/* if there is a button in form, it will close the modal */}
+                  <button className=" btn bg-green-100 text-green-600 border border-green-400 hover:shadow-md rounded-lg py-2 px-4 text-2xl font-bold">
+                    Close
+                  </button>
+                </form>
+              </div>
               <button
+                className=" btn bg-green-100 text-green-600 border border-green-400 hover:shadow-md rounded-lg py-2 px-4 text-2xl font-bold"
                 type="submit"
-                className="btn bg-[#70e00080] hover:bg-[#70e000]"
+                onClick={() => document.getElementById("my_modal_1").close()}
               >
-                Update Recipe
+                update
               </button>
-              <label htmlFor="add-recipe-modal" className="btn">
-                Close
-              </label>
             </div>
           </form>
         </div>
-      </div>
+      </dialog>
     </>
   );
 };
