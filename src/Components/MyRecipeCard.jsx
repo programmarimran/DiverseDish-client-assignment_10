@@ -94,7 +94,7 @@ const MyRecipeCard = ({ recipe, myRecipes }) => {
               </div>
             </div>
             <div className={darkIstrue ? "text-gray-300" : "text-gray-600"}>
-              {recipe?.categories.join(", ")}
+              {recipe?.categories.join(",")}
             </div>
           </div>
         </div>
