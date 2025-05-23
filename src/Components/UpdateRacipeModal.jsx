@@ -1,11 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaEdit } from "react-icons/fa";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
-import Swal from "sweetalert2";
 
 const UpdateRacipeModal = ({ recipe }) => {
   const navigate = useNavigate();
+  
+  const [recipes, setRecipes] = useState([]);
+ useEffect(() => {
+  fetch("http://localhost:3000/recipes")
+    .then((res) => res.json())
+    .then((data) => setRecipes(data));
+}, []);
+const [remainingCurrentRacipe,setRemainingCurrentRacipe]=useState(null)
+// যখন recipes আপডেট হবে, তখন log হবে
+useEffect(() => {
+  if (recipes.length > 0) {
+    console.log("Updated Recipes:", recipes);
+    // Example:
+    const currentRecipe = recipes.find(
+      (rap) => rap._id?.toString() === recipe._id?.toString()
+    );
+    console.log("Matched Recipe:", currentRecipe);
+    setRemainingCurrentRacipe(currentRecipe)
+  }
+}, [recipes, recipe._id]);
+console.log(remainingCurrentRacipe)
   const {
     _id,
     title,
@@ -17,6 +37,7 @@ const UpdateRacipeModal = ({ recipe }) => {
     cuisine,
     categories,
   } = recipe;
+
   // const categoryArray = Array.isArray(categories)
   // ? categories
   // : categories?.split(",") || [];
@@ -42,7 +63,9 @@ const UpdateRacipeModal = ({ recipe }) => {
       .then((res) => res.json())
       .then((data) => {
         console.log("after update ", data);
-        if (data?.modifiedCount > 0) {
+        if (data?.modifiedCount == 0) {
+          toast.info("You didn't make any changes.");
+        } else if (data?.modifiedCount > 0) {
           toast.success("Your Recipe Updated Successfully !!");
           navigate("/my-recipes");
 
@@ -189,12 +212,13 @@ const UpdateRacipeModal = ({ recipe }) => {
             {/* modal end */}
             <div className=" flex items-center justify-between">
               <div className="modal-action">
-                <form method="dialog">
-                  {/* if there is a button in form, it will close the modal */}
-                  <button className=" btn bg-green-100 text-green-600 border border-green-400 hover:shadow-md rounded-lg py-2 px-4 text-2xl font-bold">
-                    Close
-                  </button>
-                </form>
+                <button
+                  type="button"
+                  onClick={() => document.getElementById("my_modal_1").close()}
+                  className="btn bg-green-100 text-green-600 border border-green-400 hover:shadow-md rounded-lg py-2 px-4 text-2xl font-bold"
+                >
+                  Close
+                </button>
               </div>
               <button
                 className=" btn bg-green-100 text-green-600 border border-green-400 hover:shadow-md rounded-lg py-2 px-4 text-2xl font-bold"

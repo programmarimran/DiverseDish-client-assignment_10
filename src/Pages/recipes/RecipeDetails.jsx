@@ -14,11 +14,15 @@ const RecipeDetails = () => {
   const recipe = useLoaderData();
   const [likeCount, setLikeCount] = useState(recipe?.likeCount);
   const [currentUser, setCurrentUser] = useState(false);
-
-  // Custom text colors for dark/light mode
-  const textColor = darkIstrue ? "text-gray-100" : "text-gray-800";
-  const subTextColor = darkIstrue ? "text-gray-200" : "text-gray-700";
-
+  // const [wishlistRecipe, setWishlistRecipe] = useState({});
+  const wishlistRecipe = {
+    wishlist_user: {
+      name: user?.displayName,
+      email: user?.email,
+      photo: user?.photoURL,
+    },
+  };
+  wishlistRecipe.recipe = recipe;
   const handleGoBack = () => {
     navigate(-1);
   };
@@ -26,8 +30,9 @@ const RecipeDetails = () => {
   useEffect(() => {
     if (user?.email === recipe?.user?.email) {
       setCurrentUser(true);
+      return;
     }
-  }, [user,recipe]);
+  }, [user, recipe]);
 
   const handleLikeButton = () => {
     const updateLike = { likeCount: recipe?.likeCount };
@@ -42,7 +47,9 @@ const RecipeDetails = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log("After Updated likeCount", data);
-        if (user?.email === recipe?.user?.email) {
+        if (currentUser) {
+          return;
+        } else if (user?.email === recipe?.user?.email) {
           setCurrentUser(true);
           return;
         } else if (data?.modifiedCount > 0) {
@@ -51,6 +58,37 @@ const RecipeDetails = () => {
         }
       });
   };
+  const handleAddToWishlist = () => {
+    // console.log(recipe);
+
+    //wishlist database start
+    fetch("http://localhost:3000/wishlist/recipes", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(wishlistRecipe),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("after wishlisted ", data);
+        if (data.insertedId) {
+          toast.success("Your Recipe Add To Wishlist successfully!");
+        } else if (data.message) {
+          Swal.fire({
+            icon: "warning",
+            title: "Notice",
+            text: data?.message,
+            confirmButtonText: "OK",
+          });
+        }
+      });
+  };
+
+  // console.log(wishlistRecipe)
+  // Custom text colors for dark/light mode
+  const textColor = darkIstrue ? "text-gray-100" : "text-gray-800";
+  const subTextColor = darkIstrue ? "text-gray-200" : "text-gray-700";
 
   return (
     <div className="pt-8 pb-24 space-y-6">
@@ -66,7 +104,7 @@ const RecipeDetails = () => {
       </div>
 
       <div className="bg-linear-to-br from-[#70e00099] to-[#4ade8090] shadow-2xl rounded-lg p-4 flex flex-col md:flex-row gap-4">
-        <div className="w-full h-full md:w-1/2">
+        <div className="w-full h-full md:w-3/4">
           <img
             src={recipe.image}
             alt={recipe.title}
@@ -74,49 +112,57 @@ const RecipeDetails = () => {
           />
         </div>
 
-        <div className={`w-full md:w-1/2 space-y-4 ${textColor}`}>
-          <h2 className="text-2xl font-bold">{recipe?.title}</h2>
-          <p>
-            <strong className="text-xl font-bold">Origin:</strong>{" "}
-            <span className={subTextColor}>{recipe?.cuisineType}</span>
-          </p>
-          <p>
-            <strong className="text-xl font-bold">Cooking Time:</strong>{" "}
-            <span className={subTextColor}>{recipe?.preparationTime} mins</span>
-          </p>
-          <p>
-            <strong className="text-xl font-bold">Ingredients:</strong>{" "}
-            <span className={subTextColor}>
-              {recipe?.ingredients?.slice(0, 4).join(", ")}
-            </span>
-          </p>
-          <p title={recipe?.instructions}>
-            <strong className="text-xl font-bold">Instructions:</strong>{" "}
-            <span className={subTextColor}>{recipe?.instructions}</span>
-          </p>
-          <div className="flex">
-            <h1 className="text-xl font-bold">Category:</h1>
-            {recipe.categories.map((cat, index) => (
-              <button
-                className="text-green-600 bg-green-200 rounded-lg mx-3 px-3"
-                key={index}
-              >
-                {cat}
-              </button>
-            ))}
+        <div className="flex flex-col justify-between w-full">
+          <div className={`w-full  md:w-1/2 space-y-4 mb-4 ${textColor}`}>
+            <h2 className="text-2xl font-bold">{recipe?.title}</h2>
+            <p>
+              <strong className="text-xl font-bold">Origin:</strong>{" "}
+              <span className={subTextColor}>{recipe?.cuisineType}</span>
+            </p>
+            <p>
+              <strong className="text-xl font-bold">Cooking Time:</strong>{" "}
+              <span className={subTextColor}>
+                {recipe?.preparationTime} mins
+              </span>
+            </p>
+            <p>
+              <strong className="text-xl font-bold">Ingredients:</strong>{" "}
+              <span className={subTextColor}>
+                {recipe?.ingredients?.slice(0, 4).join(", ")}
+              </span>
+            </p>
+            <p title={recipe?.instructions}>
+              <strong className="text-xl font-bold">Instructions:</strong>{" "}
+              <span className={subTextColor}>{recipe?.instructions}</span>
+            </p>
+            <div className="flex">
+              <h1 className="text-xl font-bold">Category:</h1>
+              {recipe.categories.map((cat, index) => (
+                <button
+                  className="text-green-600 bg-green-200 rounded-lg mx-3 px-3"
+                  key={index}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+            <h3 className="text-xl font-bold">Author: {recipe?.user.name}</h3>
           </div>
-          <h3 className="text-xl font-bold">Author: {recipe?.user.name}</h3>
-
           <div className="w-full flex gap-3 flex-col">
             <button
               className={`btn ${
                 currentUser ? "cursor-not-allowed" : ""
               } text-xl shadow-2xl`}
-              onClick={handleLikeButton}
+              onClick={currentUser || handleLikeButton}
             >
               <AiFillLike size={30} className="text-blue-500 shadow-2xl" />
             </button>
-            <button className=" btn  btn-success">Add to wishlist</button>
+            <button
+              onClick={() => handleAddToWishlist()}
+              className=" btn  btn-success"
+            >
+              Add to wishlistRecipe
+            </button>
           </div>
         </div>
       </div>

@@ -1,11 +1,25 @@
-import { use } from "react";
+import { use, useEffect, useState } from "react";
 import { Link } from "react-router";
 import ProductContext from "../../contexts/ProductContext";
 import { AiFillLike } from "react-icons/ai";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
+import AuthContext from "../../contexts/AuthContext";
 const AllRecipes = () => {
+  const {user}=use(AuthContext)
   const { recipes } = use(ProductContext);
+  const [data,setData]=useState(null)
+  useEffect(()=>{
+    fetch(`http://localhost:3000/wishlist/recipes?email=${user?.email}`,{
+      method:"GET"
+    })
+    .then(res=>res.json())
+    .then(data=>{
+      console.log("after get",data)
+      setData(data)
+    })
+  },[user?.email])
+  console.log(data)
   return (
     <>
       <div className=" pt-12">

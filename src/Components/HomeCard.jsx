@@ -6,7 +6,8 @@ import { Link } from "react-router";
 
 const HomeCard = ({ recipe }) => {
   const { darkIstrue } = use(ProductContext);
-
+// console.log(recipe.cuisine,    recipe.title)
+// console.log(recipe)
   return (
     <div
       className={`${
