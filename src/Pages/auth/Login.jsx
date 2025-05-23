@@ -3,20 +3,23 @@ import { Link, useLocation, useNavigate } from "react-router";
 import AuthContext from "../../contexts/AuthContext";
 import { toast } from "react-toastify";
 import { FcGoogle } from "react-icons/fc";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { IoMdEyeOff } from "react-icons/io";
 
 const Login = () => {
   const location = useLocation();
   // console.log(location)
   const { loginUser, createUserWithGoogleLogin, setLoading } = use(AuthContext);
   const navigate = useNavigate();
+  const [show, setShow] = useState(true);
   const [error, setError] = useState("");
-  const [passwordError,setPasswordError]=useState("")
+  const [passwordError, setPasswordError] = useState("");
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-     //  Password authentication start with regular expression
+    //  Password authentication start with regular expression
     const uppercaseRegex = /^(?=.*[A-Z]).{1,}$/;
     const lowercaseRegex = /^(?=.*[a-z]).{1,}$/;
     const passwordLength = /^.{6,}$/;
@@ -92,13 +95,26 @@ const Login = () => {
           />
           {/* password */}
           <label className="label">Password</label>
-          <input
-            type="password"
-            required
-            className="input bg-[#70e00020] w-full"
-            name="password"
-            placeholder="Password"
-          />
+          <div className=" flex relative">
+            <input
+              type={show ? "password" : "text"}
+              name="password"
+              className="input w-full"
+              placeholder="Password"
+              required
+            />
+            <button
+              onClick={() => setShow(!show)}
+              type="button"
+              className=" absolute top-[16%] right-5"
+            >
+              {show ? (
+                <MdOutlineRemoveRedEye size={30} />
+              ) : (
+                <IoMdEyeOff size={30} />
+              )}
+            </button>
+          </div>
           <p className=" text-error my-3 ">{passwordError}</p>
           <div>
             <a className="link link-hover">Forgot password?</a>

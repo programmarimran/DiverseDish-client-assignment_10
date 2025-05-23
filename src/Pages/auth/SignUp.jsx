@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router";
 import AuthContext from "../../contexts/AuthContext";
 import { toast } from "react-toastify";
 import { FcGoogle } from "react-icons/fc";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { IoMdEyeOff } from "react-icons/io";
 
 const SignUp = () => {
   const {
@@ -12,6 +14,7 @@ const SignUp = () => {
     setLoading,
   } = use(AuthContext);
   const navigate = useNavigate();
+  const [show,setShow]=useState(true)
   const [error, setError] = useState("");
   const [passwordError,setPasswordError]=useState("")
   const handleCreateUser = (e) => {
@@ -119,13 +122,26 @@ const SignUp = () => {
           />
           {/* password */}
           <label className="label">Password</label>
-          <input
-            type="password"
-            required
-            className="input bg-[#70e00020] w-full"
-            name="password"
-            placeholder="Password"
-          />
+            <div className=" flex relative">
+              <input
+                type={show ? "password" : "text"}
+                name="password"
+                className="input w-full"
+                placeholder="Password" 
+                required
+              />
+              <button
+                onClick={() => setShow(!show)}
+                type="button"
+                className=" absolute top-[16%] right-5"
+              >
+                {show ? (
+                  <MdOutlineRemoveRedEye size={30} />
+                ) : (
+                  <IoMdEyeOff size={30} />
+                )}
+              </button>
+            </div>
           <p className=" text-error my-3 text-sm">{passwordError}</p>
           <button className="btn bg-[#70e00099] mt-4">SignUp</button>
         </fieldset>
