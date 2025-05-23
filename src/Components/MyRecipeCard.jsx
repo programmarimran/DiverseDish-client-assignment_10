@@ -14,7 +14,7 @@ const MyRecipeCard = ({ recipe }) => {
         darkIstrue
           ? "bg-green-900 text-gray-100"
           : "bg-green-200 text-gray-800"
-      } mx-auto w-full shadow-2xl rounded-2xl max-w-xl min-h-[550px] flex flex-col`}>
+      } mx-auto w-full shadow-2xl rounded-2xl   min-h-[550px] flex flex-col`}>
       <img
         src={recipe?.image}
         alt={recipe?.title}

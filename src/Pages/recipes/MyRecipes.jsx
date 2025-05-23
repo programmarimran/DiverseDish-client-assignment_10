@@ -20,7 +20,7 @@ const MyRecipes = () => {
         </span>{" "}
         Recipes found!
       </h1>
-      <div className={`pb-12 ${myRecipes.length<2?"grid-cols-1":myRecipes.length>3?"md:grid-cols-2":myRecipes.length>=3?"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4":""} `}>
+      <div className={`pb-12 grid ${myRecipes.length<2?"grid-cols-1 max-w-xl mx-auto":myRecipes.length<3?" grid-cols-1 md:grid-cols-2 gap-6 ":myRecipes.length>=3?" grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6":""} `}>
         {
           myRecipes.map(recipe=><MyRecipeCard key={recipe?._id} recipe={recipe}></MyRecipeCard>)
         }

@@ -1,8 +1,10 @@
 import React, { use, useState } from "react";
 import Swal from "sweetalert2";
 import AuthContext from "../../contexts/AuthContext";
+import { useNavigate } from "react-router";
 
 const AddRecipe = () => {
+  const navigate=useNavigate()
   const { user } = use(AuthContext);
   const [value, setValue] = useState(0);
   const [error, setError] = useState("");
@@ -52,6 +54,7 @@ const AddRecipe = () => {
             icon: "success",
             confirmButtonText: "OK",
           });
+          navigate("/my-recipes")
         }
       });
   };
