@@ -1,9 +1,10 @@
-import React, { use } from "react";
+import React, { use} from "react";
 import AuthContext from "../../contexts/AuthContext";
 import ProductContext from "../../contexts/ProductContext";
 import MyRecipeCard from "../../components/MyRecipeCard";
 
 const MyRecipes = () => {
+
   const { user } = use(AuthContext);
   const { recipes } = use(ProductContext);
   const userEmail = user?.email;

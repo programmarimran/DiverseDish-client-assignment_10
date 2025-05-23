@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { FaEdit } from "react-icons/fa";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
-const UpdateRacipeModal = ({ recipe }) => {
+const UpdateRacipeModal = ({ recipe,setShowModal }) => {
   const navigate=useNavigate()
   const {
     _id,
@@ -21,6 +22,7 @@ const UpdateRacipeModal = ({ recipe }) => {
   // : categories?.split(",") || [];
   const [value, setValue] = useState(preparationTime);
   // const [error,setError]=useState("")
+  
   const handleUpdateRacipe = (e) => {
     e.preventDefault();
     const form=e.target;
@@ -28,6 +30,7 @@ const UpdateRacipeModal = ({ recipe }) => {
     const updatedRecipe=Object.fromEntries(formData.entries())
     updatedRecipe.ingredients=form.ingredients.value.split(",")
     updatedRecipe.categories=formData.getAll("categories");
+     updatedRecipe.likeCount=parseInt(form.likeCount.value)
     // console.log(updatedRecipe)
     fetch(`http://localhost:3000/recipes/${_id}`,{
       method:"PUT",
@@ -39,9 +42,13 @@ const UpdateRacipeModal = ({ recipe }) => {
     .then(res=>res.json())
     .then(data=>{
       console.log("after update ",data)
-      if(data?.modifiedCount>0){
+      if(data.modifiedCount==0){
+        Swal.fire("please Change your Data");
+      }
+      else if(data?.modifiedCount>0){
         toast.success("Your Recipe Updated Successfully !!")
         navigate("/my-recipes")
+        setShowModal(false)
         return
       }
     })

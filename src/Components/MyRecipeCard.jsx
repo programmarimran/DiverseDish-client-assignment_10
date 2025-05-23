@@ -1,4 +1,4 @@
-import { use } from "react";
+import { use, useState } from "react";
 import ProductContext from "../contexts/ProductContext";
 import { AiFillLike } from "react-icons/ai";
 import { Link } from "react-router";
@@ -7,6 +7,8 @@ import UpdateRacipeModal from "./UpdateRacipeModal";
 import { FaUser } from "react-icons/fa";
 
 const MyRecipeCard = ({ recipe, myRecipes }) => {
+  const [showModal, setShowModal] = useState(true);
+
   const { darkIstrue } = use(ProductContext);
 
   return (
@@ -31,7 +33,12 @@ const MyRecipeCard = ({ recipe, myRecipes }) => {
             }`}
           >
             <div>
-              <UpdateRacipeModal recipe={recipe}></UpdateRacipeModal>
+              {showModal && (
+                <UpdateRacipeModal
+                  setShowModal={setShowModal}
+                  recipe={recipe}
+                ></UpdateRacipeModal>
+              )}
             </div>
             <div className="p-2 rounded-full bg-red-200 hover:bg-red-300 cursor-pointer transition-all duration-300">
               <RiDeleteBin6Line
