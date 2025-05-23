@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { FaEdit } from "react-icons/fa";
+import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 const UpdateRacipeModal = ({ recipe }) => {
+  const navigate=useNavigate()
   const {
+    _id,
     title,
     preparationTime,
     likeCount,
@@ -12,13 +16,35 @@ const UpdateRacipeModal = ({ recipe }) => {
     cuisine,
     categories,
   } = recipe;
-  const categoryArray = Array.isArray(categories)
-  ? categories
-  : categories?.split(",") || [];
+  // const categoryArray = Array.isArray(categories)
+  // ? categories
+  // : categories?.split(",") || [];
   const [value, setValue] = useState(preparationTime);
   // const [error,setError]=useState("")
   const handleUpdateRacipe = (e) => {
     e.preventDefault();
+    const form=e.target;
+    const formData=new FormData(form)
+    const updatedRecipe=Object.fromEntries(formData.entries())
+    updatedRecipe.ingredients=form.ingredients.value.split(",")
+    updatedRecipe.categories=formData.getAll("categories");
+    // console.log(updatedRecipe)
+    fetch(`http://localhost:3000/recipes/${_id}`,{
+      method:"PUT",
+      headers:{
+        "content-type":"application/json"
+      },
+      body:JSON.stringify(updatedRecipe)
+    })
+    .then(res=>res.json())
+    .then(data=>{
+      console.log("after update ",data)
+      if(data?.modifiedCount>0){
+        toast.success("Your Recipe Updated Successfully !!")
+        navigate("/my-recipes")
+        return
+      }
+    })
   };
 
   return (
@@ -133,7 +159,7 @@ const UpdateRacipeModal = ({ recipe }) => {
                     <label key={cat} className="cursor-pointer label">
                       <input
                         type="checkbox"
-                       defaultChecked={categoryArray.includes(cat)}
+                       defaultChecked={categories.includes(cat)}
                        
                         className="checkbox bg-[#70e00020] checkbox-primary mr-2"
                         name="categories"

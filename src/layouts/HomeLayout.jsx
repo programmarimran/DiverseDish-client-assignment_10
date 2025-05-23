@@ -5,7 +5,7 @@ import HomeCard from "../components/HomeCard";
 const HomeLayout = () => {
   // const [recipes,setRecipes]=useState([])
   // useEffect(()=>{
-  //   fetch("https://diverse-dish-server.vercel.app/recipes/home")
+  //   fetch("http://localhost:3000/recipes/home")
   //   .then(res=>res.json())
   //   .then(data=>setRecipes(data))
   // },[])
