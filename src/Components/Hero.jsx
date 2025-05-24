@@ -62,11 +62,13 @@ const Hero = () => {
                 {/* **********react typewriter is start******************* */}
                 <div className='App'>
       <h1 style={{ paddingTop: '5rem', margin: 'auto 0', fontWeight: 'normal' }}>
-        {product?.title}{' '}
-        <span style={{ color: 'red', fontWeight: 'bold' }}>
+         <span className="text-2xl md:text-4xl font-bold mt-2">
+                  {product?.title}
+                </span>{' '}
+        <span className="text-2xl md:text-4xl font-bold text-red-500 mt-2" style={{ fontWeight: 'bold' }}>
           {/* Style will be inherited from the parent element */}
           <Typewriter
-            words={['Eat', 'Sleep', 'Code', 'Repeat!']}
+            words={['Delicious!', 'Spicy!', 'Popular!', 'Traditional!']}
             loop={5}
             cursor
             cursorStyle='_'
@@ -79,9 +81,7 @@ const Hero = () => {
         </span>
       </h1>
     </div>
-                <h1 className="text-2xl md:text-4xl font-bold mt-2">
-                  {product?.title}
-                </h1>
+               
                 <p className="text-md md:text-lg font-medium mt-2 mb-1">
                   {product?.instructions}
                 </p>
