@@ -121,7 +121,7 @@ const AddRecipe = () => {
           <fieldset className="fieldset bg-base-300 border-base-300 rounded-box border p-4">
             <label className="label">Cuisine Type</label>
             <select
-              name="cuisine"
+              name="cuisineType"
               required
               defaultValue=""
               className="select select-bordered w-full"

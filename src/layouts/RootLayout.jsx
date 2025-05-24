@@ -12,13 +12,16 @@ const RootLayout = () => {
         <div className=" w-11/12 mx-auto">
           <Navbar></Navbar>
         </div>
+       
       </header>
       <main className=" bg-[#70e00010]">
        <div className=" w-11/12 mx-auto min-h-[calc(100vh-429px)]">
          <Outlet></Outlet>
        </div>
       </main>
-      <footer className=" bg-[#70e00099]">
+
+      {/* bg-[#70e00099] */}
+      <footer className=" bg-green-200">
         <div className=" w-11/12 mx-auto">
           <Footer></Footer>
         </div>
