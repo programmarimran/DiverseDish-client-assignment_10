@@ -9,7 +9,7 @@ import { Helmet } from "react-helmet-async";
 const HomeLayout = () => {
   // const [recipes,setRecipes]=useState([])
   // useEffect(()=>{
-  //   fetch("http://localhost:3000/recipes/home")
+  //   fetch("https://diverse-dish-server.vercel.app/recipes/home")
   //   .then(res=>res.json())
   //   .then(data=>setRecipes(data))
   // },[])

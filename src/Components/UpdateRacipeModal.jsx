@@ -13,7 +13,7 @@ const UpdateRacipeModal = () => {
   console.log(modalId);
   useEffect(() => {
     if (modalId) {
-      fetch(`http://localhost:3000/recipes/${modalId}`)
+      fetch(`https://diverse-dish-server.vercel.app/recipes/${modalId}`)
         .then((res) => res.json())
         .then((data) => {
           setUpdateRecipe(data);
@@ -31,7 +31,7 @@ const UpdateRacipeModal = () => {
     updatedRecipe.likeCount = parseInt(form.likeCount.value);
     // const cuisineType=form.
     // console.log(updatedRecipe)
-    fetch(`http://localhost:3000/recipes/${findingUpdateRecipe?._id}`, {
+    fetch(`https://diverse-dish-server.vercel.app/recipes/${findingUpdateRecipe?._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

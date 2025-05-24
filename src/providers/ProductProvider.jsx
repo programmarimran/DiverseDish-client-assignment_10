@@ -9,14 +9,14 @@ const ProductProvider = ({ children }) => {
   const [modalId, setModalId] = useState();
 
   useEffect(() => {
-    fetch("http://localhost:3000/recipes") // Replace with your actual API URL
+    fetch("https://diverse-dish-server.vercel.app/recipes") // Replace with your actual API URL
       .then((res) => res.json())
       .then((data) => setRecipes(data));
   }, []);
   //   console.log(recipes);
 
   const displayRecipeFunction = () => {
-    fetch("http://localhost:3000/recipes")
+    fetch("https://diverse-dish-server.vercel.app/recipes")
       .then((res) => res.json())
       .then((data) => {
         setDisplayRecipes(data);

@@ -12,7 +12,7 @@ const MyRecipeCard = ({ recipe, myRecipes }) => {
   const { darkIstrue, setModalId,displayRecipes,setDisplayRecipes,displayRecipeFunction } = use(ProductContext);
 
   const handleDeleteForDB = (_id) => {
-    fetch(`http://localhost:3000/recipes/${_id}`,{
+    fetch(`https://diverse-dish-server.vercel.app/recipes/${_id}`,{
       method:"DELETE"
     })
     .then(res=>res.json())
