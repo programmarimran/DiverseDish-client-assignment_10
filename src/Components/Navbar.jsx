@@ -139,10 +139,10 @@ const Navbar = () => {
 
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 h-full flex flex-col justify-between p-4 shadow"
+              className="menu dropdown-content bg-base-300 rounded-2xl min-w-max px-4 py-2"
             >
-              <li>
-                <button className="btn btn-primary bg-gray-950">Update</button>
+              <li className=" w-full">
+                <h1 className=" whitespace-nowrap w-full text-lg font-bold">{user.displayName}</h1>
               </li>
               <li>
                 <button onClick={handleLogoutUser} className="btn btn-primary bg-gray-950">
