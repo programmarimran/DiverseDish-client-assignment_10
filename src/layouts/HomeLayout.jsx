@@ -1,8 +1,9 @@
 // import React, { useEffect, useState } from "react";
-import { useLoaderData } from "react-router";
+import { Link, useLoaderData } from "react-router";
 import HomeCard from "../components/HomeCard";
 import Hero from "../components/Hero";
 import WhyChooseUs from "../components/WhyChooseUs";
+import CustomerReviews from "../components/UserReview";
 
 const HomeLayout = () => {
   // const [recipes,setRecipes]=useState([])
@@ -25,9 +26,17 @@ const HomeLayout = () => {
           <HomeCard key={recipe._id} recipe={recipe}></HomeCard>
         ))}
       </div>
+      <Link to={"/all-recipes"}>
+      <button className=" btn hover:border-2 text-gray-800 bg-green-200 mx-auto flex justify-center">
+        View All Recipes
+      </button>
+      </Link>
      </section>
-     <section className=" my-12">
+     <section className=" py-12">
       <WhyChooseUs></WhyChooseUs>
+     </section>
+     <section className=" py-12">
+      <CustomerReviews></CustomerReviews>
      </section>
     </div>
   );

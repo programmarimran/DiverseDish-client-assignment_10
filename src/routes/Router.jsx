@@ -10,7 +10,7 @@ import Login from "../Pages/auth/Login";
 import SignUp from "../Pages/auth/SignUp";
 import PrivateRoute from "./PrivateRoute";
 import RecipeDetails from "../Pages/recipes/RecipeDetails";
-import UpdateRecipe from "../components/UpdateRecipe";
+
 
 const router = createBrowserRouter([
   {
@@ -49,10 +49,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      {
-        path:"/update-recipe",
-        element:<PrivateRoute><UpdateRecipe></UpdateRecipe></PrivateRoute>
-      },
+     
       {
         path: "/login",
         Component: Login,

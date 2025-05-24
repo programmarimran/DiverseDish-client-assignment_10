@@ -26,7 +26,8 @@ const WhyChooseUs = () => {
         {features.map((item) => (
           <div
             key={item.id}
-            className={`shadow-2xl p-8 text-center space-y-4 rounded-2xl
+            className={`flex flex-col justify-between p-8 space-y-4 rounded-2xl
+             shadow-lg  border-2 border-slate-200 hover:border-slate-400
               ${
                 darkIstrue
                   ? "bg-gradient-to-t from-slate-900 to-slate-800 text-gray-300"

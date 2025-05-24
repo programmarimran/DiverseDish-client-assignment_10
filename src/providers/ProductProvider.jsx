@@ -5,10 +5,8 @@ const ProductProvider = ({ children }) => {
   const [recipes, setRecipes] = useState([]);
   const [darkIstrue,setDarkIStrue]=useState(false);
     const [modalId,setModalId] = useState();
-    let [isOpen, setIsOpen] = useState(true)
-     function close() {
-    setIsOpen(false)
-  }
+   
+
 
   useEffect(() => {
     fetch("https://diverse-dish-server.vercel.app/recipes") // Replace with your actual API URL
@@ -22,9 +20,8 @@ const ProductProvider = ({ children }) => {
     darkIstrue,
      modalId,
      setModalId,
-    isOpen,
-    setIsOpen,
-    close
+   
+    
   }
   // console.log(wishlistRecipe)
   return (
