@@ -2,10 +2,12 @@ import React, { use, useState } from "react";
 import Swal from "sweetalert2";
 import AuthContext from "../../contexts/AuthContext";
 import { useNavigate } from "react-router";
+import ProductContext from "../../contexts/ProductContext";
 
 const AddRecipe = () => {
   const navigate=useNavigate()
   const { user } = use(AuthContext);
+  // const {darkIstrue}=use(ProductContext)
   const [value, setValue] = useState(0);
   const [error, setError] = useState("");
   const handleAddRecipe = (e) => {
@@ -58,12 +60,14 @@ const AddRecipe = () => {
         }
       });
   };
+ // Custom text colors for dark/light mode
+ 
 
   return (
     <div className="py-12">
       <div className="text-center space-y-4 p-6">
         <h1 className="text-2xl font-bold">Add New Recipe</h1>
-        <p className="text-base">
+        <p className={`text-base`}>
           Fill out the form to add a delicious new recipe to the collection.
         </p>
       </div>
@@ -71,7 +75,7 @@ const AddRecipe = () => {
       <form onSubmit={handleAddRecipe}>
         <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-6">
           <fieldset className="fieldset bg-base-300  border-base-300 rounded-box border p-4">
-            <label className="label">Image URL</label>
+            <label className={`label `} >Image URL</label>
             <input
               type="text"
               className="input bg-[#70e00020] w-full"
@@ -120,7 +124,7 @@ const AddRecipe = () => {
               name="cuisine"
               required
               defaultValue=""
-              className="select bg-[#70e00020] select-bordered w-full"
+              className="select select-bordered w-full"
             >
               <option value={""} disabled>
                 Select cuisine
