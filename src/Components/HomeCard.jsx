@@ -9,11 +9,15 @@ const HomeCard = ({ recipe }) => {
 // console.log(recipe.cuisine,    recipe.title)
 // console.log(recipe)
   return (
+    
     <div
+    
+    
       className={`${
-        darkIstrue ? "bg-green-900 text-gray-100" : "bg-green-200 text-gray-800"
+        darkIstrue ? "bg-green-200 border-2  hover:border-4 border-gray-300 text-gray-800" : "bg-green-200 border-2  hover:border-4 border-gray-300 text-gray-800"
       } mx-auto w-full shadow-2xl rounded-2xl  min-h-[550px] flex flex-col`}
     >
+      <p className=" bg-linear-to-bl from-[#70e00099] to-[#4ade8090]" ></p>
       <img
         src={recipe?.image}
         alt={recipe?.title}
@@ -38,7 +42,7 @@ const HomeCard = ({ recipe }) => {
             </div>
 
             <div
-              className={`${darkIstrue ? "text-gray-300" : "text-gray-600"}`}
+             
             >
               {recipe?.categories.join(", ")}
             </div>

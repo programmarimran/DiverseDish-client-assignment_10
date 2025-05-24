@@ -8,7 +8,7 @@ import Footer from "../Components/Footer";
 const RootLayout = () => {
   return (
     <div>
-      <header className=" border-b-2 border-[#00000050] bg-[#70e000] sticky top-0 z-50 shadow-2xl">
+      <header className=" border-b-2 border-[#00000050] bg-base-300 hover:border-b-green-500 border-b-gray-200 sticky top-0 z-50 shadow-md">
         <div className=" w-11/12 mx-auto">
           <Navbar></Navbar>
         </div>

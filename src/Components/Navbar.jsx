@@ -92,7 +92,7 @@ const Navbar = () => {
         <div className=" items-center md:hidden lg:flex">
           <div className="avatar">
             <div className=" w-10 md:w-10 rounded-full">
-              <img src="https://i.ibb.co/j9wgB0GG/Screenshot-2025-05-20-112334-removebg-preview.png" />
+              <img src="https://i.ibb.co/SX6hZdjg/Screenshot-2025-05-20-112334.png" />
             </div>
           </div>
           <Link to={"/"} className="text-xl hidden lg:flex font-bold">

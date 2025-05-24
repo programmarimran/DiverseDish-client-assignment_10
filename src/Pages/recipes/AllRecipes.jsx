@@ -7,7 +7,7 @@ import "react-tabs/style/react-tabs.css";
 import AuthContext from "../../contexts/AuthContext";
 const AllRecipes = () => {
   const { user } = use(AuthContext);
-  const { recipes } = use(ProductContext);
+  const { recipes,darkIstrue } = use(ProductContext);
   const [wishlistRecipes, setWishListRecipes] = useState(null);
   useEffect(() => {
     if (!user?.email) {
@@ -43,7 +43,9 @@ const AllRecipes = () => {
                 {recipes.map((recipe) => (
                   <div
                     key={recipe._id}
-                    className="bg-linear-to-br from-[#70e00099] to-[#4ade8090] shadow-2xl rounded-xl  overflow-hidden flex flex-col justify-between"
+                    className={`${
+        darkIstrue ? "bg-green-200 border-2  hover:border-4 border-gray-300 text-gray-800" : "bg-green-200 border-2  hover:border-4 border-gray-300 text-gray-800"
+      } shadow-2xl rounded-xl  overflow-hidden flex flex-col justify-between`}
                   >
                     <img
                       src={recipe.image}
@@ -94,7 +96,9 @@ const AllRecipes = () => {
                 {wishlistRecipes?.map((singleRecipe) => (
                   <div
                     key={singleRecipe.recipe._id}
-                    className="bg-linear-to-br from-[#70e00099] to-[#4ade8090] shadow-2xl rounded-xl  overflow-hidden flex flex-col justify-between"
+                    className={`${
+        darkIstrue ? "bg-green-200 border-2  hover:border-4 border-gray-300 text-gray-800" : "bg-green-200 border-2  hover:border-4 border-gray-300 text-gray-800"
+      } shadow-2xl rounded-xl  overflow-hidden flex flex-col justify-between`}
                   >
                     <img
                       src={singleRecipe.recipe.image}

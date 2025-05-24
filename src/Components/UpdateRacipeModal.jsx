@@ -13,11 +13,11 @@ const UpdateRacipeModal = ({ recipe }) => {
     .then((data) => setRecipes(data));
 }, []);
 const [remainingCurrentRacipe,setRemainingCurrentRacipe]=useState(null)
-// যখন recipes আপডেট হবে, তখন log হবে
+
 useEffect(() => {
   if (recipes.length > 0) {
     console.log("Updated Recipes:", recipes);
-    // Example:
+
     const currentRecipe = recipes.find(
       (rap) => rap._id?.toString() === recipe._id?.toString()
     );
@@ -147,7 +147,7 @@ console.log(remainingCurrentRacipe)
                   name="cuisine"
                   required
                   defaultValue={cuisine}
-                  className="select bg-[#70e00020] select-bordered w-full"
+                  className="select select-bordered w-full"
                 >
                   <option value="" disabled>
                     Select cuisine
