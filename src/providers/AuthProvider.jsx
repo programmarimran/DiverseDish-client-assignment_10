@@ -5,7 +5,7 @@ import { auth } from "../firebase/firebase.config";
 
 
 const AuthProvider = ({ children }) => {
-
+const [heroEmail,setHeroEmail]=useState("")
     const [loading,setLoading]=useState(true)
     const [user,setUser]=useState(null)
     const provider = new GoogleAuthProvider();
@@ -45,7 +45,9 @@ const AuthProvider = ({ children }) => {
         logOutUser,
         user,
         loading,
-        setLoading
+        setLoading,
+        setHeroEmail,
+        heroEmail
        
 
     }

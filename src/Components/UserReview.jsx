@@ -38,7 +38,7 @@ const CustomerReviews = () => {
           <div
             key={item.id}
             className="flex flex-col justify-between p-8 space-y-4 rounded-2xl
-             shadow-lg bg-green-100 border-2 border-green-300 hover:border-green-400"
+             shadow-lg bg-green-100 border-2 border-green-200 hover:border-green-300"
           >
             <p
               className={`text-lg font-medium first-letter:text-3xl first-letter:font-bold first-letter:uppercase ${

@@ -9,7 +9,7 @@ import { IoMdEyeOff } from "react-icons/io";
 const Login = () => {
   const location = useLocation();
   // console.log(location)
-  const { loginUser, createUserWithGoogleLogin, setLoading } = use(AuthContext);
+  const { loginUser, createUserWithGoogleLogin,user, setLoading,heroEmail } = use(AuthContext);
   const navigate = useNavigate();
   const [show, setShow] = useState(true);
   const [error, setError] = useState("");
@@ -69,7 +69,7 @@ const Login = () => {
    <div className=" py-12">
      <div className="card mx-auto  border border-gray-200  w-full  shrink-0 shadow-2xl">
       <form onSubmit={handleLogin} className="card-body">
-        <h1 className="text-3xl text-center font-bold">Login now!</h1>
+        <h1 className="text-3xl text-center font-bold">{user?.email?"Already Success":"Login now!"}</h1>
         <fieldset className=" fieldset">
           <button
             onClick={handleGoogleLogin}
@@ -89,7 +89,8 @@ const Login = () => {
           <label className="label">Email</label>
           <input
             type="email"
-            required
+            required 
+            defaultValue={heroEmail}
             className="input bg-[#70e00020] w-full"
             name="email"
             placeholder="Email"

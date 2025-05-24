@@ -5,14 +5,24 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import { useNavigate } from "react-router";
 import ProductContext from "../contexts/ProductContext";
+import AuthContext from "../contexts/AuthContext";
+import Swal from "sweetalert2";
 
 const Hero = () => {
   const navigate = useNavigate();
   const { recipes } = use(ProductContext);
+  const { user, setHeroEmail } = use(AuthContext);
 
   const handleSubscribe = (e) => {
     e.preventDefault();
-    navigate("/auth");
+    const email=e.target.email.value;
+    if (!user?.email) {
+      setHeroEmail(email);
+      navigate("/login");
+    } else {
+      Swal.fire("You Already Success!!");
+      navigate("/");
+    }
   };
 
   return (
@@ -57,10 +67,7 @@ const Hero = () => {
                     required
                     placeholder="Enter your Email here..."
                   />
-                  <button
-                    type="submit"
-                    className="btn btn-secondary mt-2 md:mt-0"
-                  >
+                  <button className=" btn hover:border-2 text-gray-800 bg-green-200 mx-auto flex justify-center">
                     Subscribe Now!!
                   </button>
                 </form>
