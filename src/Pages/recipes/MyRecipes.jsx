@@ -7,7 +7,8 @@ import UpdateRacipeModal from "../../components/UpdateRacipeModal";
 const MyRecipes = () => {
 
   const { user } = use(AuthContext);
-  const { recipes } = use(ProductContext);
+  const { recipes,displayRecipes } = use(ProductContext);
+  console.log(displayRecipes)
   const userEmail = user?.email;
   // console.log(recipes);
   const myRecipes = recipes.filter((re) => re.user.email === userEmail);

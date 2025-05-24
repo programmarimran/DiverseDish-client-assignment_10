@@ -9,7 +9,7 @@ import { use } from "react";
 import { toast } from "react-toastify";
 
 const MyRecipeCard = ({ recipe, myRecipes }) => {
-  const { darkIstrue, setModalId } = use(ProductContext);
+  const { darkIstrue, setModalId,displayRecipes,setDisplayRecipes } = use(ProductContext);
 
   const handleDeleteForDB = (_id) => {
     fetch(`http://localhost:3000/recipes/${_id}`,{
@@ -19,6 +19,8 @@ const MyRecipeCard = ({ recipe, myRecipes }) => {
     .then(data=>{
       console.log("after delete",data)
       if(data?.deletedCount>0){
+        const afterFilteredRecipes=displayRecipes.filter(recipe=>recipe._id!==_id)
+        setDisplayRecipes(afterFilteredRecipes)
         toast.info("Deleted Successfully ")
       }
     })

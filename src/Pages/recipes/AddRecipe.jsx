@@ -4,12 +4,15 @@ import AuthContext from "../../contexts/AuthContext";
 import { useNavigate } from "react-router";
 import ProductContext from "../../contexts/ProductContext";
 
+
 const AddRecipe = () => {
   const navigate=useNavigate()
   const { user } = use(AuthContext);
+  const {setDisplayRecipes,displayRecipes}=use(ProductContext)
   // const {darkIstrue}=use(ProductContext)
   const [value, setValue] = useState(0);
   const [error, setError] = useState("");
+  //handle Addd to db
   const handleAddRecipe = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -51,6 +54,9 @@ const AddRecipe = () => {
       .then((data) => {
         // console.log("Server response:", data);
         if (data.insertedId) {
+          const finalDisplayRecipe=[...displayRecipes,recipeData]
+          setDisplayRecipes(finalDisplayRecipe)
+          
           Swal.fire({
             title: "Recipe Added Successfully!",
             icon: "success",

@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import ProductContext from "../contexts/ProductContext";
 
 const ProductProvider = ({ children }) => {
+
+
   const [recipes, setRecipes] = useState([]);
+
+  const [displayRecipes,setDisplayRecipes]=useState(recipes)
   const [darkIstrue,setDarkIStrue]=useState(false);
     const [modalId,setModalId] = useState();
    
@@ -16,6 +20,8 @@ const ProductProvider = ({ children }) => {
 //   console.log(recipes);
   const products={
     recipes,
+    displayRecipes,
+    setDisplayRecipes,
     setDarkIStrue,
     darkIstrue,
      modalId,

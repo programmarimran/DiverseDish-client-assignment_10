@@ -44,7 +44,7 @@ const AllRecipes = () => {
   //handle WishList recipes Filter
   const handleFilterWishlistRecipes = (country) => {
     if (country === "All") {
-      setWishListRecipes(specificAllRecipes);
+      setSpecificWishlistRecipes(wishlistRecipes);
     }
      else {
       const remainingRecipes = wishlistRecipes?.filter(
@@ -53,6 +53,7 @@ const AllRecipes = () => {
       setSpecificWishlistRecipes(remainingRecipes);
     }
   };
+  console.log(specificWishlistRecipes)
   return (
     <>
       <div className=" pt-12">
@@ -190,8 +191,8 @@ const AllRecipes = () => {
                     } shadow-2xl rounded-xl  overflow-hidden flex flex-col justify-between`}
                   >
                     <img
-                      src={singleRecipe?.recipe.image}
-                      alt={singleRecipe?.recipe.title}
+                      src={singleRecipe?.recipe?.image}
+                      alt={singleRecipe?.recipe?.title}
                       className="h-40 pt-1 px-1 rounded-t-2xl w-full object-cover"
                     />
                     <div className="p-4 flex flex-col justify-between flex-grow">
