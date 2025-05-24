@@ -6,6 +6,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import AuthContext from "../../contexts/AuthContext";
 import { Fade } from "react-awesome-reveal";
+import { Helmet } from "react-helmet-async";
 const AllRecipes = () => {
   const { user } = use(AuthContext);
   const { recipes, darkIstrue } = use(ProductContext);
@@ -58,6 +59,7 @@ const AllRecipes = () => {
   return (
     <>
       <div className=" pt-12">
+        <Helmet><title>DiverseDish|| All recipes</title></Helmet>
         <Tabs>
           <TabList className={" border-b-2 border-green-800 rounded-full"}>
             <Tab>All Recipes</Tab>

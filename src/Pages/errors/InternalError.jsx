@@ -1,9 +1,11 @@
 import React from "react";
+import { Helmet } from "react-helmet-async";
 import { Link } from "react-router";
 
 const ExternalError = () => {
   return (
     <div className="relative w-screen h-screen overflow-hidden">
+        <Helmet><title> DiverseDish ||Error Page</title></Helmet>
       {/* Background Image */}
       <img
         className="w-full opacity-40 h-full object-cover"

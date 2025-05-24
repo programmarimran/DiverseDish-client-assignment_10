@@ -5,6 +5,7 @@ import Hero from "../components/Hero";
 import WhyChooseUs from "../components/WhyChooseUs";
 import CustomerReviews from "../components/UserReview";
 import { Fade } from "react-awesome-reveal";
+import { Helmet } from "react-helmet-async";
 const HomeLayout = () => {
   // const [recipes,setRecipes]=useState([])
   // useEffect(()=>{
@@ -16,6 +17,7 @@ const HomeLayout = () => {
 
   return (
     <div>
+      <Helmet><title>Home page</title></Helmet>
      <Fade direction="right">
 
        <section className=" my-12">

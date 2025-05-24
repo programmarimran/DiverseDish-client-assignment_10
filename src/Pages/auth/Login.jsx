@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { FcGoogle } from "react-icons/fc";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { IoMdEyeOff } from "react-icons/io";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
   const location = useLocation();
@@ -67,6 +68,7 @@ const Login = () => {
   };
   return (
    <div className=" py-12">
+    <Helmet><title>DiverseDish ||Login page</title></Helmet>
      <div className="card mx-auto  border border-gray-200  w-full  shrink-0 shadow-2xl">
       <form onSubmit={handleLogin} className="card-body">
         <h1 className="text-3xl text-center font-bold">{user?.email?"Already Success":"Login now!"}</h1>

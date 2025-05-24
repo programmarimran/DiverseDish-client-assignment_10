@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 import AuthContext from "../../contexts/AuthContext";
 import { useNavigate } from "react-router";
 import ProductContext from "../../contexts/ProductContext";
+import { Helmet } from "react-helmet-async";
 
 
 const AddRecipe = () => {
@@ -72,6 +73,7 @@ const AddRecipe = () => {
 
   return (
     <div className="py-12">
+      <Helmet><title>DiverseDish||Add recipe</title></Helmet>
       <div className="text-center space-y-4 p-6">
         <h1 className="text-2xl font-bold">Add New Recipe</h1>
         <p className={`text-base`}>
