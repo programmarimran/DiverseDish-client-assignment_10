@@ -66,7 +66,8 @@ const Login = () => {
       });
   };
   return (
-    <div className="card mx-auto bg-base-100 border border-gray-200 my-12 w-full  shrink-0 shadow-2xl">
+   <div className=" py-12">
+     <div className="card mx-auto  border border-gray-200  w-full  shrink-0 shadow-2xl">
       <form onSubmit={handleLogin} className="card-body">
         <h1 className="text-3xl text-center font-bold">Login now!</h1>
         <fieldset className=" fieldset">
@@ -130,6 +131,7 @@ const Login = () => {
         </p>
       </form>
     </div>
+   </div>
   );
 };
 

@@ -74,7 +74,8 @@ const SignUp = () => {
       });
   };
   return (
-    <div className="card mx-auto bg-base-100 border border-gray-200 my-12 w-full  shrink-0 shadow-2xl">
+  <div className="py-12">
+      <div className="card mx-auto bg-base-100 border border-gray-200  w-full  shrink-0 shadow-2xl">
       <form onSubmit={handleCreateUser} className="card-body">
         <h1 className="text-3xl text-center font-bold">SignUp now!</h1>
         <fieldset className=" fieldset">
@@ -155,6 +156,7 @@ const SignUp = () => {
         </p>
       </form>
     </div>
+  </div>
   );
 };
 
