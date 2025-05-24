@@ -104,7 +104,7 @@ src/
 
 ## 👨‍🍳 Author
 
-- **Md Imran (Imran Shafran)**
+- **Md Imran Hasan**
 - 🌐 [Live Site](https://diverse-dish-by-imran.web.app/)
 - 📫 Reach out via GitHub or add contact info
 
