@@ -10,6 +10,7 @@ import Login from "../Pages/auth/Login";
 import SignUp from "../Pages/auth/SignUp";
 import PrivateRoute from "./PrivateRoute";
 import RecipeDetails from "../Pages/recipes/RecipeDetails";
+import UpdateRecipe from "../components/UpdateRecipe";
 
 const router = createBrowserRouter([
   {
@@ -19,7 +20,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        loader:()=>fetch("http://localhost:3000/recipes/home"),
+        loader:()=>fetch("https://diverse-dish-server.vercel.app/recipes/home"),
         Component: HomeLayout,
       },
       {
@@ -28,7 +29,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/recipe-details/:id",
-        loader:({params})=>fetch(`http://localhost:3000/recipes/${params.id}`),
+        loader:({params})=>fetch(`https://diverse-dish-server.vercel.app/recipes/${params.id}`),
         Component:RecipeDetails
       },
       {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
             <AddRecipe></AddRecipe>
           </PrivateRoute>
         ),
+      },
+      {
+        path:"/update-recipe",
+        element:<PrivateRoute><UpdateRecipe></UpdateRecipe></PrivateRoute>
       },
       {
         path: "/login",

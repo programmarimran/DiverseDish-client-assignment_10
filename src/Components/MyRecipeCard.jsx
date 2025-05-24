@@ -1,15 +1,48 @@
-import { use } from "react";
+// import { use, useState } from "react";
 import ProductContext from "../contexts/ProductContext";
 import { AiFillLike } from "react-icons/ai";
 import { Link } from "react-router";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import UpdateRacipeModal from "./UpdateRacipeModal";
-import { FaUser } from "react-icons/fa";
+import { FaEdit, FaUser } from "react-icons/fa";
+import MyModal from "./MyModal";
+import { use } from "react";
+import { Button } from "@headlessui/react";
 
 const MyRecipeCard = ({ recipe, myRecipes }) => {
- 
+  const { darkIstrue,setModalId,setIsOpen } = use(ProductContext);
+  // const handleModalIdDynamic=(_id)=>{
+  //   console.log(_id)
 
-  const { darkIstrue } = use(ProductContext);
+  // }
+
+
+
+
+
+
+
+
+
+
+
+
+// let [isOpen, setIsOpen] = useState(true)
+
+  function open() {
+    setIsOpen(true)
+  }
+
+  // function close() {
+  //   setIsOpen(false)
+  // }
+
+
+
+
+
+
+
 
   return (
     <div
@@ -32,14 +65,76 @@ const MyRecipeCard = ({ recipe, myRecipes }) => {
               darkIstrue ? "bg-green-800" : "bg-green-200"
             }`}
           >
-            <div>
-             
-                <UpdateRacipeModal
-                
-                  recipe={recipe}
-                ></UpdateRacipeModal>
-              
+            {/* ************************************** */}
+
+            <div className="p-2 rounded-full bg-green-300 hover:bg-green-400 cursor-pointer transition-all duration-300">
+              <button onClick={()=>{
+                setModalId(recipe?._id)
+               
+                }} className="">
+                <FaEdit
+                  size={24}
+                  className="text-green-900 hover:text-green-950"
+                />
+              </button>
             </div>
+            <div className="p-2 rounded-full bg-green-300 hover:bg-green-400 cursor-pointer transition-all duration-300">
+              <button onClick={()=>{
+                setModalId(recipe?._id)
+                document.getElementById("my_modal_1").showModal()
+                }} className="">
+                <FaEdit
+                  size={24}
+                  className="text-green-900 hover:text-green-950"
+                />
+              </button>
+            </div>
+            {/* ****************************** */}
+            <div>
+              <UpdateRacipeModal recipe={recipe}></UpdateRacipeModal>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <Button
+        onClick={open}
+        className="rounded-md bg-black/20 px-4 py-2 text-sm font-medium text-white focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white data-hover:bg-black/30"
+      >
+        Open dialog
+      </Button>
+
+            <p>
+              <MyModal></MyModal>
+            </p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             <div className="p-2 rounded-full bg-red-200 hover:bg-red-300 cursor-pointer transition-all duration-300">
               <RiDeleteBin6Line
                 size={24}

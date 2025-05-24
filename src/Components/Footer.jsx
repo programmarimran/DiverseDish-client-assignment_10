@@ -44,21 +44,21 @@ const Footer = () => {
      </>
    );
   return (
-    <footer className=" footer-horizontal  text-base-content rounded py-10">
-      <div className=" w-[200px] md:w-[300px] mx-auto flex justify-center items-center">
+    <footer className=" footer-horizontal text-gray-900   rounded py-10">
+      <div className=" w-[200px] md:w-[300px] mx-auto flex  items-center">
         <img
           src="https://i.ibb.co/ch573kTZ/Screenshot-2025-05-20-111920-removebg-preview.png"
           alt=""
         />
       </div>
-      <aside className="grid grid-cols-1 md:grid-cols-3 space-y-5">
+      <aside className=" md:grid text-start md:grid-cols-3 space-y-5">
         <nav className=" ">
           <h3 className=" font-bold text-xl mb-3 text-gray-700">
             Quick Links:
           </h3>
           <ul className=" flex flex-col gap-1 md:gap-3">{links}</ul>
         </nav>
-        <nav className=" mx-auto  ">
+        <nav className=" mx-auto ">
           <ul className=" md:space-y-5">
             <li className=" font-medium">
               <NavLink className={" link-hover"} to={"/copyright-notice"}>
@@ -75,7 +75,7 @@ const Footer = () => {
             </li>
           </ul>
         </nav>
-        <nav className=" flex justify-end ">
+        <nav className=" flex justify-start md:justify-end ">
           <h3 className=" font-bold text-xl mb-3 text-gray-700">Social:</h3>
           <ul className="flex gap-4 md:gap-3">
             <li>

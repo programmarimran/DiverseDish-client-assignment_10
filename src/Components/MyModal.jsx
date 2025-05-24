@@ -1,101 +1,34 @@
-import React, { use, useEffect, useState } from "react";
-import { FaEdit } from "react-icons/fa";
-import { useNavigate } from "react-router";
-import { toast } from "react-toastify";
-import ProductContext from "../contexts/ProductContext";
+import { Button, Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
+import { use } from 'react'
+import ProductContext from '../contexts/ProductContext'
 
-const UpdateRacipeModal = () => {
-  const { modalId } = use(ProductContext);
-  console.log(modalId);
-  const navigate = useNavigate();
 
-  const [recipes, setRecipes] = useState([]);
-  // const [remainingCurrentRacipe,setRemainingCurrentRacipe]=useState(null)
-  useEffect(() => {
-    fetch("https://diverse-dish-server.vercel.app/recipes")
-      .then((res) => res.json())
-      .then((data) => setRecipes(data));
-  }, []);
-  const findingUpdateRecipe = recipes?.find((rec) => rec._id === modalId);
-  console.log(findingUpdateRecipe);
-  // useEffect(() => {
-  //   if (recipes.length > 0) {
-  //     // console.log("Updated Recipes:", recipes);
-
-  //     const currentRecipe = recipes.find(
-  //       (rap) => rap._id?.toString() === recipe._id?.toString()
-  //     );
-  //     // console.log("Matched Recipe:", currentRecipe);
-  //     setRemainingCurrentRacipe(currentRecipe)
-  //   }
-  // }, [recipes, recipe._id]);
-  // console.log(remainingCurrentRacipe)
-
-  // const categoryArray = Array.isArray(categories)
-  // ? categories
-  // : categories?.split(",") || [];
-  // const [value, setValue] = useState(findingUpdateRecipe?.preparationTime);
-  // const [error,setError]=useState("")
-
-  const handleUpdateRacipe = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const formData = new FormData(form);
-    const updatedRecipe = Object.fromEntries(formData.entries());
-    updatedRecipe.ingredients = form.ingredients.value.split(",");
-    updatedRecipe.categories = formData.getAll("categories");
-    updatedRecipe.likeCount = parseInt(form.likeCount.value);
-    // const cuisineType=form.
-    // console.log(updatedRecipe)
-    fetch(
-      `https://diverse-dish-server.vercel.app/recipes/${findingUpdateRecipe?._id}`,
-      {
-        method: "PUT",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(updatedRecipe),
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        // console.log("after update ", data);
-        if (data?.modifiedCount == 0) {
-          toast.info("You didn't make any changes.");
-        } else if (data?.modifiedCount > 0) {
-          toast.success("Your Recipe Updated Successfully !!");
-          navigate("/my-recipes");
-
-          document.getElementById("add-recipe-modal").close();
-
-          return;
-        }
-      });
-  };
-
+ const  MyModal=()=> {
+  const{close,isOpen,modalId,recipes}=use(ProductContext)
+ 
+const remainingRecipe=recipes.find(recipe=>recipe._id===modalId)
+console.log(remainingRecipe)
   return (
     <>
-      <div className="p-2 rounded-full bg-green-300 hover:bg-green-400 cursor-pointer transition-all duration-300">
-        <button
-          className=""
-          onClick={() => document.getElementById("my_modal_1").showModal()}
-        >
-          <FaEdit size={24} className="text-green-900 hover:text-green-950" />
-        </button>
-      </div>
-      <dialog id="my_modal_1" className="modal">
-        <div className="modal-box max-w-4xl w-full">
-          <h3 className=" my-12 text-center bg-green-100 text-green-600 border border-green-200  rounded-lg py-2 px-4 text-2xl font-bold">
-            Update Recipe
-          </h3>
-          <form onSubmit={handleUpdateRacipe}>
+  
+      <Dialog open={isOpen} as="div" className="relative z-10 focus:outline-none" onClose={close}>
+        <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+          <div className="flex min-h-full items-center justify-center p-4">
+            <DialogPanel
+              transition
+              className="w-full max-w-md rounded-xl bg-white/5 p-6 backdrop-blur-2xl duration-300 ease-out data-closed:transform-[scale(95%)] data-closed:opacity-0"
+            >
+              <DialogTitle as="h3" className="text-base/7 font-medium text-white">
+                Payment successful
+              </DialogTitle>
+             <form >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <fieldset className="fieldset bg-base-300 border-base-300 rounded-box border p-4">
                 <label className="label">Image URL</label>
                 <input
                   type="text"
                   name="image"
-                  defaultValue={findingUpdateRecipe?.image}
+                  // defaultValue={findingUpdateRecipe?.image}
                   required
                   placeholder="Enter image URL"
                   className="input bg-[#70e00020] w-full"
@@ -107,7 +40,7 @@ const UpdateRacipeModal = () => {
                 <input
                   type="text"
                   name="title"
-                  defaultValue={findingUpdateRecipe?.title}
+                  // defaultValue={findingUpdateRecipe?.title}
                   required
                   placeholder="Enter recipe title"
                   className="input bg-[#70e00020] w-full"
@@ -119,7 +52,7 @@ const UpdateRacipeModal = () => {
                 <input
                   type="text"
                   name="ingredients"
-                  defaultValue={findingUpdateRecipe?.ingredients}
+                  // defaultValue={findingUpdateRecipe?.ingredients}
                   required
                   placeholder="Example: Chicken, Pasta, Cream"
                   className="input bg-[#70e00020] w-full"
@@ -131,7 +64,7 @@ const UpdateRacipeModal = () => {
                 <input
                   type="text"
                   name="instructions"
-                  defaultValue={findingUpdateRecipe?.instructions}
+                  // defaultValue={findingUpdateRecipe?.instructions}
                   required
                   placeholder="Example: 1.Boil pasta 2.Add cream..."
                   className="input bg-[#70e00020] w-full"
@@ -143,7 +76,7 @@ const UpdateRacipeModal = () => {
                 <select
                   name="cuisineType"
                   required
-                  defaultValue={findingUpdateRecipe?.cuisineType || ""}
+                  // defaultValue={findingUpdateRecipe?.cuisineType || ""}
                   className="select select-bordered w-full"
                 >
                   <option  disabled>
@@ -163,7 +96,7 @@ const UpdateRacipeModal = () => {
                 <input
                   type="number"
                   min={1}
-                  defaultValue={findingUpdateRecipe?.preparationTime}
+                  // defaultValue={findingUpdateRecipe?.preparationTime}
                 
                   className="input bg-[#70e00020] w-full"
                   name="preparationTime"
@@ -179,7 +112,7 @@ const UpdateRacipeModal = () => {
                 {/* {error && error} */}
               </span>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-2 mt-2">
-                {["Breakfast", "Lunch", "Dinner", "Dessert", "Vegan"].map(
+                {/* {["Breakfast", "Lunch", "Dinner", "Dessert", "Vegan"].map(
                   (cat) => (
                     <label key={cat} className="cursor-pointer label">
                       <input
@@ -194,7 +127,7 @@ const UpdateRacipeModal = () => {
                       <span className="label-text">{cat}</span>
                     </label>
                   )
-                )}
+                )} */}
               </div>
             </fieldset>
 
@@ -203,7 +136,7 @@ const UpdateRacipeModal = () => {
               <input
                 type="number"
                 name="likeCount"
-                value={findingUpdateRecipe?.likeCount}
+                // value={findingUpdateRecipe?.likeCount}
                 readOnly
                 className="input bg-[#70e00020] w-full"
               />
@@ -213,7 +146,7 @@ const UpdateRacipeModal = () => {
               <div className="modal-action">
                 <button
                   type="button"
-                  onClick={() => document.getElementById("my_modal_1").close()}
+               
                   className="btn bg-green-100 text-green-600 border border-green-400 hover:shadow-md rounded-lg py-2 px-4 text-2xl font-bold"
                 >
                   Close
@@ -222,16 +155,26 @@ const UpdateRacipeModal = () => {
               <button
                 className=" btn bg-green-100 text-green-600 border border-green-400 hover:shadow-md rounded-lg py-2 px-4 text-2xl font-bold"
                 type="submit"
-                onClick={() => document.getElementById("my_modal_1").close()}
+                
               >
                 update
               </button>
             </div>
           </form>
+              <div className="mt-4">
+                <Button
+                  className="inline-flex items-center gap-2 rounded-md bg-gray-700 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white data-hover:bg-gray-600 data-open:bg-gray-700"
+                  onClick={close}
+                >
+                  Got it, thanks!
+                </Button>
+              </div>
+            </DialogPanel>
+          </div>
         </div>
-      </dialog>
+      </Dialog>
     </>
-  );
-};
+  )
+}
 
-export default UpdateRacipeModal;
+export default MyModal

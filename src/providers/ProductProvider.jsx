@@ -4,10 +4,14 @@ import ProductContext from "../contexts/ProductContext";
 const ProductProvider = ({ children }) => {
   const [recipes, setRecipes] = useState([]);
   const [darkIstrue,setDarkIStrue]=useState(false);
-    // const [wishlistRecipe, setWishlistRecipe] = useState([]);
+    const [modalId,setModalId] = useState();
+    let [isOpen, setIsOpen] = useState(true)
+     function close() {
+    setIsOpen(false)
+  }
 
   useEffect(() => {
-    fetch("http://localhost:3000/recipes") // Replace with your actual API URL
+    fetch("https://diverse-dish-server.vercel.app/recipes") // Replace with your actual API URL
       .then((res) => res.json())
       .then((data) => setRecipes(data));
   }, []);
@@ -16,8 +20,11 @@ const ProductProvider = ({ children }) => {
     recipes,
     setDarkIStrue,
     darkIstrue,
-    // wishlistRecipe,
-    // setWishlistRecipe
+     modalId,
+     setModalId,
+    isOpen,
+    setIsOpen,
+    close
   }
   // console.log(wishlistRecipe)
   return (
