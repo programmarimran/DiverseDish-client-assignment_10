@@ -6,10 +6,24 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import UpdateRacipeModal from "./UpdateRacipeModal";
 import { FaEdit, FaUser } from "react-icons/fa";
 import { use } from "react";
+import { toast } from "react-toastify";
 
 const MyRecipeCard = ({ recipe, myRecipes }) => {
   const { darkIstrue, setModalId } = use(ProductContext);
 
+  const handleDeleteForDB = (_id) => {
+    fetch(`http://localhost:3000/recipes/${_id}`,{
+      method:"DELETE"
+    })
+    .then(res=>res.json())
+    .then(data=>{
+      console.log("after delete",data)
+      if(data?.deletedCount>0){
+        toast.info("Deleted Successfully ")
+      }
+    })
+  };
+  
   return (
     <div
       className={`${
@@ -48,15 +62,17 @@ const MyRecipeCard = ({ recipe, myRecipes }) => {
               </button>
             </div>
 
-            <div>
-              <UpdateRacipeModal recipe={recipe}></UpdateRacipeModal>
-            </div>
+            {/* <div>
+              <UpdateRacipeModal ></UpdateRacipeModal>
+            </div> */}
 
             <div className="p-2 rounded-full bg-red-200 hover:bg-red-300 cursor-pointer transition-all duration-300">
-              <RiDeleteBin6Line
-                size={24}
-                className="text-red-700 hover:text-red-900"
-              />
+              <button onClick={()=>handleDeleteForDB(recipe?._id)}>
+                <RiDeleteBin6Line
+                  size={24}
+                  className="text-red-700 hover:text-red-900"
+                />
+              </button>
             </div>
           </div>
 

@@ -17,7 +17,7 @@ const AllRecipes = () => {
       return;
     }
     fetch(
-      `https://diverse-dish-server.vercel.app/wishlist/recipes?email=${user?.email}`
+      `http://localhost:3000/wishlist/recipes?email=${user?.email}`
     )
       .then((res) => res.json())
       .then((wishlistRecipes) => {

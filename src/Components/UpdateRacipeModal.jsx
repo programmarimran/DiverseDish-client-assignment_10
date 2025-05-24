@@ -10,19 +10,15 @@ const UpdateRacipeModal = () => {
   const { modalId } = use(ProductContext);
   // console.log(modalId);
   const navigate = useNavigate();
-
-  // const [recipes, setRecipes] = useState([]);
-  // const [remainingCurrentRacipe,setRemainingCurrentRacipe]=useState(null)
+  console.log(modalId);
   useEffect(() => {
-    fetch("https://diverse-dish-server.vercel.app/recipes")
-      .then((res) => res.json())
-      .then((data) => {
-        // setRecipes(data)
-        setUpdateRecipe(data?.find((rec) => rec._id === modalId));
-        console.log(data?.find((rec) => rec._id === modalId))
-        // const findingUpdateRecipe = ;
-        // console.log(findingUpdateRecipe);
-      });
+    if (modalId) {
+      fetch(`http://localhost:3000/recipes/${modalId}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setUpdateRecipe(data);
+        });
+    }
   }, [modalId]);
 
   const handleUpdateRacipe = (e) => {
@@ -35,16 +31,13 @@ const UpdateRacipeModal = () => {
     updatedRecipe.likeCount = parseInt(form.likeCount.value);
     // const cuisineType=form.
     // console.log(updatedRecipe)
-    fetch(
-      `https://diverse-dish-server.vercel.app/recipes/${findingUpdateRecipe?._id}`,
-      {
-        method: "PUT",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(updatedRecipe),
-      }
-    )
+    fetch(`http://localhost:3000/recipes/${findingUpdateRecipe?._id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(updatedRecipe),
+    })
       .then((res) => res.json())
       .then((data) => {
         console.log("after update ", data);
@@ -61,6 +54,10 @@ const UpdateRacipeModal = () => {
       });
   };
   // console.log(findingUpdateRecipe?.cuisineType)
+  const handleClose = () => {
+    setUpdateRecipe({});
+    document.getElementById("my_modal_1").close();
+  };
   return (
     <>
       <dialog id="my_modal_1" className="modal">
@@ -161,15 +158,18 @@ const UpdateRacipeModal = () => {
                 {["Breakfast", "Lunch", "Dinner", "Dessert", "Vegan"].map(
                   (cat) => (
                     <label key={cat} className="cursor-pointer label">
-                      <input
-                        type="checkbox"
-                        defaultChecked={findingUpdateRecipe?.categories?.includes(
-                          cat
-                        )}
-                        className="checkbox bg-[#70e00020] checkbox-primary mr-2"
-                        name="categories"
-                        value={cat}
-                      />
+                      {findingUpdateRecipe?.categories?.length > 0 && (
+                        <input
+                          type="checkbox"
+                          defaultChecked={findingUpdateRecipe?.categories?.includes(
+                            cat
+                          )}
+                          className="checkbox bg-[#70e00020] checkbox-primary mr-2"
+                          name="categories"
+                          value={cat}
+                        />
+                      )}
+
                       <span className="label-text">{cat}</span>
                     </label>
                   )
@@ -182,7 +182,7 @@ const UpdateRacipeModal = () => {
               <input
                 type="number"
                 name="likeCount"
-               defaultValue={findingUpdateRecipe?.likeCount}
+                defaultValue={findingUpdateRecipe?.likeCount}
                 readOnly
                 className="input bg-[#70e00020] w-full"
               />
@@ -192,7 +192,7 @@ const UpdateRacipeModal = () => {
               <div className="modal-action">
                 <button
                   type="button"
-                  onClick={() => document.getElementById("my_modal_1").close()}
+                  onClick={() => handleClose()}
                   className="btn bg-green-100 text-green-600 border border-green-400 hover:shadow-md rounded-lg py-2 px-4 text-2xl font-bold"
                 >
                   Close

@@ -7,7 +7,7 @@ import { useNavigate } from "react-router";
 import ProductContext from "../contexts/ProductContext";
 import AuthContext from "../contexts/AuthContext";
 import Swal from "sweetalert2";
-
+import { Typewriter } from 'react-simple-typewriter'
 const Hero = () => {
   const navigate = useNavigate();
   const { recipes } = use(ProductContext);
@@ -24,7 +24,20 @@ const Hero = () => {
       navigate("/");
     }
   };
+// react type writer is start
+// import React from 'react'
 
+
+// const MyComponent = () => {
+
+//   const handleType = (count: Number) => {
+//     // access word count number
+//     console.log(count)}
+//   }
+
+  const handleDone = () => {
+    console.log(`Done after 5 loops!`)
+  }
   return (
     <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
       {recipes.map((product, index) => (
@@ -46,6 +59,26 @@ const Hero = () => {
               {/* Text Section */}
               <div className="col-span-2 flex flex-col justify-center items-start px-4">
                 <p className="text-sm italic">{product?.cuisineType} Cuisine</p>
+                {/* **********react typewriter is start******************* */}
+                <div className='App'>
+      <h1 style={{ paddingTop: '5rem', margin: 'auto 0', fontWeight: 'normal' }}>
+        {product?.title}{' '}
+        <span style={{ color: 'red', fontWeight: 'bold' }}>
+          {/* Style will be inherited from the parent element */}
+          <Typewriter
+            words={['Eat', 'Sleep', 'Code', 'Repeat!']}
+            loop={5}
+            cursor
+            cursorStyle='_'
+            typeSpeed={70}
+            deleteSpeed={50}
+            delaySpeed={1000}
+            onLoopDone={handleDone}
+            // onType={handleType}
+          />
+        </span>
+      </h1>
+    </div>
                 <h1 className="text-2xl md:text-4xl font-bold mt-2">
                   {product?.title}
                 </h1>

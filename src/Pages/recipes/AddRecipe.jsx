@@ -40,7 +40,7 @@ const AddRecipe = () => {
     // console.log(recipeData);
 
     // POST to server
-    fetch("https://diverse-dish-server.vercel.app/recipes", {
+    fetch("http://localhost:3000/recipes", {
       method: "POST",
       headers: {
         "content-type": "application/json",

@@ -2,6 +2,7 @@ import React, { use} from "react";
 import AuthContext from "../../contexts/AuthContext";
 import ProductContext from "../../contexts/ProductContext";
 import MyRecipeCard from "../../components/MyRecipeCard";
+import UpdateRacipeModal from "../../components/UpdateRacipeModal";
 
 const MyRecipes = () => {
 
@@ -34,6 +35,7 @@ const MyRecipes = () => {
             recipe={recipe}
           ></MyRecipeCard>
         ))}
+        <UpdateRacipeModal></UpdateRacipeModal>
       </div>
     </div>
   );
