@@ -7,13 +7,18 @@ import "react-tabs/style/react-tabs.css";
 import AuthContext from "../../contexts/AuthContext";
 const AllRecipes = () => {
   const { user } = use(AuthContext);
-  const { recipes,darkIstrue } = use(ProductContext);
+  const { recipes, darkIstrue } = use(ProductContext);
+  const [specificAllRecipes, setSpecificAllRecipes] = useState(recipes);
   const [wishlistRecipes, setWishListRecipes] = useState(null);
+  const [specificWishlistRecipes, setSpecificWishlistRecipes] =
+    useState(wishlistRecipes);
   useEffect(() => {
     if (!user?.email) {
       return;
     }
-    fetch(`https://diverse-dish-server.vercel.app/wishlist/recipes?email=${user?.email}`)
+    fetch(
+      `https://diverse-dish-server.vercel.app/wishlist/recipes?email=${user?.email}`
+    )
       .then((res) => res.json())
       .then((wishlistRecipes) => {
         // console.log("after get",wishlistRecipes)
@@ -23,7 +28,31 @@ const AllRecipes = () => {
         console.log(error);
       });
   }, [user?.email]);
-  console.log(wishlistRecipes);
+  // console.log(wishlistRecipes);
+  //hanlde All recipe Filter
+  const handleFilterAllRecipes = (country) => {
+    // console.log(country);
+    if (country === "All") {
+      setSpecificAllRecipes(recipes);
+    } else {
+      const remainingRecipes = recipes?.filter(
+        (recipe) => recipe?.cuisineType === country
+      );
+      setSpecificAllRecipes(remainingRecipes);
+    }
+  };
+  //handle WishList recipes Filter
+  const handleFilterWishlistRecipes = (country) => {
+    if (country === "All") {
+      setWishListRecipes(specificAllRecipes);
+    }
+     else {
+      const remainingRecipes = wishlistRecipes?.filter(
+        (singlerecipe) => singlerecipe?.recipe?.cuisineType === country
+      );
+      setSpecificWishlistRecipes(remainingRecipes);
+    }
+  };
   return (
     <>
       <div className=" pt-12">
@@ -38,14 +67,43 @@ const AllRecipes = () => {
               <h2 className="text-3xl font-bold mb-6 text-center">
                 All Recipes
               </h2>
-
+              <section className=" my-6">
+                <div className="fieldset max-w-64 mx-auto bg-base-300 border-base-300 rounded-box border">
+                  <label className=" text-2xl font-bold text-center">
+                    Filter
+                  </label>
+                  <select
+                    name="cuisineType"
+                    required
+                    defaultValue=""
+                    onChange={(e) => handleFilterAllRecipes(e.target.value)}
+                    className="select select-bordered w-3/4 mx-auto"
+                  >
+                    <option value={""} disabled>
+                      Select cuisine
+                    </option>
+                    <option>All</option>
+                    <option>BanglaDeshi</option>
+                    <option>Italian</option>
+                    <option>Mexican</option>
+                    <option>Indian</option>
+                    <option>Chinese</option>
+                    <option>Others</option>
+                  </select>
+                  <h1 className=" text-center text-base font-medium">
+                    {specificAllRecipes?.length} Recipes Found
+                  </h1>
+                </div>
+              </section>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                {recipes.map((recipe) => (
+                {specificAllRecipes.map((recipe) => (
                   <div
                     key={recipe._id}
                     className={`${
-        darkIstrue ? "bg-green-200 border-2  hover:border-4 border-gray-300 text-gray-800" : "bg-green-200 border-2  hover:border-4 border-gray-300 text-gray-800"
-      } shadow-2xl rounded-xl  overflow-hidden flex flex-col justify-between`}
+                      darkIstrue
+                        ? "bg-green-200 border-2  hover:border-4 border-gray-300 text-gray-800"
+                        : "bg-green-200 border-2  hover:border-4 border-gray-300 text-gray-800"
+                    } shadow-2xl rounded-xl  overflow-hidden flex flex-col justify-between`}
                   >
                     <img
                       src={recipe.image}
@@ -89,20 +147,51 @@ const AllRecipes = () => {
               <h1 className="text-3xl font-bold mb-6 text-center">
                 {!user?.email
                   ? "Please log in to view your wishlist."
-                  : wishlistRecipes?.length < 1
-                  }
+                  : wishlistRecipes?.length < 1}
               </h1>
+              <section className=" my-6">
+                <div className="fieldset max-w-64 mx-auto bg-base-300 border-base-300 rounded-box border">
+                  <label className=" text-2xl font-bold text-center">
+                    Filter
+                  </label>
+                  <select
+                    name="cuisineType"
+                    required
+                    defaultValue=""
+                    onChange={(e) =>
+                      handleFilterWishlistRecipes(e.target.value)
+                    }
+                    className="select select-bordered w-3/4 mx-auto"
+                  >
+                    <option value={""} disabled>
+                      Select cuisine
+                    </option>
+                    <option>All</option>
+                    <option>BanglaDeshi</option>
+                    <option>Italian</option>
+                    <option>Mexican</option>
+                    <option>Indian</option>
+                    <option>Chinese</option>
+                    <option>Others</option>
+                  </select>
+                  <h1 className=" text-center text-base font-medium">
+                    {specificWishlistRecipes?.length} Recipes Found
+                  </h1>
+                </div>
+              </section>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                {wishlistRecipes?.map((singleRecipe) => (
+                {specificWishlistRecipes?.map((singleRecipe) => (
                   <div
                     key={singleRecipe.recipe._id}
                     className={`${
-        darkIstrue ? "bg-green-200 border-2  hover:border-4 border-gray-300 text-gray-800" : "bg-green-200 border-2  hover:border-4 border-gray-300 text-gray-800"
-      } shadow-2xl rounded-xl  overflow-hidden flex flex-col justify-between`}
+                      darkIstrue
+                        ? "bg-green-200 border-2  hover:border-4 border-gray-300 text-gray-800"
+                        : "bg-green-200 border-2  hover:border-4 border-gray-300 text-gray-800"
+                    } shadow-2xl rounded-xl  overflow-hidden flex flex-col justify-between`}
                   >
                     <img
-                      src={singleRecipe.recipe.image}
-                      alt={singleRecipe.recipe.title}
+                      src={singleRecipe?.recipe.image}
+                      alt={singleRecipe?.recipe.title}
                       className="h-40 pt-1 px-1 rounded-t-2xl w-full object-cover"
                     />
                     <div className="p-4 flex flex-col justify-between flex-grow">

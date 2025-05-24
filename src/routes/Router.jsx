@@ -20,15 +20,18 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
+        errorElement:<InternalError></InternalError>,
         loader:()=>fetch("https://diverse-dish-server.vercel.app/recipes/home"),
         Component: HomeLayout,
       },
       {
         path: "/all-recipes",
+        errorElement:<InternalError></InternalError>,
         element: <AllRecipes />,
       },
       {
         path: "/recipe-details/:id",
+        errorElement:<InternalError></InternalError>,
         loader:({params})=>fetch(`https://diverse-dish-server.vercel.app/recipes/${params.id}`),
         Component:RecipeDetails
       },
@@ -43,6 +46,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/add-recipes",
+        errorElement:<InternalError></InternalError>,
         element: (
           <PrivateRoute>
             <AddRecipe></AddRecipe>
@@ -52,10 +56,12 @@ const router = createBrowserRouter([
      
       {
         path: "/login",
+        errorElement:<InternalError></InternalError>,
         Component: Login,
       },
       {
         path: "/signup",
+        errorElement:<InternalError></InternalError>,
         Component: SignUp,
       },
     ],
