@@ -1,0 +1,87 @@
+{
+  "diverseDishInfo": {
+    "whyChooseUs": {
+      "title": "Why Choose Diverse Dish?",
+      "description": "Discover flavors from around the world with Diverse Dish—where every recipe is a celebration of culture, taste, and homemade goodness.",
+      "features": [
+        {
+          "id": 1,
+          "title": "Authentic Recipes",
+          "icon": "🍽️",
+          "description": "Each recipe is crafted with care and cultural authenticity to bring global cuisine to your kitchen."
+        },
+        {
+          "id": 2,
+          "title": "Easy to Follow",
+          "icon": "📋",
+          "description": "Step-by-step instructions and ingredient lists make cooking fun and simple for everyone."
+        },
+        {
+          "id": 3,
+          "title": "Free & Family-Friendly",
+          "icon": "👨‍👩‍👧‍👦",
+          "description": "Our recipes are free to explore and perfect for family meals or special gatherings."
+        },
+        {
+          "id": 4,
+          "title": "Community Shared",
+          "icon": "🌍",
+          "description": "Join a global community of food lovers sharing their favorite dishes and cooking tips."
+        }
+      ]
+    },
+    "userReviews": {
+      "title": "What Our Home Cooks Say",
+      "reviews": [
+        {
+          "id": 1,
+          "name": "Nadia H.",
+          "location": "Bangladesh",
+          "rating": 5,
+          "comment": "Diverse Dish is my go-to for dinner ideas. Love the variety and easy steps!",
+          "image": "https://i.ibb.co/TMb8YW6G/female.png"
+        },
+        {
+          "id": 2,
+          "name": "Thomas K.",
+          "location": "Australia",
+          "rating": 4,
+          "comment": "Fantastic collection of recipes from around the world. Always something new to try.",
+          "image": "https://i.ibb.co/YTpjHbHk/image-180x180-8.png"
+        },
+        {
+          "id": 3,
+          "name": "Ayesha Z.",
+          "location": "Pakistan",
+          "rating": 5,
+          "comment": "My kids enjoy cooking with me now thanks to Diverse Dish. Highly recommended!",
+          "image": "https://i.ibb.co/TMb8YW6G/female.png"
+        },
+        {
+          "id": 4,
+          "name": "Luis M.",
+          "location": "Spain",
+          "rating": 4,
+          "comment": "Tried the Spanish omelette recipe—it was perfect. Keep them coming!",
+          "image": "https://i.ibb.co/YTpjHbHk/image-180x180-8.png"
+        },
+        {
+          "id": 5,
+          "name": "Zara T.",
+          "location": "London, UK",
+          "rating": 5,
+          "comment": "Excellent recipe layout and diverse content. I’ve bookmarked so many already!",
+          "image": "https://i.ibb.co/TMb8YW6G/female.png"
+        },
+        {
+          "id": 6,
+          "name": "Junaid R.",
+          "location": "Pakistan",
+          "rating": 5,
+          "comment": "Easy, delicious, and international. Diverse Dish makes home cooking exciting!",
+          "image": "https://i.ibb.co/YTpjHbHk/image-180x180-8.png"
+        }
+      ]
+    }
+  }
+}

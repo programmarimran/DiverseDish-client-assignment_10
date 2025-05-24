@@ -2,6 +2,7 @@
 import { useLoaderData } from "react-router";
 import HomeCard from "../components/HomeCard";
 import Hero from "../components/Hero";
+import WhyChooseUs from "../components/WhyChooseUs";
 
 const HomeLayout = () => {
   // const [recipes,setRecipes]=useState([])
@@ -17,12 +18,17 @@ const HomeLayout = () => {
       <section className=" my-12">
         <Hero></Hero>
       </section>
-      <h1 className=" text-2xl text-center font-extrabold py-12 ">Top Liked Recipes</h1>
+     <section>
+       <h1 className=" text-2xl text-center font-extrabold py-12 ">Top Liked Recipes</h1>
       <div className=" pb-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {recipes.map((recipe) => (
           <HomeCard key={recipe._id} recipe={recipe}></HomeCard>
         ))}
       </div>
+     </section>
+     <section className=" my-12">
+      <WhyChooseUs></WhyChooseUs>
+     </section>
     </div>
   );
 };

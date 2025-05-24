@@ -135,11 +135,10 @@ const RecipeDetails = () => {
               <strong className="text-xl font-bold">Instructions:</strong>{" "}
               <span className={subTextColor}>{recipe?.instructions}</span>
             </p>
-            <div className="flex">
-              <h1 className="text-xl font-bold">Category:</h1>
+            <div className="flex flex-wrap md:flex-nowrap overflow-x-auto gap-2 py-2">
               {recipe.categories.map((cat, index) => (
                 <button
-                  className="text-green-600 bg-green-200 rounded-lg mx-3 px-3"
+                  className="text-green-600 bg-green-200 whitespace-nowrap rounded-lg px-3 py-1"
                   key={index}
                 >
                   {cat}
