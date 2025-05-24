@@ -46,7 +46,7 @@ const RecipeDetails = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("After Updated likeCount", data);
+        // console.log("After Updated likeCount", data);
         if (currentUser) {
           return;
         } else if (user?.email === recipe?.user?.email) {
@@ -71,7 +71,7 @@ const RecipeDetails = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("after wishlisted ", data);
+        // console.log("after wishlisted ", data);
         if (data.insertedId) {
           toast.success("Your Recipe Add To Wishlist successfully!");
         } else if (data.message) {

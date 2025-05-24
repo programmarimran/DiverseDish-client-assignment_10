@@ -36,7 +36,7 @@ const Hero = () => {
 //   }
 
   const handleDone = () => {
-    console.log(`Done after 5 loops!`)
+    // console.log(`Done after 5 loops!`)
   }
   return (
     <Swiper navigation={true} modules={[Navigation]} className="mySwiper">

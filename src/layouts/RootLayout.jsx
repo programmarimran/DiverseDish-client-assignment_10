@@ -14,10 +14,12 @@ const RootLayout = () => {
         </div>
        
       </header>
-      <main className=" bg-[#70e00010]">
-       <div className=" w-11/12 mx-auto min-h-[calc(100vh-429px)]">
+      <main className=" bg-[#70e00010] ">
+      <section className="max-w-7xl mx-auto ">
+         <div className=" w-11/12 mx-auto min-h-[calc(100vh-429px)]">
          <Outlet></Outlet>
        </div>
+      </section>
       </main>
 
       {/* bg-[#70e00099] */}

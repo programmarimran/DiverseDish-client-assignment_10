@@ -59,7 +59,7 @@ const Login = () => {
         navigate(location?.state || "/");
       })
       .catch((error) => {
-        console.log(error.code);
+        // console.log(error.code);
         setError(error.code);
       })
       .finally(() => {

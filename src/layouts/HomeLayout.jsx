@@ -20,7 +20,7 @@ const HomeLayout = () => {
       <Helmet><title>Home page</title></Helmet>
      <Fade direction="right">
 
-       <section className=" my-12">
+       <section className=" py-12">
         <Hero></Hero>
       </section>
      </Fade>

@@ -40,7 +40,7 @@ const UpdateRacipeModal = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("after update ", data);
+        // console.log("after update ", data);
         if (data?.modifiedCount == 0) {
           toast.info("You didn't make any changes.");
         } else if (data?.modifiedCount > 0) {

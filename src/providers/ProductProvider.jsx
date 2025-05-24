@@ -20,7 +20,7 @@ const ProductProvider = ({ children }) => {
       .then((res) => res.json())
       .then((data) => {
         setDisplayRecipes(data);
-        console.log(data);
+        // console.log(data);
       });
   };
   const products = {

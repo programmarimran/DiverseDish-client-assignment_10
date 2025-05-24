@@ -55,7 +55,7 @@ const AllRecipes = () => {
       setSpecificWishlistRecipes(remainingRecipes);
     }
   };
-  console.log(specificWishlistRecipes)
+  // console.log(specificWishlistRecipes)
   return (
     <>
       <div className=" pt-12">

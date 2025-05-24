@@ -9,7 +9,7 @@ const MyRecipes = () => {
   const [finalUIRecipe, setFinalUiRecipe] = useState([]);
   const { user } = use(AuthContext);
   const { recipes, displayRecipes } = use(ProductContext);
-  console.log(displayRecipes);
+  // console.log(displayRecipes);
   const userEmail = user?.email;
   // console.log(recipes);
   const myRecipes = recipes.filter((re) => re.user.email === userEmail);
