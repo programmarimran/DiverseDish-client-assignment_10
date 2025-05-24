@@ -2,33 +2,37 @@ import React, { useEffect, useState } from "react";
 import ProductContext from "../contexts/ProductContext";
 
 const ProductProvider = ({ children }) => {
-
-
   const [recipes, setRecipes] = useState([]);
 
-  const [displayRecipes,setDisplayRecipes]=useState(recipes)
-  const [darkIstrue,setDarkIStrue]=useState(false);
-    const [modalId,setModalId] = useState();
-   
-
+  const [displayRecipes, setDisplayRecipes] = useState([]);
+  const [darkIstrue, setDarkIStrue] = useState(false);
+  const [modalId, setModalId] = useState();
 
   useEffect(() => {
     fetch("http://localhost:3000/recipes") // Replace with your actual API URL
       .then((res) => res.json())
       .then((data) => setRecipes(data));
   }, []);
-//   console.log(recipes);
-  const products={
+  //   console.log(recipes);
+
+  const displayRecipeFunction = () => {
+    fetch("http://localhost:3000/recipes")
+      .then((res) => res.json())
+      .then((data) => {
+        setDisplayRecipes(data);
+        console.log(data);
+      });
+  };
+  const products = {
     recipes,
+    displayRecipeFunction,
     displayRecipes,
     setDisplayRecipes,
     setDarkIStrue,
     darkIstrue,
-     modalId,
-     setModalId,
-   
-    
-  }
+    modalId,
+    setModalId,
+  };
   // console.log(wishlistRecipe)
   return (
     <div>

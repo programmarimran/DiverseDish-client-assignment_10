@@ -1,17 +1,25 @@
-import React, { use} from "react";
+import React, { use, useEffect, useState} from "react";
 import AuthContext from "../../contexts/AuthContext";
 import ProductContext from "../../contexts/ProductContext";
 import MyRecipeCard from "../../components/MyRecipeCard";
 import UpdateRacipeModal from "../../components/UpdateRacipeModal";
 
 const MyRecipes = () => {
-
+const [finalUIRecipe,setFinalUiRecipe]=useState([])
   const { user } = use(AuthContext);
   const { recipes,displayRecipes } = use(ProductContext);
   console.log(displayRecipes)
   const userEmail = user?.email;
   // console.log(recipes);
   const myRecipes = recipes.filter((re) => re.user.email === userEmail);
+  useEffect(()=>{
+    if(displayRecipes?.length>0){
+      setFinalUiRecipe(displayRecipes)
+    }
+    else{
+      setFinalUiRecipe(myRecipes)
+    }
+  },[displayRecipes])
   // console.log(myRecipes);
   let layoutClass =
   myRecipes.length === 2
@@ -29,7 +37,7 @@ const MyRecipes = () => {
       <div
         className={`pb-12 ${layoutClass} `}
       >
-        {myRecipes.map((recipe) => (
+        {finalUIRecipe.map((recipe) => (
           <MyRecipeCard
             key={recipe?._id}
             myRecipes={myRecipes}

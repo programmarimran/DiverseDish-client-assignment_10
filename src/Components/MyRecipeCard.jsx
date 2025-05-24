@@ -3,13 +3,13 @@ import ProductContext from "../contexts/ProductContext";
 import { AiFillLike } from "react-icons/ai";
 import { Link } from "react-router";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import UpdateRacipeModal from "./UpdateRacipeModal";
+// import UpdateRacipeModal from "./UpdateRacipeModal";
 import { FaEdit, FaUser } from "react-icons/fa";
 import { use } from "react";
 import { toast } from "react-toastify";
 
 const MyRecipeCard = ({ recipe, myRecipes }) => {
-  const { darkIstrue, setModalId,displayRecipes,setDisplayRecipes } = use(ProductContext);
+  const { darkIstrue, setModalId,displayRecipes,setDisplayRecipes,displayRecipeFunction } = use(ProductContext);
 
   const handleDeleteForDB = (_id) => {
     fetch(`http://localhost:3000/recipes/${_id}`,{
@@ -21,6 +21,7 @@ const MyRecipeCard = ({ recipe, myRecipes }) => {
       if(data?.deletedCount>0){
         const afterFilteredRecipes=displayRecipes.filter(recipe=>recipe._id!==_id)
         setDisplayRecipes(afterFilteredRecipes)
+        displayRecipeFunction()
         toast.info("Deleted Successfully ")
       }
     })
