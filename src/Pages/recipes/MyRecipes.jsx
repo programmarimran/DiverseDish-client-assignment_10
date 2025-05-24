@@ -1,30 +1,29 @@
-import React, { use, useEffect, useState} from "react";
+import React, { use, useEffect, useState } from "react";
 import AuthContext from "../../contexts/AuthContext";
 import ProductContext from "../../contexts/ProductContext";
 import MyRecipeCard from "../../components/MyRecipeCard";
 import UpdateRacipeModal from "../../components/UpdateRacipeModal";
 
 const MyRecipes = () => {
-const [finalUIRecipe,setFinalUiRecipe]=useState([])
+  const [finalUIRecipe, setFinalUiRecipe] = useState([]);
   const { user } = use(AuthContext);
-  const { recipes,displayRecipes } = use(ProductContext);
-  console.log(displayRecipes)
+  const { recipes, displayRecipes } = use(ProductContext);
+  console.log(displayRecipes);
   const userEmail = user?.email;
   // console.log(recipes);
   const myRecipes = recipes.filter((re) => re.user.email === userEmail);
-  useEffect(()=>{
-    if(displayRecipes?.length>0){
-      setFinalUiRecipe(displayRecipes)
+  useEffect(() => {
+    if (displayRecipes?.length > 0) {
+      setFinalUiRecipe(displayRecipes);
+    } else {
+      setFinalUiRecipe(myRecipes);
     }
-    else{
-      setFinalUiRecipe(myRecipes)
-    }
-  },[displayRecipes])
+  }, [displayRecipes]);
   // console.log(myRecipes);
   let layoutClass =
-  myRecipes.length === 2
-    ? "flex justify-center gap-6 flex-wrap"
-    : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6";
+    myRecipes.length === 2
+      ? "flex justify-center gap-6 flex-wrap"
+      : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6";
   return (
     <div>
       <h1 className="text-2xl text-center font-extrabold py-12">
@@ -34,9 +33,7 @@ const [finalUIRecipe,setFinalUiRecipe]=useState([])
         </span>{" "}
         Recipes found!
       </h1>
-      <div
-        className={`pb-12 ${layoutClass} `}
-      >
+      <div className={`pb-12 ${layoutClass} `}>
         {finalUIRecipe.map((recipe) => (
           <MyRecipeCard
             key={recipe?._id}

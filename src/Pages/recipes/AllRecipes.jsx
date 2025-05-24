@@ -5,6 +5,7 @@ import { AiFillLike } from "react-icons/ai";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import AuthContext from "../../contexts/AuthContext";
+import { Fade } from "react-awesome-reveal";
 const AllRecipes = () => {
   const { user } = use(AuthContext);
   const { recipes, darkIstrue } = use(ProductContext);
@@ -63,7 +64,8 @@ const AllRecipes = () => {
             <Tab>Wishlist</Tab>
           </TabList>
 
-          <TabPanel>
+         <Fade direction="left">
+           <TabPanel>
             <div className="p-4 pb-12 ">
               <h2 className="text-3xl font-bold mb-6 text-center">
                 All Recipes
@@ -136,7 +138,9 @@ const AllRecipes = () => {
               </div>
             </div>
           </TabPanel>
-          <TabPanel>
+         </Fade>
+          <Fade direction="right">
+            <TabPanel>
             <div className=" p-4 pb-12">
               <h1 className="text-3xl font-bold mb-6 text-center">
                 {!user?.email
@@ -220,6 +224,7 @@ const AllRecipes = () => {
               </div>
             </div>
           </TabPanel>
+          </Fade>
         </Tabs>
       </div>
     </>
