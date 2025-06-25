@@ -16,7 +16,9 @@ Diverse Dish is a responsive recipe-sharing web application where users can disc
   - [Screenshot 1](https://i.ibb.co/9HjLdjDx/Screenshot-2025-06-25-145450.png)
   - [Screenshot 2](https://i.ibb.co/m7hkvnK/Screenshot-2025-06-25-145347.png)
   - [Screenshot 3](https://i.ibb.co/HTsffVtK/Screenshot-2025-06-25-151310.png)
-- Mobile View Screenshot: [View here]([https://i.ibb.co/9HjLdjDx/Screenshot-2025-06-25-145450.png](https://i.ibb.co/ZyPbQTW/Whats-App-Image-2025-06-25-at-15-00-50-ee74841e.jpg))
+
+- Mobile View Screenshot: [View here](https://i.ibb.co/ZyPbQTW/Whats-App-Image-2025-06-25-at-15-00-50-ee74841e.jpg)
+
 
 ## 🌟 Core Features
 - Browse curated recipes from multiple cultures
