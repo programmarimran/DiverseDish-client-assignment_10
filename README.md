@@ -3,15 +3,18 @@
 ## 🔗 Relevant Links
 - 🌐 Live Website: https://diverse-dish-by-imran.web.app/
 - 📦 Client Repository: https://github.com/programmarimran/DiverseDish-client-assignment_10
-- 🛠️ Server Repository: (add your server repo URL here)
+- 🛠️ Server Repository: https://github.com/programmarimran/DiverseDish-server-assignment_10
 
 ## 📌 Project Overview
 Diverse Dish is a responsive recipe-sharing web application where users can discover, add, and explore recipes from around the world. It features user authentication, CRUD operations for recipes, modern UI with animations, and a dark/light theme toggle. Built with React, Tailwind CSS, and Firebase, it aims to offer a smooth and engaging experience for food enthusiasts and developers alike.
 
 ## 🖼️ Preview
-[https://i.ibb.co/m7hkvnK/Screenshot-2025-06-25-145347.png](https://i.ibb.co/m7hkvnK/Screenshot-2025-06-25-145347.png)
-- Additional Screenshots or Sections: (https://i.ibb.co/ZyPbQTW/Whats-App-Image-2025-06-25-at-15-00-50-ee74841e.jpg)
-- Mobile View Screenshot: (https://i.ibb.co/9HjLdjDx/Screenshot-2025-06-25-145450.png)
+
+![Main Screenshot](https://i.ibb.co/m7hkvnK/Screenshot-2025-06-25-145347.png)
+
+- Additional Screenshots or Sections: [View here](https://i.ibb.co/ZyPbQTW/Whats-App-Image-2025-06-25-at-15-00-50-ee74841e.jpg)
+
+- Mobile View Screenshot: [View here](https://i.ibb.co/9HjLdjDx/Screenshot-2025-06-25-145450.png)
 
 ## 🌟 Core Features
 - Browse curated recipes from multiple cultures
