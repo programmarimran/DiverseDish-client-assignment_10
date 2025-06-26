@@ -9,11 +9,26 @@ import { Fade } from "react-awesome-reveal";
 import { Helmet } from "react-helmet-async";
 const AllRecipes = () => {
   const { user } = use(AuthContext);
-  const { recipes, darkIstrue } = use(ProductContext);
-  const [specificAllRecipes, setSpecificAllRecipes] = useState(recipes);
+  const { darkIstrue } = use(ProductContext);
+
+  const [specificAllRecipes, setSpecificAllRecipes] = useState([]);
   const [wishlistRecipes, setWishListRecipes] = useState(null);
   const [specificWishlistRecipes, setSpecificWishlistRecipes] =
     useState(wishlistRecipes);
+    useEffect(()=>{
+      fetch(
+      `${import.meta.env.VITE_serverBaseURL}/recipes`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data)
+        setSpecificAllRecipes(data)
+        
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    },[])
   useEffect(() => {
     if (!user?.email) {
       return;
@@ -35,9 +50,9 @@ const AllRecipes = () => {
   const handleFilterAllRecipes = (country) => {
     // console.log(country);
     if (country === "All") {
-      setSpecificAllRecipes(recipes);
+      setSpecificAllRecipes(specificAllRecipes);
     } else {
-      const remainingRecipes = recipes?.filter(
+      const remainingRecipes = specificAllRecipes?.filter(
         (recipe) => recipe?.cuisineType === country
       );
       setSpecificAllRecipes(remainingRecipes);
