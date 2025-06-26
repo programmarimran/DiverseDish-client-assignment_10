@@ -37,7 +37,7 @@ const RecipeDetails = () => {
   const handleLikeButton = () => {
     const updateLike = { likeCount: recipe?.likeCount };
 
-    fetch(`https://diverse-dish-server.vercel.app/recipes/${recipe._id}`, {
+    fetch(`${import.meta.env.VITE_serverBaseURL}/recipes/${recipe._id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
@@ -62,7 +62,7 @@ const RecipeDetails = () => {
     // console.log(recipe);
 
     //wishlist database start
-    fetch("https://diverse-dish-server.vercel.app/wishlist/recipes", {
+    fetch(`${import.meta.env.VITE_serverBaseURL}/wishlist/recipes`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

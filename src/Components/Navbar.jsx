@@ -83,7 +83,7 @@ const Navbar = () => {
           )}
         </div>
 
-        <div className="items-center md:hidden lg:flex">
+        <div className="items-center md:hidden lg:flex gap-2">
           <div className="avatar">
             <div className="w-10 md:w-10 rounded-full">
               <img src="https://i.ibb.co/SX6hZdjg/Screenshot-2025-05-20-112334.png" />

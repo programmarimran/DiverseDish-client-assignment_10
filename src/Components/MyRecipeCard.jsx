@@ -8,25 +8,26 @@ import { FaEdit, FaUser } from "react-icons/fa";
 import { use } from "react";
 import { toast } from "react-toastify";
 
-const MyRecipeCard = ({ recipe, myRecipes }) => {
-  const { darkIstrue, setModalId,displayRecipes,setDisplayRecipes,displayRecipeFunction } = use(ProductContext);
+const MyRecipeCard = ({ recipe, myRecipes, setMyRecipes }) => {
+  const { darkIstrue, setModalId} = use(ProductContext);
 
   const handleDeleteForDB = (_id) => {
-    fetch(`https://diverse-dish-server.vercel.app/recipes/${_id}`,{
-      method:"DELETE"
+    fetch(`${import.meta.env.VITE_serverBaseURL}/recipes/${_id}`, {
+      method: "DELETE",
     })
-    .then(res=>res.json())
-    .then(data=>{
-      console.log("after delete",data)
-      if(data?.deletedCount>0){
-        const afterFilteredRecipes=displayRecipes.filter(recipe=>recipe._id!==_id)
-        setDisplayRecipes(afterFilteredRecipes)
-        displayRecipeFunction()
-        toast.info("Deleted Successfully ")
-      }
-    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("after delete", data);
+        if (data?.deletedCount > 0) {
+          const afterFilteredRecipes = myRecipes.filter(
+            (recipe) => recipe._id !== _id
+          );
+          setMyRecipes(afterFilteredRecipes);
+          toast.info("Deleted Successfully ");
+        }
+      });
   };
-  
+
   return (
     <div
       className={`${
@@ -70,7 +71,7 @@ const MyRecipeCard = ({ recipe, myRecipes }) => {
             </div> */}
 
             <div className="p-2 rounded-full bg-red-200 hover:bg-red-300 cursor-pointer transition-all duration-300">
-              <button onClick={()=>handleDeleteForDB(recipe?._id)}>
+              <button onClick={() => handleDeleteForDB(recipe?._id)}>
                 <RiDeleteBin6Line
                   size={24}
                   className="text-red-700 hover:text-red-900"
@@ -99,7 +100,7 @@ const MyRecipeCard = ({ recipe, myRecipes }) => {
               darkIstrue ? "text-gray-200" : "text-gray-800"
             }`}
           >
-            {recipe?.ingredients.map((item, index) => (
+            {recipe?.ingredients?.map((item, index) => (
               <li key={index}>{item}</li>
             ))}
           </ul>
@@ -114,7 +115,7 @@ const MyRecipeCard = ({ recipe, myRecipes }) => {
             </div>
             <div className="flex items-center gap-2">
               <FaUser className="text-blue-400" />
-              <span className="text-sm">{recipe?.user.name}</span>
+              <span className="text-sm">{recipe?.user?.name}</span>
             </div>
           </div>
 
@@ -125,7 +126,7 @@ const MyRecipeCard = ({ recipe, myRecipes }) => {
               </div>
             </div>
             <div className={darkIstrue ? "text-gray-300" : "text-gray-600"}>
-              {recipe?.categories.join(",")}
+              {recipe?.categories?.join(",")}
             </div>
           </div>
         </div>

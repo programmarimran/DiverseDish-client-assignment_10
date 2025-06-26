@@ -6,20 +6,16 @@ import UpdateRacipeModal from "../../components/UpdateRacipeModal";
 import { Helmet } from "react-helmet-async";
 
 const MyRecipes = () => {
-  const [finalUIRecipe, setFinalUiRecipe] = useState([]);
+  const [myRecipes, setMyRecipes] = useState([]);
   const { user } = use(AuthContext);
-  const { recipes, displayRecipes } = use(ProductContext);
-  // console.log(displayRecipes);
-  const userEmail = user?.email;
-  // console.log(recipes);
-  const myRecipes = recipes.filter((re) => re.user.email === userEmail);
+ 
   useEffect(() => {
-    if (displayRecipes?.length > 0) {
-      setFinalUiRecipe(displayRecipes);
-    } else {
-      setFinalUiRecipe(myRecipes);
-    }
-  }, [displayRecipes]);
+  fetch(`${import.meta.env.VITE_serverBaseURL}/my-recipes?email=${user.email}`)
+  .then(res=>res.json())
+  .then(data=>{
+    setMyRecipes(data)
+  })
+  }, []);
   // console.log(myRecipes);
   let layoutClass =
     myRecipes.length === 2
@@ -36,9 +32,10 @@ const MyRecipes = () => {
         Recipes found!
       </h1>
       <div className={`pb-12 ${layoutClass} `}>
-        {finalUIRecipe.map((recipe) => (
+        {myRecipes.map((recipe) => (
           <MyRecipeCard
-            key={recipe?._id}
+            key={recipe?._id} 
+            setMyRecipes={setMyRecipes}
             myRecipes={myRecipes}
             recipe={recipe}
           ></MyRecipeCard>

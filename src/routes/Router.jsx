@@ -21,7 +21,7 @@ const router = createBrowserRouter([
       {
         index: true,
         errorElement:<InternalError></InternalError>,
-        loader:()=>fetch("https://diverse-dish-server.vercel.app/recipes/home"),
+        loader:()=>fetch(`${import.meta.env.VITE_serverBaseURL}/recipes/home`),
         Component: HomeLayout,
       },
       {
@@ -32,7 +32,7 @@ const router = createBrowserRouter([
       {
         path: "/recipe-details/:id",
         errorElement:<InternalError></InternalError>,
-        loader:({params})=>fetch(`https://diverse-dish-server.vercel.app/recipes/${params.id}`),
+        loader:({params})=>fetch(`${import.meta.env.VITE_serverBaseURL}/recipes/${params.id}`),
         Component:RecipeDetails
       },
       {

@@ -19,7 +19,7 @@ const AllRecipes = () => {
       return;
     }
     fetch(
-      `https://diverse-dish-server.vercel.app/wishlist/recipes?email=${user?.email}`
+      `${import.meta.env.VITE_serverBaseURL}/wishlist/recipes?email=${user?.email}`
     )
       .then((res) => res.json())
       .then((wishlistRecipes) => {

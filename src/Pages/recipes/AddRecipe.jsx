@@ -44,7 +44,7 @@ const AddRecipe = () => {
     // console.log(recipeData);
 
     // POST to server
-    fetch("https://diverse-dish-server.vercel.app/recipes", {
+    fetch(`${import.meta.env.VITE_serverBaseURL}/recipes`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
