@@ -9,6 +9,10 @@ import { ToastContainer } from "react-toastify";
 import ProductProvider from "./providers/ProductProvider";
 import { HelmetProvider } from "react-helmet-async";
 
+import 'aos/dist/aos.css'; // You can also use <link> for styles
+import Aos from "aos";
+// ..
+Aos.init();
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <ToastContainer />

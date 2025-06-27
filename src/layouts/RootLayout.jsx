@@ -14,7 +14,7 @@ const RootLayout = () => {
       </header>
 
       <main className="bg-green-50 dark:bg-base-100">
-        <section className="max-w-7xl mx-auto">
+        <section className="max-w-[1440px] mx-auto">
           <div className="w-11/12 mx-auto min-h-[calc(100vh-429px)]">
             <Outlet />
           </div>

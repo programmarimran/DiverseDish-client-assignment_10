@@ -1,18 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import { useNavigate } from "react-router";
-import ProductContext from "../contexts/ProductContext";
+
 import AuthContext from "../contexts/AuthContext";
 import Swal from "sweetalert2";
 import { Typewriter } from "react-simple-typewriter";
 
-const Hero = () => {
+const Hero = ({ recipes }) => {
   const navigate = useNavigate();
-  const { recipes } = React.useContext(ProductContext);
-  const { user, setHeroEmail } = React.useContext(AuthContext);
+
+  const { user, setHeroEmail } = useContext(AuthContext);
 
   const handleSubscribe = (e) => {
     e.preventDefault();
@@ -58,15 +58,27 @@ const Hero = () => {
                 {/* Typewriter text */}
                 <div className="App">
                   <h1
-                    style={{ paddingTop: "5rem", margin: "auto 0", fontWeight: "normal" }}
+                    style={{
+                      paddingTop: "5rem",
+                      margin: "auto 0",
+                      fontWeight: "normal",
+                    }}
                     className="mb-2"
                   >
                     <span className="text-2xl md:text-4xl font-bold mt-2">
                       {product?.title}
                     </span>{" "}
-                    <span className="text-2xl md:text-4xl font-bold text-red-500 mt-2" style={{ fontWeight: "bold" }}>
+                    <span
+                      className="text-2xl md:text-4xl font-bold text-red-500 mt-2"
+                      style={{ fontWeight: "bold" }}
+                    >
                       <Typewriter
-                        words={["Delicious!", "Spicy!", "Popular!", "Traditional!"]}
+                        words={[
+                          "Delicious!",
+                          "Spicy!",
+                          "Popular!",
+                          "Traditional!",
+                        ]}
                         loop={5}
                         cursor
                         cursorStyle="_"
@@ -86,7 +98,10 @@ const Hero = () => {
                   ⏱ Ready in {product?.preparationTime} minutes
                 </p>
 
-                <form onSubmit={handleSubscribe} className="w-full md:flex gap-2">
+                <form
+                  onSubmit={handleSubscribe}
+                  className="w-full md:flex gap-2"
+                >
                   <input
                     className="w-full input border border-gray-300 text-black dark:text-gray-900 dark:bg-gray-100"
                     name="email"

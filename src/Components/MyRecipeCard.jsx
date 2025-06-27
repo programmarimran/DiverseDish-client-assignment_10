@@ -91,20 +91,6 @@ const MyRecipeCard = ({ recipe, myRecipes, setMyRecipes }) => {
             </div>
           </div>
 
-          <p className="font-bold italic text-sm">{recipe?.instructions}</p>
-
-          <hr className="border-2 border-dashed border-gray-500" />
-
-          <ul
-            className={`text-sm mt-2 ${
-              darkIstrue ? "text-gray-200" : "text-gray-800"
-            }`}
-          >
-            {recipe?.ingredients?.map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
-          </ul>
-
           <hr className="border-2 border-dashed border-gray-500" />
 
           <div className="flex items-center justify-between mt-3 text-sm">
