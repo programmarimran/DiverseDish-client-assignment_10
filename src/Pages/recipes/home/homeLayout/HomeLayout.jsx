@@ -1,14 +1,14 @@
 import { Link, useLoaderData } from "react-router";
 // import HomeCard from "../components/HomeCard";
-import Hero from "../components/Hero";
+import Hero from "../../../../components/Hero";
 
 import { Helmet } from "react-helmet-async";
-import RecipeCard from "../components/RecipeCard";
-import ExploreByCuisine from "../Pages/recipes/home/ExploreByCuisine";
-import CustomerReviewsSection from "../Pages/recipes/home/customerReview/CustomerReviewsSection";
-import FeatureSection from "../Pages/recipes/home/featuresSection/FeatureSection";
-import DIshStatusCount from "../Pages/recipes/home/statusCount/DIshStatusCount";
-import FeaturedHomeCooks from "../Pages/recipes/home/featureHomeCook/FeaturedHomeCooks";
+import RecipeCard from "../../../../components/RecipeCard";
+import ExploreByCuisine from "../explorebyCuisine/ExploreByCuisine";
+import CustomerReviewsSection from "../customerReview/CustomerReviewsSection";
+import FeatureSection from "../featuresSection/FeatureSection";
+import DIshStatusCount from "../statusCount/DIshStatusCount";
+import FeaturedHomeCooks from "../featureHomeCook/FeaturedHomeCooks";
 
 const HomeLayout = () => {
   const recipes = useLoaderData();

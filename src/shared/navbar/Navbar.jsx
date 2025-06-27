@@ -1,11 +1,12 @@
-import React, { useState, use } from "react";
+import React, { use } from "react";
 import { FaCircleUser } from "react-icons/fa6";
-import { GiHamburgerMenu } from "react-icons/gi";
-import { RxCross2 } from "react-icons/rx";
+
 import { Link, NavLink } from "react-router";
 import { toast } from "react-toastify";
-import ThemeToggle from "../components/ThemeToggle";
-import AuthContext from "../contexts/AuthContext";
+import ThemeToggle from "../../components/ThemeToggle";
+import AuthContext from "../../contexts/AuthContext";
+import DrawerMobile from "./DrawerMobile";
+import Hambarger from "./Hambarger";
 
 const Navbar = () => {
   const { logOutUser, user, loading } = use(AuthContext);
@@ -15,9 +16,6 @@ const Navbar = () => {
       toast.warning("Logout Successfully");
     });
   };
-
-  const [state, setState] = useState(false);
-  const handleHamburger = () => setState(!state);
 
   const links = (
     <>
@@ -36,6 +34,11 @@ const Navbar = () => {
           Add Recipe
         </NavLink>
       </li>
+      <li className="my-1">
+        <NavLink className="link-hover" to={"/my-recipes"}>
+          My Recipes
+        </NavLink>
+      </li>
 
       {loading && (
         <>
@@ -51,14 +54,6 @@ const Navbar = () => {
           </li>
         </>
       )}
-
-      {user && (
-        <li className="my-1">
-          <NavLink className="link-hover" to={"/my-recipes"}>
-            My Recipes
-          </NavLink>
-        </li>
-      )}
     </>
   );
 
@@ -66,22 +61,8 @@ const Navbar = () => {
     <div className="navbar p-0">
       {/* Navbar Start */}
       <div className="navbar-start md:gap-4">
-        <div className="dropdown">
-          <button onClick={handleHamburger} type="button">
-            <div tabIndex={0} className="lg:hidden">
-              {state ? <RxCross2 size={35} /> : <GiHamburgerMenu size={35} />}
-            </div>
-          </button>
-
-          {state && (
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-52 p-2 shadow"
-            >
-              {links}
-            </ul>
-          )}
-        </div>
+        <Hambarger></Hambarger>
+        <DrawerMobile></DrawerMobile>
 
         <div className="items-center md:hidden lg:flex gap-2">
           <div className="avatar">
@@ -118,21 +99,25 @@ const Navbar = () => {
 
         {user?.photoURL ? (
           <div className="dropdown dropdown-end">
-            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle ">
-              <div className="tooltip tooltip-bottom rounded-full bg-gray-200">
-                <div className="tooltip-content">
-                  <div
-                    className={`animate-bounce text-orange-400 ${
-                      user?.email.length < 15 ? "text-lg" : "text-xs"
-                    } font-black`}
-                  >
-                    {user ? user.displayName : ""}
-                  </div>
-                </div>
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost btn-circle "
+            >
+              <div className="relative group inline-block">
                 <div className="avatar">
-                  <div className="ring-primary ring-offset-base-100 w-10 rounded-full ring-2 ring-offset-2">
+                  <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                     <img src={user?.photoURL} alt="User" />
                   </div>
+                </div>
+
+                {/* Tooltip: bottom-left, no break, single line */}
+                <div
+                  className={`absolute bottom-0 -left-24 transform translate-y-full bg-gray-200 text-orange-400 px-3 py-1 rounded z-20 whitespace-nowrap overflow-hidden overflow-ellipsis break-words max-w-xs ${
+                    user?.email.length < 15 ? "text-lg" : "text-xs"
+                  } font-black hidden group-hover:block shadow-lg`}
+                >
+                  {user?.displayName || ""}
                 </div>
               </div>
             </div>
@@ -142,10 +127,15 @@ const Navbar = () => {
               className="menu dropdown-content bg-base-300 rounded-2xl min-w-max px-4 py-2"
             >
               <li className=" w-full">
-                <h1 className=" whitespace-nowrap w-full text-lg font-bold">{user.displayName}</h1>
+                <h1 className=" whitespace-nowrap w-full text-lg font-bold">
+                  {user.displayName}
+                </h1>
               </li>
               <li>
-                <button onClick={handleLogoutUser} className="btn btn-primary bg-gray-950">
+                <button
+                  onClick={handleLogoutUser}
+                  className="btn btn-primary bg-gray-950"
+                >
                   Logout
                 </button>
               </li>

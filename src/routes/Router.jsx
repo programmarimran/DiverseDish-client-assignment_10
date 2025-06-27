@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router";
 import RootLayout from "../layouts/RootLayout";
-import HomeLayout from "../layouts/HomeLayout";
+import HomeLayout from "../Pages/recipes/home/homeLayout/HomeLayout";
 import AllRecipes from "../Pages/recipes/AllRecipes";
 import MyRecipes from "../Pages/recipes/MyRecipes";
 import AddRecipe from "../Pages/recipes/AddRecipe";

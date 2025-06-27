@@ -8,8 +8,8 @@ import {
 } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa6";
 import { Link, NavLink } from "react-router";
-import AuthContext from "../contexts/AuthContext";
-import ProductContext from "../contexts/ProductContext";
+import AuthContext from "../../contexts/AuthContext";
+import ProductContext from "../../contexts/ProductContext";
 
 const Footer = () => {
   const { user } = use(AuthContext);

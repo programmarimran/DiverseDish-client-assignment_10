@@ -5,7 +5,7 @@ import { AiFillLike } from "react-icons/ai";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import AuthContext from "../../contexts/AuthContext";
-import { Fade } from "react-awesome-reveal";
+
 import { Helmet } from "react-helmet-async";
 import RecipeCard from "../../components/RecipeCard";
 const AllRecipes = () => {
@@ -93,7 +93,7 @@ const AllRecipes = () => {
             <Tab>Wishlist</Tab>
           </TabList>
 
-          <Fade direction="left">
+       
             <TabPanel>
               <div className="p-4 pb-12 ">
                 <h2 className="text-3xl font-bold mb-6 text-center">
@@ -134,8 +134,8 @@ const AllRecipes = () => {
                 </div>
               </div>
             </TabPanel>
-          </Fade>
-          <Fade direction="right">
+     
+       
             <TabPanel>
               <div className=" p-4 pb-12">
                 <h1 className="text-3xl font-bold mb-6 text-center">
@@ -190,7 +190,7 @@ const AllRecipes = () => {
                 </div>
               </div>
             </TabPanel>
-          </Fade>
+        
         </Tabs>
       </div>
     </>
