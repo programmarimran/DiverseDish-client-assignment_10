@@ -1,9 +1,10 @@
 import React from 'react';
 
 const WishList = () => {
+    
     return (
         <div>
-            wishlist
+             th si i wishoist
         </div>
     );
 };

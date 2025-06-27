@@ -1,11 +1,8 @@
-import React from 'react';
+import React from "react";
+import MyRecipes from "../../recipes/MyRecipes";
 
 const DashboardMyRecipes = () => {
-    return (
-        <div>
-             thsi si my table
-        </div>
-    );
+  return <MyRecipes></MyRecipes>;
 };
 
 export default DashboardMyRecipes;

@@ -1,11 +1,8 @@
-import React from 'react';
+import React from "react";
+import AllRecipes from "../../recipes/AllRecipes";
 
 const DashboardAllRecipes = () => {
-    return (
-        <div>
-            this is all table
-        </div>
-    );
+  return <AllRecipes></AllRecipes>;
 };
 
 export default DashboardAllRecipes;
