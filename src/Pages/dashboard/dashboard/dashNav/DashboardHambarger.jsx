@@ -1,8 +1,9 @@
 import React, { use, useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router';
-import AuthContext from '../../contexts/AuthContext';
+import AuthContext from '../../../../contexts/AuthContext';
 
-const Hambarger = () => {
+
+const DashboardHambarger = () => {
     const {loading}=use(AuthContext)
       const [active, setActive] = useState(false);
       const handleHambargar = () => setActive(!active);
@@ -32,8 +33,13 @@ const Hambarger = () => {
         </NavLink>
       </li>
       <li className="my-1">
-        <NavLink onClick={handleHambargarFalse} className="link-hover" to={"/dashboard"}>
-          Dashboard
+        <NavLink onClick={handleHambargarFalse} className="link-hover" to={"/dashboard/add-recipes"}>
+          Add Recipe
+        </NavLink>
+      </li>
+      <li className="my-1">
+        <NavLink onClick={handleHambargarFalse} className="link-hover" to={"/dashboard/my-recipes"}>
+          My Recipes
         </NavLink>
       </li>
 
@@ -100,4 +106,4 @@ const Hambarger = () => {
     );
 };
 
-export default Hambarger;
+export default DashboardHambarger;

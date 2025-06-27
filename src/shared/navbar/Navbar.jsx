@@ -5,8 +5,8 @@ import { Link, NavLink } from "react-router";
 import { toast } from "react-toastify";
 import ThemeToggle from "../themeChange/ThemeToggle";
 import AuthContext from "../../contexts/AuthContext";
-import DrawerMobile from "./DrawerMobile";
 import Hambarger from "./Hambarger";
+import { FaLongArrowAltRight } from "react-icons/fa";
 
 const Navbar = () => {
   const { logOutUser, user, loading } = use(AuthContext);
@@ -30,13 +30,8 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li className="my-1">
-        <NavLink className="link-hover" to={"/dashboard/add-recipes"}>
-          Add Recipe
-        </NavLink>
-      </li>
-      <li className="my-1">
-        <NavLink className="link-hover" to={"/dashboard/my-recipes"}>
-          My Recipes
+        <NavLink className="link-hover" to={"/dashboard"}>
+          <FaLongArrowAltRight size={30}/>Dashboard
         </NavLink>
       </li>
 
@@ -62,7 +57,7 @@ const Navbar = () => {
       {/* Navbar Start */}
       <div className="navbar-start md:gap-4">
         <Hambarger></Hambarger>
-        <DrawerMobile></DrawerMobile>
+  
 
         <div className="items-center md:hidden lg:flex gap-2">
           <div className="avatar">
