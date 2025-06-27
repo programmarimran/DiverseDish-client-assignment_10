@@ -1,6 +1,6 @@
 import { use, useEffect, useState } from "react";
 import { FaToggleOff, FaToggleOn } from "react-icons/fa6";
-import ProductContext from "../contexts/ProductContext";
+import ProductContext from "../../contexts/ProductContext";
 
 const ThemeToggle = () => {
   const [theme, setTheme] = useState("light");

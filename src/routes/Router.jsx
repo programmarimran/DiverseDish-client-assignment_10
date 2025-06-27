@@ -10,7 +10,9 @@ import Login from "../Pages/auth/Login";
 import SignUp from "../Pages/auth/SignUp";
 import PrivateRoute from "./PrivateRoute";
 import RecipeDetails from "../Pages/recipes/RecipeDetails";
-
+import AuthLayout from "../layouts/AuthLayout";
+import DashboardLayout from "../layouts/DashboardLayout";
+import DashboardHome from "../Pages/dashboard/dashboardHome/DashboardHome";
 
 const router = createBrowserRouter([
   {
@@ -20,48 +22,64 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        errorElement:<InternalError></InternalError>,
-        loader:()=>fetch(`${import.meta.env.VITE_serverBaseURL}/recipes/home`),
+        errorElement: <InternalError></InternalError>,
+        loader: () =>
+          fetch(`${import.meta.env.VITE_serverBaseURL}/recipes/home`),
         Component: HomeLayout,
       },
       {
         path: "/all-recipes",
-        errorElement:<InternalError></InternalError>,
+        errorElement: <InternalError></InternalError>,
         element: <AllRecipes />,
       },
       {
         path: "/recipe-details/:id",
-        errorElement:<InternalError></InternalError>,
-        loader:({params})=>fetch(`${import.meta.env.VITE_serverBaseURL}/recipes/${params.id}`),
-        Component:RecipeDetails
-      },
-      {
-        path: "/my-recipes",
         errorElement: <InternalError></InternalError>,
-        element: (
-          <PrivateRoute>
-            <MyRecipes></MyRecipes>
-          </PrivateRoute>
-        ),
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_serverBaseURL}/recipes/${params.id}`),
+        Component: RecipeDetails,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    errorElement: <ExternalError></ExternalError>,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout></DashboardLayout>
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        index: true,
+        Component: DashboardHome,
       },
       {
-        path: "/add-recipes",
-        errorElement:<InternalError></InternalError>,
-        element: (
-          <PrivateRoute>
-            <AddRecipe></AddRecipe>
-          </PrivateRoute>
-        ),
+        path: "add-recipes",
+        errorElement: <InternalError></InternalError>,
+        Component: AddRecipe,
       },
-     
+      {
+        path: "my-recipes",
+        errorElement: <InternalError></InternalError>,
+        Component: MyRecipes,
+      },
+    ],
+  },
+  {
+    path: "/",
+    errorElement: <ExternalError></ExternalError>,
+    Component: AuthLayout,
+    children: [
       {
         path: "/login",
-        errorElement:<InternalError></InternalError>,
+        errorElement: <InternalError></InternalError>,
         Component: Login,
       },
+
       {
         path: "/signup",
-        errorElement:<InternalError></InternalError>,
+        errorElement: <InternalError></InternalError>,
         Component: SignUp,
       },
     ],

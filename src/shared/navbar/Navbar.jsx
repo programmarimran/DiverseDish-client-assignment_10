@@ -3,7 +3,7 @@ import { FaCircleUser } from "react-icons/fa6";
 
 import { Link, NavLink } from "react-router";
 import { toast } from "react-toastify";
-import ThemeToggle from "../../components/ThemeToggle";
+import ThemeToggle from "../themeChange/ThemeToggle";
 import AuthContext from "../../contexts/AuthContext";
 import DrawerMobile from "./DrawerMobile";
 import Hambarger from "./Hambarger";
@@ -30,12 +30,12 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li className="my-1">
-        <NavLink className="link-hover" to={"/add-recipes"}>
+        <NavLink className="link-hover" to={"/dashboard/add-recipes"}>
           Add Recipe
         </NavLink>
       </li>
       <li className="my-1">
-        <NavLink className="link-hover" to={"/my-recipes"}>
+        <NavLink className="link-hover" to={"/dashboard/my-recipes"}>
           My Recipes
         </NavLink>
       </li>
