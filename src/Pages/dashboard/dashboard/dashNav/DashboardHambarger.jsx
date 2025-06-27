@@ -28,18 +28,23 @@ const DashboardHambarger = () => {
         </NavLink>
       </li>
       <li className="my-1">
-        <NavLink onClick={handleHambargarFalse} className="link-hover" to={"/all-recipes"}>
-          All Recipes
+        <NavLink onClick={handleHambargarFalse} className="link-hover" to={"/dashboard/add-recipes"}>
+         Dashboard Add Recipe
         </NavLink>
       </li>
       <li className="my-1">
-        <NavLink onClick={handleHambargarFalse} className="link-hover" to={"/dashboard/add-recipes"}>
-          Add Recipe
+        <NavLink onClick={handleHambargarFalse} className="link-hover" to={"/dashboard/all-recipes"}>
+         Dashboard All Recipes
         </NavLink>
       </li>
       <li className="my-1">
         <NavLink onClick={handleHambargarFalse} className="link-hover" to={"/dashboard/my-recipes"}>
-          My Recipes
+         Dashboard My Recipes
+        </NavLink>
+      </li>
+      <li className="my-1">
+        <NavLink onClick={handleHambargarFalse} className="link-hover" to={"/dashboard/wishlist"}>
+         Dashboard Wishlist
         </NavLink>
       </li>
 

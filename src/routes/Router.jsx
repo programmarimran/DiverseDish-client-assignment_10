@@ -13,6 +13,9 @@ import RecipeDetails from "../Pages/recipes/RecipeDetails";
 import AuthLayout from "../layouts/AuthLayout";
 import DashboardLayout from "../layouts/DashboardLayout";
 import DashboardHome from "../Pages/dashboard/dashboardHome/DashboardHome";
+import DashboardAllRecipes from "../Pages/dashboard/dashboardAllRecipes/DashboardAllRecipes";
+import DashboardMyRecipes from "../Pages/dashboard/dashboardMyRecipes/DashboardMyRecipes";
+import WishList from "../Pages/dashboard/wishlist/WishList";
 
 const router = createBrowserRouter([
   {
@@ -60,9 +63,19 @@ const router = createBrowserRouter([
         Component: AddRecipe,
       },
       {
+        path: "all-recipes",
+        errorElement: <InternalError></InternalError>,
+        Component: DashboardAllRecipes,
+      },
+      {
         path: "my-recipes",
         errorElement: <InternalError></InternalError>,
-        Component: MyRecipes,
+        Component: DashboardMyRecipes,
+      },
+      {
+        path: "wishlist",
+        errorElement: <InternalError></InternalError>,
+        Component: WishList,
       },
     ],
   },
