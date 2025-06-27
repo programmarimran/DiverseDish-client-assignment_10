@@ -1,10 +1,7 @@
-import { use, useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router";
-import ProductContext from "../../contexts/ProductContext";
-import { AiFillLike } from "react-icons/ai";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router";
+
 import "react-tabs/style/react-tabs.css";
-import AuthContext from "../../contexts/AuthContext";
 
 import { Helmet } from "react-helmet-async";
 import RecipeCard from "../../components/RecipeCard";
@@ -14,11 +11,11 @@ const AllRecipes = () => {
   const searchParams = new URLSearchParams(location.search);
   const cuisine = searchParams.get("cuisine");
   console.log(cuisine);
-  const { user } = use(AuthContext);
+
   const [specificAllRecipes, setSpecificAllRecipes] = useState([]);
-  const [wishlistRecipes, setWishListRecipes] = useState(null);
+
   const [selectedCountry, setSelectedCountry] = useState("");
-  const [selectedWishlistCountre, setSelectedWishlistCountey] = useState("");
+
   const handleCountryChange = (val) => {
     setSelectedCountry(val);
 
@@ -53,145 +50,49 @@ const AllRecipes = () => {
       });
   }, [selectedCountry, cuisine]);
 
-  useEffect(() => {
-    if (!user?.email) {
-      return;
-    }
-    fetch(
-      `${import.meta.env.VITE_serverBaseURL}/wishlist/recipes?email=${
-        user?.email
-      }`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        if (
-          selectedWishlistCountre === "All" ||
-          selectedWishlistCountre === ""
-        ) {
-          setWishListRecipes(data);
-        } else {
-          const filtered = data?.filter(
-            (recipe) => recipe?.cuisineType === selectedWishlistCountre
-          );
-          setWishListRecipes(filtered);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [user?.email, selectedWishlistCountre]);
-
   return (
     <>
-      <div className=" pt-12">
+      <div>
         <Helmet>
           <title>DiverseDish|| All recipes</title>
         </Helmet>
-        <Tabs>
-          <TabList className={" border-b-2 border-green-800 rounded-full"}>
-            <Tab>All Recipes</Tab>
-            <Tab>Wishlist</Tab>
-          </TabList>
 
-       
-            <TabPanel>
-              <div className="p-4 pb-12 ">
-                <h2 className="text-3xl font-bold mb-6 text-center">
-                  All Recipes
-                </h2>
-                <section className=" my-6">
-                  <div className="fieldset max-w-64 mx-auto bg-base-300 border-base-300 rounded-box border">
-                    <label className=" text-2xl font-bold text-center">
-                      Filter
-                    </label>
-                    <select
-                      name="cuisineType"
-                      required
-                      defaultValue=""
-                      onChange={(e) => handleCountryChange(e.target.value)}
-                      className="select select-bordered w-3/4 mx-auto"
-                    >
-                      <option value={""} disabled>
-                        Select cuisine
-                      </option>
-                      <option>All</option>
-                      <option>BanglaDeshi</option>
-                      <option>Italian</option>
-                      <option>Mexican</option>
-                      <option>Indian</option>
-                      <option>Chinese</option>
-                      <option>Others</option>
-                    </select>
-                    <h1 className=" text-center text-base font-medium">
-                      {specificAllRecipes?.length} Recipes Found
-                    </h1>
-                  </div>
-                </section>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                  {specificAllRecipes.map((recipe) => (
-                    <RecipeCard key={recipe._id} recipe={recipe}></RecipeCard>
-                  ))}
-                </div>
-              </div>
-            </TabPanel>
-     
-       
-            <TabPanel>
-              <div className=" p-4 pb-12">
-                <h1 className="text-3xl font-bold mb-6 text-center">
-                  {!user?.email
-                    ? null
-                    : wishlistRecipes?.length > 0
-                    ? `You have ${wishlistRecipes?.length} recipe(s) in your wishlist.`
-                    : "You don't have any recipes in your wishlist yet."}
-                </h1>
-                <h1 className="text-3xl font-bold mb-6 text-center">
-                  {!user?.email
-                    ? "Please log in to view your wishlist."
-                    : wishlistRecipes?.length < 1}
-                </h1>
-                <section className=" my-6">
-                  <div className="fieldset max-w-64 mx-auto bg-base-300 border-base-300 rounded-box border">
-                    <label className=" text-2xl font-bold text-center">
-                      Filter
-                    </label>
-                    <select
-                      name="cuisineType"
-                      required
-                      defaultValue=""
-                      onChange={(e) =>
-                        setSelectedWishlistCountey(e.target.value)
-                      }
-                      className="select select-bordered w-3/4 mx-auto"
-                    >
-                      <option value={""} disabled>
-                        Select cuisine
-                      </option>
-                      <option>All</option>
-                      <option>BanglaDeshi</option>
-                      <option>Italian</option>
-                      <option>Mexican</option>
-                      <option>Indian</option>
-                      <option>Chinese</option>
-                      <option>Others</option>
-                    </select>
-                    <h1 className=" text-center text-base font-medium">
-                      {wishlistRecipes?.length} Recipes Found
-                    </h1>
-                  </div>
-                </section>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                  {wishlistRecipes?.map((singleRecipe) => (
-                    <RecipeCard
-                      key={singleRecipe._id}
-                      recipe={singleRecipe}
-                    ></RecipeCard>
-                  ))}
-                </div>
-              </div>
-            </TabPanel>
-        
-        </Tabs>
+        <div className="py-12 ">
+          <h2 className="text-4xl font-bold mb-4 text-center ">All Recipes</h2>
+          <p className="text-center text-base text-gray-600 mb-8 w-3/4 mx-auto">
+            Browse our collection of {specificAllRecipes?.length} carefully
+            selected recipes from different cuisines including Bangladeshi,
+            Italian, Chinese, and more.
+          </p>
+
+          <section>
+            <div className="fieldset my-4 max-w-64 mx-auto  border-base-300 rounded-box border">
+              <select
+                name="cuisineType"
+                required
+                defaultValue=""
+                onChange={(e) => handleCountryChange(e.target.value)}
+                className="select select-bordered w-3/4 mx-auto"
+              >
+                <option value={""} disabled>
+                  Select cuisine
+                </option>
+                <option>All</option>
+                <option>BanglaDeshi</option>
+                <option>Italian</option>
+                <option>Mexican</option>
+                <option>Indian</option>
+                <option>Chinese</option>
+                <option>Others</option>
+              </select>
+            </div>
+          </section>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {specificAllRecipes.map((recipe) => (
+              <RecipeCard key={recipe._id} recipe={recipe}></RecipeCard>
+            ))}
+          </div>
+        </div>
       </div>
     </>
   );
