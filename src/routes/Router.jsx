@@ -15,7 +15,10 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import DashboardHome from "../Pages/dashboard/dashboardHome/DashboardHome";
 import DashboardAllRecipes from "../Pages/dashboard/dashboardAllRecipes/DashboardAllRecipes";
 import DashboardMyRecipes from "../Pages/dashboard/dashboardMyRecipes/DashboardMyRecipes";
-import WishList from "../Pages/dashboard/wishlist/WishList";
+import WishListRecipes from "../Pages/dashboard/wishlist/WishListRecipes";
+import CopyrightNotice from "../components/CopyRightNotice";
+import ContactInfo from "../components/ContactInfo";
+import About from "../components/About";
 
 const router = createBrowserRouter([
   {
@@ -40,7 +43,24 @@ const router = createBrowserRouter([
         errorElement: <InternalError></InternalError>,
         loader: ({ params }) =>
           fetch(`${import.meta.env.VITE_serverBaseURL}/recipes/${params.id}`),
-        Component: RecipeDetails,
+        element: (
+          <PrivateRoute>
+            <RecipeDetails></RecipeDetails>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path:"/about",
+        Component:About
+      }
+      ,
+      {
+        path: "/copyright-notice",
+        Component: CopyrightNotice,
+      },
+      {
+        path: "/contact-informaion",
+        Component: ContactInfo,
       },
     ],
   },
@@ -75,7 +95,7 @@ const router = createBrowserRouter([
       {
         path: "wishlist",
         errorElement: <InternalError></InternalError>,
-        Component: WishList,
+        Component: WishListRecipes,
       },
     ],
   },

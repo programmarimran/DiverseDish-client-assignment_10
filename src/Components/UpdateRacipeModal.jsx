@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import ProductContext from "../contexts/ProductContext";
 
-const UpdateRacipeModal = () => {
+const UpdateRacipeModal = ({ myRecipes, setMyRecipes }) => {
   // const [cuisineType,setCusineType]=useState("")
   const [findingUpdateRecipe, setUpdateRecipe] = useState({});
   const { modalId } = use(ProductContext);
@@ -31,13 +31,18 @@ const UpdateRacipeModal = () => {
     updatedRecipe.likeCount = parseInt(form.likeCount.value);
     // const cuisineType=form.
     // console.log(updatedRecipe)
-    fetch(`${import.meta.env.VITE_serverBaseURL}/recipes/${findingUpdateRecipe?._id}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(updatedRecipe),
-    })
+    fetch(
+      `${import.meta.env.VITE_serverBaseURL}/recipes/${
+        findingUpdateRecipe?._id
+      }`,
+      {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(updatedRecipe),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         // console.log("after update ", data);
@@ -45,10 +50,13 @@ const UpdateRacipeModal = () => {
           toast.info("You didn't make any changes.");
         } else if (data?.modifiedCount > 0) {
           toast.success("Your Recipe Updated Successfully !!");
-          navigate("/my-recipes");
-
-          // document.getElementById("add-recipe-modal").close();
-
+          navigate("/dashboard/my-recipes");
+          const updatedMyRecipes = myRecipes.map((item) =>
+            item._id == findingUpdateRecipe?._id
+              ? { ...item, ...updatedRecipe }
+              : data
+          );
+          setMyRecipes(updatedMyRecipes);
           return;
         }
       });

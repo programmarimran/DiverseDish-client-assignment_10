@@ -1,6 +1,5 @@
 import React, { use } from "react";
 
-
 import { Link, NavLink } from "react-router";
 import { toast } from "react-toastify";
 
@@ -52,8 +51,9 @@ const DashboardNavbar = () => {
     <div className="navbar p-0">
       {/* Navbar Start */}
       <div className="navbar-start md:gap-4">
-        <DashboardHambarger></DashboardHambarger>
-
+        <div className=" lg:hidden">
+          <DashboardHambarger></DashboardHambarger>
+        </div>
         <div className="items-center md:hidden lg:flex gap-2">
           <div className="avatar">
             <div className="w-10 md:w-10 rounded-full">
@@ -87,7 +87,9 @@ const DashboardNavbar = () => {
       <div className="navbar-end gap-2 md:gap-3">
         <ThemeToggle />
 
-        <button onClick={handleLogoutUser} className=" btn btn-primary">Logout</button>
+        <button onClick={handleLogoutUser} className=" btn btn-primary">
+          Logout
+        </button>
       </div>
     </div>
   );

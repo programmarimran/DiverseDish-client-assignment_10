@@ -29,7 +29,7 @@
     "react-simple-typewriter": "^5.0.1",
     "react-tabs": "^6.1.0",
     "react-toastify": "^11.0.5",
-    "sweetalert2": "^11.21.2",
+    "sweetalert2": "^11.22.1",
     "swiper": "^11.2.8",
     "tailwindcss": "^4.1.7"
   },

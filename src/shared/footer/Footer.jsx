@@ -2,8 +2,6 @@ import React, { use } from "react";
 import {
   FaFacebook,
   FaGithub,
-  FaInstagram,
-  FaTwitter,
   FaYoutube,
 } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa6";
@@ -30,12 +28,12 @@ const Footer = () => {
       {user && (
         <>
           <li className="my-1">
-            <NavLink className="link-hover" to={"/add-recipes"}>
+            <NavLink className="link-hover" to={"/dashboard/add-recipes"}>
               Add Recipe
             </NavLink>
           </li>
           <li className="my-1">
-            <NavLink className="link-hover" to={"/my-recipes"}>
+            <NavLink className="link-hover" to={"/dashboard/my-recipes"}>
               My Recipes
             </NavLink>
           </li>

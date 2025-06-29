@@ -64,7 +64,7 @@ const AddRecipe = () => {
             icon: "success",
             confirmButtonText: "OK",
           });
-          navigate("/my-recipes")
+          navigate("/dashboard/my-recipes")
         }
       });
   };

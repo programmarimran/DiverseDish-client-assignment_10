@@ -36,6 +36,11 @@ const Hambarger = () => {
           Dashboard
         </NavLink>
       </li>
+        <li className="my-1">
+              <NavLink onClick={handleHambargarFalse} className="link-hover" to={"/about"}>
+                About
+              </NavLink>
+            </li>
 
       {loading && (
         <>

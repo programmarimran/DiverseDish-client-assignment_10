@@ -57,6 +57,22 @@ const DashboardLayout = () => {
           </li>
           <li>
             <NavLink
+              to="/dashboard/all-recipes"
+              className={({ isActive }) => (isActive ? "active font-bold" : "")}
+            >
+              All Recipes
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/dashboard/wishlist"
+              className={({ isActive }) => (isActive ? "active font-bold" : "")}
+            >
+              Wishlist Recipes
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
               to="/dashboard/add-recipes"
               className={({ isActive }) => (isActive ? "active font-bold" : "")}
             >

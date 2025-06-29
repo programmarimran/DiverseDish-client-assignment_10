@@ -31,7 +31,13 @@ const Navbar = () => {
       </li>
       <li className="my-1">
         <NavLink className="link-hover" to={"/dashboard"}>
-          <FaLongArrowAltRight size={30}/>Dashboard
+          <FaLongArrowAltRight size={30} />
+          Dashboard
+        </NavLink>
+      </li>
+      <li className="my-1">
+        <NavLink className="link-hover" to={"/about"}>
+          About
         </NavLink>
       </li>
 
@@ -57,7 +63,6 @@ const Navbar = () => {
       {/* Navbar Start */}
       <div className="navbar-start md:gap-4">
         <Hambarger></Hambarger>
-  
 
         <div className="items-center md:hidden lg:flex gap-2">
           <div className="avatar">
