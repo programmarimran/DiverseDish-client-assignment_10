@@ -40,7 +40,7 @@ const WishListRecipes = () => {
         )
           .then((res) => res.json())
           .then((data) => {
-            console.log("wihtl dleeted successfuy", data);
+            // console.log("wihtl dleeted successfuy", data);
             if (data.deletedCount > 0) {
               const remainingWishlistRecipe = recipes.filter(
                 (recipe) => recipe._id !== item._id

@@ -4,10 +4,10 @@ import ProductContext from '../contexts/ProductContext'
 
 
  const  MyModal=()=> {
-  const{close,isOpen,modalId,recipes}=use(ProductContext)
+  const{close,isOpen}=use(ProductContext)
  
-const remainingRecipe=recipes.find(recipe=>recipe._id===modalId)
-console.log(remainingRecipe)
+// const remainingRecipe=recipes.find(recipe=>recipe._id===modalId)
+// console.log(remainingRecipe)
   return (
     <>
   

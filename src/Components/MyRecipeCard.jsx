@@ -17,7 +17,7 @@ const MyRecipeCard = ({ recipe, myRecipes, setMyRecipes }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("after delete", data);
+        // console.log("after delete", data);
         if (data?.deletedCount > 0) {
           const afterFilteredRecipes = myRecipes.filter(
             (recipe) => recipe._id !== _id

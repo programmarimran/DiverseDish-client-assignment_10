@@ -10,7 +10,7 @@ const AllRecipes = () => {
   const navigate = useNavigate();
   const searchParams = new URLSearchParams(location.search);
   const cuisine = searchParams.get("cuisine");
-  console.log(cuisine);
+  // console.log(cuisine);
 
   const [specificAllRecipes, setSpecificAllRecipes] = useState([]);
 

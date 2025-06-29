@@ -10,7 +10,7 @@ const UpdateRacipeModal = ({ myRecipes, setMyRecipes }) => {
   const { modalId } = use(ProductContext);
   // console.log(modalId);
   const navigate = useNavigate();
-  console.log(modalId);
+  // console.log(modalId);
   useEffect(() => {
     if (modalId) {
       fetch(`${import.meta.env.VITE_serverBaseURL}/recipes/${modalId}`)
